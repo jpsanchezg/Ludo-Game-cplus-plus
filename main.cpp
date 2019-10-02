@@ -18,6 +18,8 @@ struct parques
     char nombre[30];
     int dado1=0,dado2=0;
     int pos=0;
+    int ficha1 [maxix][maxy],ficha2[maxix][maxy];
+    int ficha3[maxix][maxy],ficha4[maxix][maxy];
 
 };
 using namespace std;
@@ -111,6 +113,7 @@ void juego (int tablero [maxix][maxy],struct parques jugadores [maxiju],int numj
                 {
                     if(jugadores[i].dado2==1)
                     {
+                        tabler
 
                     }
                 }
@@ -121,9 +124,9 @@ void juego (int tablero [maxix][maxy],struct parques jugadores [maxiju],int numj
 
                     }
                 }
-                if(jugadores[i].dado1==2)
+                if(jugadores[i].dado1==3)
                 {
-                    if(jugadores[i].dado2==2)
+                    if(jugadores[i].dado2==3)
                     {
 
                     }
