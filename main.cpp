@@ -1,7 +1,9 @@
 #include <iostream>
-#include <windows.h>
-#include <stdlib.h>
-#include <time.h>
+#include <iomanip>
+#include "time.h"
+#include "stdlib.h"
+#include <iomanip>
+#include "windows.h"
 #define maxiju 15
 #define maxix 100
 #define maxy 100
@@ -25,7 +27,7 @@ int main()
     struct parques jugadores [maxiju];
     int numjug=0,opcion=0,tamtab=0;
     srand(time(NULL));
-    int tablero [maxitab];
+    int tablero [maxix][maxy];
     cout<<"Bienvenido al juego parques"<<endl;
     do
     {
@@ -77,18 +79,21 @@ void vista (int tablero [maxix][maxy],struct parques jugadores [maxiju],int numj
         for(int j=0; j<tamtab; j++)
         {
 
+            cout<<setw(3.5)<<'|';
         }
+        cout<<endl;
     }
+
 }
 void juego (int tablero [maxix][maxy],struct parques jugadores [maxiju],int numjug)
 {
-    int turno=1,i=1,resd=0;
+    int turno=1,i=0,resd=0;
     bool ganador=false;
     do
     {
 
         cout<<"turno #"<<turno<<endl;
-        cout<<"juega el jugador #"<<i<<endl;
+        cout<<"juega "<<jugadores[i].nombre<<endl;
         if (turno == 1)
         {
             cout<<"recuerda que para sacar las 4 fichas que tienes tienes que sacar par 1,1-2,2-3,3-4,4-5,5-6,6 para sacar las fichas"<<endl;
@@ -97,8 +102,8 @@ void juego (int tablero [maxix][maxy],struct parques jugadores [maxiju],int numj
         cin>>resd;
         if(resd == 1)
         {
-            jugadores[i].dado1 = rand() % (6 + 1);
-            jugadores[i].dado2 = rand() % (6 + 1);
+            jugadores[i].dado1 = rand() % 6 + 1;
+            jugadores[i].dado2 = rand() % 6 + 1;
             cout<<jugadores[i].dado1<<","<<jugadores[i].dado2<<endl;
             if (turno == 1)
             {
@@ -109,14 +114,31 @@ void juego (int tablero [maxix][maxy],struct parques jugadores [maxiju],int numj
 
                     }
                 }
+                if(jugadores[i].dado1==2)
+                {
+                    if(jugadores[i].dado2==2)
+                    {
+
+                    }
+                }
+                if(jugadores[i].dado1==2)
+                {
+                    if(jugadores[i].dado2==2)
+                    {
+
+                    }
+                }
             }
         }
 
 
-        turno++;
-        i++
-        if (i)
 
+        i++;
+        if (i>numjug-1)
+        {
+            i=0;
+            turno++;
         }
+    }
     while(ganador==false);
 }
