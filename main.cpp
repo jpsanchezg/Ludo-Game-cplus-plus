@@ -1,16 +1,17 @@
 #include <iostream>
 #include <iomanip>
-#include "time.h"
-#include "stdlib.h"
+#include <time.h>
+#include <stdlib.h>
 #include <iomanip>
-#include "windows.h"
+#include <windows.h>
+
 #define maxiju 15
 #define maxix 100
-#define maxy 100
+#define maxiy 100
 /** juan pablo sanchez gaitan**/
 void datos (struct parques jugadores [maxiju],int numjug);
-void juego (int tablero [maxix][maxy],struct parques jugadores [maxiju],int numjug);
-void vista (int tablero [maxix][maxy],struct parques jugadores [maxiju],int numjug,int tamtab);
+void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug);
+void vista (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab);
 
 
 struct parques
@@ -18,8 +19,10 @@ struct parques
     char nombre[30];
     int dado1=0,dado2=0;
     int pos=0;
-    int ficha1 [maxix][maxy],ficha2[maxix][maxy];
-    int ficha3[maxix][maxy],ficha4[maxix][maxy];
+    int ficha1x,ficha1y;
+    int ficha2x,ficha2y;
+    int ficha3x,ficha3y;
+    int ficha4x,ficha4y;
 
 };
 using namespace std;
@@ -29,7 +32,7 @@ int main()
     struct parques jugadores [maxiju];
     int numjug=0,opcion=0,tamtab=0;
     srand(time(NULL));
-    int tablero [maxix][maxy];
+    int tablero [maxix][maxiy];
     cout<<"Bienvenido al juego parques"<<endl;
     do
     {
@@ -74,7 +77,7 @@ void datos (struct parques jugadores [maxiju],int numjug)
     }
 
 }
-void vista (int tablero [maxix][maxy],struct parques jugadores [maxiju],int numjug,int tamtab)
+void vista (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab)
 {
     for(int i=0; i<tamtab; i++)
     {
@@ -87,10 +90,11 @@ void vista (int tablero [maxix][maxy],struct parques jugadores [maxiju],int numj
     }
 
 }
-void juego (int tablero [maxix][maxy],struct parques jugadores [maxiju],int numjug)
+void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug)
 {
-    int turno=1,i=0,resd=0;
+    int turno=1,i=0,resd=0,contadados=0;
     bool ganador=false;
+    bool saledados=false;
     do
     {
 
@@ -100,42 +104,72 @@ void juego (int tablero [maxix][maxy],struct parques jugadores [maxiju],int numj
         {
             cout<<"recuerda que para sacar las 4 fichas que tienes tienes que sacar par 1,1-2,2-3,3-4,4-5,5-6,6 para sacar las fichas"<<endl;
         }
-        cout<<"Tirar dados? 1.si 2.no"<<endl;
-        cin>>resd;
-        if(resd == 1)
+        do
         {
-            jugadores[i].dado1 = rand() % 6 + 1;
-            jugadores[i].dado2 = rand() % 6 + 1;
-            cout<<jugadores[i].dado1<<","<<jugadores[i].dado2<<endl;
-            if (turno == 1)
+            cout<<"Tirar dados? 1.si 2.no"<<endl;
+            cin>>resd;
+            if(resd == 1)
             {
-                if(jugadores[i].dado1==1)
+                jugadores[i].dado1 = rand() % 6 + 1;
+                jugadores[i].dado2 = rand() % 6 + 1;
+                cout<<jugadores[i].dado1<<","<<jugadores[i].dado2<<endl;
+                if (turno == 1)
                 {
-                    if(jugadores[i].dado2==1)
+                    if(jugadores[i].dado1==1)
                     {
-                        tabler
+                        if(jugadores[i].dado2==1)
+                        {
 
+                            saledados = true;
+
+                        }
                     }
-                }
-                if(jugadores[i].dado1==2)
-                {
-                    if(jugadores[i].dado2==2)
+                    if(jugadores[i].dado1==2)
                     {
+                        if(jugadores[i].dado2==2)
+                        {
+                            saledados = true;
 
+                        }
                     }
-                }
-                if(jugadores[i].dado1==3)
-                {
-                    if(jugadores[i].dado2==3)
+                    if(jugadores[i].dado1==3)
                     {
+                        if(jugadores[i].dado2==3)
+                        {
+                            saledados = true;
 
+                        }
+                    }
+                    if(jugadores[i].dado1==4)
+                    {
+                        if(jugadores[i].dado2==4)
+                        {
+                            saledados = true;
+                        }
+                    }
+                    if(jugadores[i].dado1==5)
+                    {
+                        if(jugadores[i].dado2==5)
+                        {
+                            saledados = true;
+
+                        }
+                    }
+                    if(jugadores[i].dado1==6)
+                    {
+                        if(jugadores[i].dado2==6)
+                        {
+                            saledados = true;
+                        }
+                    }
+                    if(saledados == false)
+                    {
+                        contadados++;
                     }
                 }
             }
         }
-
-
-
+        while(saledados == false);
         i++;
         if (i>numjug-1)
         {
