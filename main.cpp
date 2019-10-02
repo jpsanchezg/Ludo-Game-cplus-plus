@@ -45,8 +45,12 @@ int main()
         {
             cout<<"cuantos jugadores van a jugar?"<<endl;
             cin>>numjug;
-            if (numjug <=4)
+            /** si es de doble espacio para mover es de 2 el tamano minimo es de 9, si el espacio para moverse es de 1 el tamano minimo es 7**/
+            cout<<"Que tan grande quieres el mapa el minimo es 7"<<endl;
+            cin>>tamtab;
+            if (tamtab<7)
             {
+                cout<<"Pusiste un valor incorrecto te vamos a poner el valor minimo"<<endl;
                 tamtab=7;
             }
             datos (jugadores,numjug);
@@ -166,6 +170,10 @@ void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int num
                     {
                         contadados++;
                     }
+                }
+                if (turno > 1)
+                {
+
                 }
             }
         }
