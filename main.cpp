@@ -19,6 +19,9 @@ struct parques
     char nombre[30];
     int dado1=0,dado2=0;
     int pos=0;
+    int movfich = 0;
+    bool fichas;
+    bool todas;
     int ficha1x,ficha1y;
     int ficha2x,ficha2y;
     int ficha3x,ficha3y;
@@ -96,9 +99,11 @@ void vista (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int num
 }
 void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug)
 {
-    int turno=1,i=0,resd=0,contadados=0;
+    int turno=1,i=0,resd=0,contadados=1,movfich=0;
     bool ganador=false;
     bool saledados=false;
+
+
     do
     {
 
@@ -117,14 +122,15 @@ void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int num
                 jugadores[i].dado1 = rand() % 6 + 1;
                 jugadores[i].dado2 = rand() % 6 + 1;
                 cout<<jugadores[i].dado1<<","<<jugadores[i].dado2<<endl;
-                if (turno == 1)
+                if (jugadores[i].fichas != true)
                 {
                     if(jugadores[i].dado1==1)
                     {
                         if(jugadores[i].dado2==1)
                         {
 
-                            saledados = true;
+                            jugadores[i].todas=true;
+                            jugadores[i].fichas=true;
 
                         }
                     }
@@ -132,7 +138,7 @@ void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int num
                     {
                         if(jugadores[i].dado2==2)
                         {
-                            saledados = true;
+                            jugadores[i].fichas=true;
 
                         }
                     }
@@ -140,7 +146,7 @@ void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int num
                     {
                         if(jugadores[i].dado2==3)
                         {
-                            saledados = true;
+                            jugadores[i].fichas=true;
 
                         }
                     }
@@ -148,14 +154,15 @@ void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int num
                     {
                         if(jugadores[i].dado2==4)
                         {
-                            saledados = true;
+                            jugadores[i].fichas=true;
                         }
                     }
                     if(jugadores[i].dado1==5)
                     {
                         if(jugadores[i].dado2==5)
                         {
-                            saledados = true;
+
+                            jugadores[i].fichas=true;
 
                         }
                     }
@@ -163,26 +170,47 @@ void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int num
                     {
                         if(jugadores[i].dado2==6)
                         {
-                            saledados = true;
+
+                           jugadores[i].todas=true;
+                            jugadores[i].fichas=true;
                         }
                     }
                     if(saledados == false)
                     {
                         contadados++;
                     }
+                    if (contadados > 3)
+                    {
+                        saledados= true;
+                    }
                 }
-                if (turno > 1)
+                if (jugadores[i].fichas != false)
                 {
 
+                    cout<<"que fichas quieres mover?: "<<endl;
+                    cout<<"1. ficha 1"<<endl;
+                    cout<<"2. ficha 2"<<endl;
+                    if (jugadores[i].todas == true)
+                    {
+                        cout<<"3. ficha 3"<<endl;
+                        cout<<"4. ficha 4"<<endl;
+                    }
+                   /** cin>>jugadores[i].movfich;
+                    saledados = true;**/
                 }
             }
         }
         while(saledados == false);
+
         i++;
         if (i>numjug-1)
         {
             i=0;
             turno++;
+            contadados = 0;
+            saledados= false;
+
+
         }
     }
     while(ganador==false);
