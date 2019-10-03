@@ -11,9 +11,9 @@
 /** juan pablo sanchez gaitan**/
 void datos (struct parques jugadores [maxiju],int numjug);
 void juegoconlamaquina (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab);
-void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab);
+void juego (char tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab);
 
-void vista (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab);
+void vista (char tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab);
 
 
 struct parques
@@ -26,6 +26,7 @@ struct parques
     bool fichas =false;
     bool todas;
     bool ganador = false;
+    int salidax=0,saliday=0;
     int ficha1x=0,ficha1y=0;
     int ficha2x=0,ficha2y=0;
     int ficha3x=0,ficha3y=0;
@@ -39,7 +40,7 @@ int main()
     struct parques jugadores [maxiju];
     int numjug=0,opcion=0,tamtab=0;
     srand(time(NULL));
-    int tablero [maxix][maxiy];
+    char tablero [maxix][maxiy];
     cout<<"Bienvenido al juego parques"<<endl;
     do
     {
@@ -63,7 +64,7 @@ int main()
             /** si es de doble espacio para mover es de 2 el tamano minimo es de 9, si el espacio para moverse es de 1 el tamano minimo es 7**/
             if(numjug >= 2)
             {
-                cout<<"Que tan grande quieres el mapa el minimo es 7"<<endl;
+                cout<<"Que tan grande quieres el mapa el minimo es 10"<<endl;
                 cin>>tamtab;
                 if (tamtab<7)
                 {
@@ -99,28 +100,44 @@ void datos (struct parques jugadores [maxiju],int numjug)
     }
 
 }
-void vista (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab)
+void vista (char tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab)
 {
-    for(int i=0; i<tamtab; i++)
-    {
-        for(int j=0; j<tamtab; j++)
-        {
+    tablero[0][0]='@';
+    tablero[0][1]='@';
+    tablero[1][0]='@';
+    tablero[1][1]='@';
+    tablero[8][0]='@';
+    tablero[8][1]='@';
+    tablero[9][0]='@';
+    tablero[9][1]='@';
 
-            cout<<setw(3.5)<<'|';
+    for(int i = 0; i < tamtab; i++)
+    {
+        for(int j = 0; j < tamtab; j++)
+        {
+            cout<<setw(3.5)<<tablero[i][j]<<'|';
         }
         cout<<endl;
     }
 
 }
-void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab)
+void juego (char tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab)
 {
     int turno=0,i=0,respu=0,contador=0,lanzamientos=3,fichmov=0;
     int dadox=0,dadoy=0,suma=0;
     bool salio =false;
     bool finalista = false;
+    jugadores[0].salidax=1;
+    jugadores[0].saliday=2;
+    jugadores[1].salidax=7;
+    jugadores[1].saliday=1;
+    jugadores[2].salidax=8;
+    jugadores[2].saliday=7;
+    jugadores[3].salidax=2;
+    jugadores[3].saliday=8;
     do
     {
-        if(i==2)
+        if(i == numjug)
         {
             i=0;
             turno++;
@@ -252,27 +269,82 @@ void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int num
                 cout<<"que fichas quieres mover?: "<<endl;
                 cout<<"1. ficha 1"<<endl;
                 cout<<"2. ficha 2"<<endl;
+                jugadores[i].ficha1x=jugadores[i].salidax;
+                jugadores[i].ficha1y=jugadores[i].saliday;
+                jugadores[i].ficha2x=jugadores[i].salidax;
+                jugadores[i].ficha2y=jugadores[i].saliday;
+
                 if (jugadores[i].todas == true)
                 {
                     cout<<"3. ficha 3"<<endl;
                     cout<<"4. ficha 4"<<endl;
+                    jugadores[i]. ficha3x=jugadores[i].salidax;
+                    jugadores[i].ficha3y=jugadores[i].saliday;
+                    jugadores[i].ficha4x=jugadores[i].salidax;
+                    jugadores[i].ficha4y=jugadores[i].saliday;
                 }
                 cin>>fichmov;
                 if(fichmov == 1)
                 {
                     cout<<"cuantas casillas quieres mover la ficha?"<<endl;
                     suma = dadox+dadoy;
-                    cout<<dadox<<" posiciones"<<endl;
-                    cout<<dadoy<<" posiciones"<<endl;
-                    cout<<suma<<" posiciones"<<endl;
+                    cout<<"Op 1 "<<dadox<<" posiciones"<<endl;
+                    cout<<"Op 2 "<<dadoy<<" posiciones"<<endl;
+                    cout<<"Op 3 "<<suma<<" posiciones"<<endl;
                     cin>>jugadores[i].movfich;
+                    if (jugadores[i].movfich == 1)
+                    {
+                        if (dadox == 1)
+                        {
+                            jugadores[i].ficha1x = jugadores[i].ficha1x + 1;
+                            tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='A1';
+                            vista(tablero,jugadores,numjug,tamtab);
+                        }
+                        if (dadox == 2)
+                        {
+                            jugadores[i].ficha1x = jugadores[i].ficha1x + 1;
+                            jugadores[i].ficha1y = jugadores[i].ficha1y -1;
+                            tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='J';
+                            vista(tablero,jugadores,numjug,tamtab);
+                        }
+                        if (dadox == 3)
+                        {
+                            jugadores[i].ficha1x = jugadores[i].ficha1x + 1;
+                            jugadores[i].ficha1y = jugadores[i].ficha1y -2;
+                            tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='A1';
+                            vista(tablero,jugadores,numjug,tamtab);
+                        }
+                        if (dadox == 4)
+                        {
+                            jugadores[i].ficha1x = jugadores[i].ficha1x + 2;
+                            jugadores[i].ficha1y = jugadores[i].ficha1y -2;
+                            tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='A1';
+                            vista(tablero,jugadores,numjug,tamtab);
+                        }
+                        if (dadox == 5)
+                        {
+                            jugadores[i].ficha1x = jugadores[i].ficha1x + 3;
+                            jugadores[i].ficha1y = jugadores[i].ficha1y -2;
+                            tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='A1';
+                            vista(tablero,jugadores,numjug,tamtab);
+                        }
+                        if (dadox == 6)
+                        {
+                            jugadores[i].ficha1x = jugadores[i].ficha1x + 4;
+                            jugadores[i].ficha1y = jugadores[i].ficha1y -2;
+                            tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='A1';
+                            vista(tablero,jugadores,numjug,tamtab);
+                        }
+
+                    }
+
                 }
             }
         }
         salio = false;
         contador = 0;
         i++;
-         if (jugadores[i].fichas == false)
+        if (jugadores[i].fichas == false)
         {
             lanzamientos = 3;
             contador =0;
