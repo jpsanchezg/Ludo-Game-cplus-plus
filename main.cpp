@@ -10,22 +10,26 @@
 #define maxiy 100
 /** juan pablo sanchez gaitan**/
 void datos (struct parques jugadores [maxiju],int numjug);
-void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug);
+void juegoconlamaquina (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab);
+void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab);
+
 void vista (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab);
 
 
 struct parques
 {
     char nombre[30];
-    int dado1=0,dado2=0;
+    int dadox=0;
+    int dadoy=0;
     int pos=0;
     int movfich = 0;
-    bool fichas;
+    bool fichas =false;
     bool todas;
-    int ficha1x,ficha1y;
-    int ficha2x,ficha2y;
-    int ficha3x,ficha3y;
-    int ficha4x,ficha4y;
+    bool ganador = false;
+    int ficha1x=0,ficha1y=0;
+    int ficha2x=0,ficha2y=0;
+    int ficha3x=0,ficha3y=0;
+    int ficha4x=0,ficha4y=0;
 
 };
 using namespace std;
@@ -48,18 +52,29 @@ int main()
         {
             cout<<"cuantos jugadores van a jugar?"<<endl;
             cin>>numjug;
-            /** si es de doble espacio para mover es de 2 el tamano minimo es de 9, si el espacio para moverse es de 1 el tamano minimo es 7**/
-            cout<<"Que tan grande quieres el mapa el minimo es 7"<<endl;
-            cin>>tamtab;
-            if (tamtab<7)
+            if(numjug == 1 )
             {
-                cout<<"Pusiste un valor incorrecto te vamos a poner el valor minimo"<<endl;
-                tamtab=7;
+                cout<<"No puedes jugar solo, consiguete a alguien"<<endl;
+                cout<<"Vas a jugar contra la maquina en difultad normal"<<endl;
+                tamtab = 9;
+                datos (jugadores,numjug);
+                // juegoconlamaquina (tablero,jugadores,numjug,tamtab);
             }
-            datos (jugadores,numjug);
-            vista(tablero,jugadores,numjug,tamtab);
-            juego(tablero,jugadores,numjug);
+            /** si es de doble espacio para mover es de 2 el tamano minimo es de 9, si el espacio para moverse es de 1 el tamano minimo es 7**/
+            if(numjug >= 2)
+            {
+                cout<<"Que tan grande quieres el mapa el minimo es 7"<<endl;
+                cin>>tamtab;
+                if (tamtab<7)
+                {
+                    cout<<"Pusiste un valor incorrecto te vamos a poner el valor minimo"<<endl;
+                    tamtab=7;
+                }
+                datos (jugadores,numjug);
+                vista(tablero,jugadores,numjug,tamtab);
+                juego(tablero,jugadores,numjug,tamtab);
 
+            }
         }
         if (opcion == 2)
         {
@@ -97,121 +112,171 @@ void vista (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int num
     }
 
 }
-void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug)
+void juego (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtab)
 {
-    int turno=1,i=0,resd=0,contadados=1,movfich=0;
-    bool ganador=false;
-    bool saledados=false;
-
-
+    int turno=0,i=0,respu=0,contador=0,lanzamientos=3,fichmov=0;
+    int dadox=0,dadoy=0,suma=0;
+    bool salio =false;
+    bool finalista = false;
     do
     {
-
-        cout<<"turno #"<<turno<<endl;
-        cout<<"juega "<<jugadores[i].nombre<<endl;
-        if (turno == 1)
-        {
-            cout<<"recuerda que para sacar las 4 fichas que tienes tienes que sacar par 1,1-2,2-3,3-4,4-5,5-6,6 para sacar las fichas"<<endl;
-        }
-        do
-        {
-            cout<<"Tirar dados? 1.si 2.no"<<endl;
-            cin>>resd;
-            if(resd == 1)
-            {
-                jugadores[i].dado1 = rand() % 6 + 1;
-                jugadores[i].dado2 = rand() % 6 + 1;
-                cout<<jugadores[i].dado1<<","<<jugadores[i].dado2<<endl;
-                if (jugadores[i].fichas != true)
-                {
-                    if(jugadores[i].dado1==1)
-                    {
-                        if(jugadores[i].dado2==1)
-                        {
-
-                            jugadores[i].todas=true;
-                            jugadores[i].fichas=true;
-
-                        }
-                    }
-                    if(jugadores[i].dado1==2)
-                    {
-                        if(jugadores[i].dado2==2)
-                        {
-                            jugadores[i].fichas=true;
-
-                        }
-                    }
-                    if(jugadores[i].dado1==3)
-                    {
-                        if(jugadores[i].dado2==3)
-                        {
-                            jugadores[i].fichas=true;
-
-                        }
-                    }
-                    if(jugadores[i].dado1==4)
-                    {
-                        if(jugadores[i].dado2==4)
-                        {
-                            jugadores[i].fichas=true;
-                        }
-                    }
-                    if(jugadores[i].dado1==5)
-                    {
-                        if(jugadores[i].dado2==5)
-                        {
-
-                            jugadores[i].fichas=true;
-
-                        }
-                    }
-                    if(jugadores[i].dado1==6)
-                    {
-                        if(jugadores[i].dado2==6)
-                        {
-
-                           jugadores[i].todas=true;
-                            jugadores[i].fichas=true;
-                        }
-                    }
-                    if(saledados == false)
-                    {
-                        contadados++;
-                    }
-                    if (contadados > 3)
-                    {
-                        saledados= true;
-                    }
-                }
-                if (jugadores[i].fichas != false)
-                {
-
-                    cout<<"que fichas quieres mover?: "<<endl;
-                    cout<<"1. ficha 1"<<endl;
-                    cout<<"2. ficha 2"<<endl;
-                    if (jugadores[i].todas == true)
-                    {
-                        cout<<"3. ficha 3"<<endl;
-                        cout<<"4. ficha 4"<<endl;
-                    }
-                   /** cin>>jugadores[i].movfich;
-                    saledados = true;**/
-                }
-            }
-        }
-        while(saledados == false);
-
-        i++;
-        if (i>numjug-1)
+        if(i==2)
         {
             i=0;
             turno++;
-            contadados = 0;
-            saledados= false;
+        }
+        cout<<"Turno #"<<turno<<endl;
+        cout<<"Juega "<<jugadores[i].nombre<<endl;
+        cout<<"Tirar dados? 1.si"<<endl;
+        cin>>respu;
+        if (respu == 1)
+        {
+            do
+            {
+                cout<<"Lanzamiento #"<<contador+1<<endl;
+                dadox = rand() % 6 + 1;
+                dadoy = rand() % 6 + 1;
+                cout<<dadox<<","<<dadoy<<endl;
+                if (jugadores[i].fichas == false)
+                {
+                    if(dadox==1)
+                    {
+                        if(dadoy==1)
+                        {
+                            cout<<"SALEN TODAS LAS FICHAS"<<endl;
+                            salio=true;
+                            lanzamientos =1;
 
+                            jugadores[i].todas=true;
+                            jugadores[i].fichas=true;
+                        }
+                        if(dadoy != 1)
+                        {
+                            contador++;
+                        }
+                    }
+                    if(dadox==2)
+                    {
+                        if(dadoy==2)
+                        {
+                            cout<<"SALEN 2 FICHAS"<<endl;
+                            salio=true;
+                            lanzamientos =1;
 
+                            jugadores[i].fichas=true;
+                        }
+                        if(dadoy != 2)
+                        {
+                            contador++;
+                        }
+                    }
+                    if(dadox==3)
+                    {
+                        if(dadoy==3)
+                        {
+                            cout<<"SALEN 2 FICHAS"<<endl;
+                            salio=true;
+                            lanzamientos =1;
+
+                            jugadores[i].fichas=true;
+                        }
+                        if(dadoy != 3)
+                        {
+                            contador++;
+                        }
+                    }
+                    if(dadox==4)
+                    {
+                        if(dadoy==4)
+                        {
+                            cout<<"SALEN 2 FICHAS"<<endl;
+                            salio=true;
+                            lanzamientos =1;
+
+                            jugadores[i].fichas=true;
+                        }
+                        if(dadoy != 4)
+                        {
+                            contador++;
+                        }
+                    }
+                    if(dadox==5)
+                    {
+                        if(dadoy==5)
+                        {
+                            cout<<"SALEN 2 FICHAS"<<endl;
+                            salio=true;
+                            lanzamientos =1;
+
+                            jugadores[i].fichas=true;
+                        }
+                        if(dadoy != 5)
+                        {
+                            contador++;
+                        }
+                    }
+                    if(dadox==6)
+                    {
+                        if(dadoy==6)
+                        {
+                            cout<<"SALEN TODAS LAS FICHAS"<<endl;
+                            salio=true;
+                            lanzamientos =1;
+                            jugadores[i].todas=true;
+                            jugadores[i].fichas=true;
+                        }
+                        if(dadoy != 6)
+                        {
+                            contador++;
+                        }
+                    }
+                    if (contador == lanzamientos)
+                    {
+                        salio = true;
+                    }
+                }
+                if (jugadores[i].fichas==true)
+                {
+                    if (turno>0)
+                    {
+                        salio=true;
+                    }
+                }
+            }
+            while (salio == false);
+        }
+        if (turno >0)
+        {
+            if (jugadores[i].fichas == true)
+            {
+                cout<<"que fichas quieres mover?: "<<endl;
+                cout<<"1. ficha 1"<<endl;
+                cout<<"2. ficha 2"<<endl;
+                if (jugadores[i].todas == true)
+                {
+                    cout<<"3. ficha 3"<<endl;
+                    cout<<"4. ficha 4"<<endl;
+                }
+                cin>>fichmov;
+                if(fichmov == 1)
+                {
+                    cout<<"cuantas casillas quieres mover la ficha?"<<endl;
+                    suma = dadox+dadoy;
+                    cout<<dadox<<" posiciones"<<endl;
+                    cout<<dadoy<<" posiciones"<<endl;
+                    cout<<suma<<" posiciones"<<endl;
+                    cin>>jugadores[i].movfich;
+                }
+            }
+        }
+        salio = false;
+        contador = 0;
+        i++;
+         if (jugadores[i].fichas == false)
+        {
+            lanzamientos = 3;
+            contador =0;
         }
     }
-    while(ganador==false);
+    while(finalista == false);
 }
