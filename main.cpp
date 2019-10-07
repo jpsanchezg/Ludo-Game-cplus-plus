@@ -11,6 +11,8 @@
 /** juan pablo sanchez gaitan**/
 void datos (struct parques jugadores [maxiju],int numjug);
 
+void mapa(char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby);
+
 void juegoconlamaquina (int tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby);
 
 void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby);
@@ -58,101 +60,11 @@ int main()
             cin>>numjug;
             if(numjug == 1 )
             {
-                for(int i = 0; i < tamtabx; i++)
-                {
-                    for(int j = 0; j < tamtaby; j++)
-                    {
-                        tablerofantasma[i][j]=0;
-                    }
-                    cout<<endl;
-                }
-                 for(int i = 0; i < tamtabx; i++)
-                {
-                    for(int j = 0; j < tamtaby; j++)
-                    {
-                        tablero[i][j]='-';
-                    }
-                    cout<<endl;
-                }
                 cout<<"No puedes jugar solo, consiguete a alguien"<<endl;
                 cout<<"Vas a jugar contra la maquina en difultad normal"<<endl;
                 tamtabx = 4;
                 tamtaby = 6;
-                tablero[0][0]='@';
-                tablero[1][0]='@';
-                //base jugador 2
-                tablero[2][0]='#';
-                tablero[3][0]='#';
-                //base jugador 3
-                tablero[0][5]='$';
-                tablero[1][5]='$';
-                //base jugado 4
-                tablero[2][5]='&';
-                tablero[3][5]='&';
-                //puntos de llegada jugadores
-                tablero[1][2]='@';
-                tablero[2][2]='#';
-                tablero[2][3]='$';
-                tablero[1][3]='&';
-                //************//
-                // base jugador 1 movimientos
-                tablerofantasma[0][0]=1;
-                tablerofantasma[1][0]=1;
-                //base jugador 2 movimientos
-                tablerofantasma[2][0]=2;
-                tablerofantasma[3][0]=2;
-                //base jugador 3 movimientos
-                tablerofantasma[0][5]=3;
-                tablerofantasma[1][5]=3;
-                //base jugador 4 movimientos
-                tablerofantasma[2][5]=4;
-                tablerofantasma[3][5]=4;
-                //puntos de llegada jugadores
-                //jugador 1
-                tablerofantasma[1][2]=1;
-                jugadores[0].llegadax=1;
-                jugadores[0].llegaday=2;
-                jugadores[0].casillegadax=0;
-                jugadores[0].casillegaday=2;
-
-                //jugador 2
-                tablerofantasma[2][2]=2;
-                jugadores[1].llegadax=2;
-                jugadores[1].llegaday=2;
-                jugadores[1].casillegadax=1;
-                jugadores[1].casillegaday=2;
-                //jugador 3
-                tablerofantasma[2][3]=3;
-                jugadores[2].llegadax=2;
-                jugadores[2].llegaday=3;
-                jugadores[2].casillegadax=3;
-                jugadores[2].casillegaday=3;
-                //jugador 4
-                tablerofantasma[1][3]=4;
-                jugadores[3].llegadax=1;
-                jugadores[3].llegaday=3;
-                jugadores[3].casillegadax=1;
-                jugadores[3].casillegaday=4;
-                //salidas jugadores
-                //jugador 1
-                jugadores[0].salidax=0;
-                jugadores[0].saliday=1;
-                //judador 2
-                jugadores[1].salidax=3;
-                jugadores[1].saliday=1;
-                //jugador 3
-                jugadores[2].salidax=3;
-                jugadores[2].saliday=4;
-                //jugador 4
-                jugadores[3].salidax=6;
-                jugadores[3].saliday=4;
-                //pasa turnos jugadores
-                //jugador 1
-                jugadores[0].pasaturnox=0;
-                jugadores[0].pasaturnoy=4;
-                //jugador 2
-                jugadores[1].pasaturnox=0;
-                jugadores[1].pasaturnoy=4;
+                mapa(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
                 datos (jugadores,numjug);
                 vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
                 juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
@@ -160,103 +72,9 @@ int main()
             }
             if(numjug >= 2)
             {
-                for(int i = 0; i < tamtabx; i++)
-                {
-                    for(int j = 0; j < tamtaby; j++)
-                    {
-                        tablerofantasma[i][j]=0;
-                    }
-                    cout<<endl;
-                }
-                 for(int i = 0; i < tamtabx; i++)
-                {
-                    for(int j = 0; j < tamtaby; j++)
-                    {
-                        tablero[i][j]='-';
-                    }
-                    cout<<endl;
-                }
                 tamtabx = 4;
                 tamtaby = 6;
-                //base jugador 1
-                tablero[0][0]='@';
-                tablero[1][0]='@';
-                //base jugador 2
-                tablero[2][0]='#';
-                tablero[3][0]='#';
-                //base jugador 3
-                tablero[0][5]='$';
-                tablero[1][5]='$';
-                //base jugado 4
-                tablero[2][5]='&';
-                tablero[3][5]='&';
-                //puntos de llegada jugadores
-                tablero[1][2]='@';
-                tablero[2][2]='#';
-                tablero[2][3]='$';
-                tablero[1][3]='&';
-                //************//
-                // base jugador 1 movimientos
-                tablerofantasma[0][0]=1;
-                tablerofantasma[1][0]=1;
-                //base jugador 2 movimientos
-                tablerofantasma[2][0]=2;
-                tablerofantasma[3][0]=2;
-                //base jugador 3 movimientos
-                tablerofantasma[0][5]=3;
-                tablerofantasma[1][5]=3;
-                //base jugador 4 movimientos
-                tablerofantasma[2][5]=4;
-                tablerofantasma[3][5]=4;
-                //puntos de llegada jugadores
-                //jugador 1
-                tablerofantasma[1][2]=1;
-                jugadores[0].llegadax=1;
-                jugadores[0].llegaday=2;
-                jugadores[0].casillegadax=0;
-                jugadores[0].casillegaday=2;
-
-                //jugador 2
-                tablerofantasma[2][2]=2;
-                jugadores[1].llegadax=2;
-                jugadores[1].llegaday=2;
-                jugadores[1].casillegadax=1;
-                jugadores[1].casillegaday=2;
-                //jugador 3
-                tablerofantasma[2][3]=3;
-                jugadores[2].llegadax=2;
-                jugadores[2].llegaday=3;
-                jugadores[2].casillegadax=3;
-                jugadores[2].casillegaday=3;
-                //jugador 4
-                tablerofantasma[1][3]=4;
-                jugadores[3].llegadax=1;
-                jugadores[3].llegaday=3;
-                jugadores[3].casillegadax=1;
-                jugadores[3].casillegaday=4;
-                //salidas jugadores
-                //jugador 1
-                jugadores[0].salidax=0;
-                jugadores[0].saliday=1;
-                //judador 2
-                jugadores[1].salidax=3;
-                jugadores[1].saliday=1;
-                //jugador 3
-                jugadores[2].salidax=3;
-                jugadores[2].saliday=4;
-                //jugador 4
-                jugadores[3].salidax=6;
-                jugadores[3].saliday=4;
-                //pasa turnos jugadores
-                //jugador 1
-                jugadores[0].pasaturnox=0;
-                jugadores[0].pasaturnoy=4;
-                //jugador 2
-                jugadores[1].pasaturnox=0;
-                jugadores[1].pasaturnoy=4;
-
-
-
+                mapa(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
                 datos (jugadores,numjug);
                 vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
                 juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
@@ -275,6 +93,100 @@ int main()
         }
     }
     while(opcion !=3);
+}
+void mapa(char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby)
+{
+    for(int i = 0; i < tamtabx; i++)
+    {
+        for(int j = 0; j < tamtaby; j++)
+        {
+            tablerofantasma[i][j]=0;
+        }
+    }
+    for(int x = 0; x < tamtabx; x++)
+    {
+        for(int y = 0; y < tamtaby; y++)
+        {
+            tablero[x][y]='-';
+        }
+}
+//base jugador 1
+tablero[0][0]='@';
+tablero[1][0]='@';
+//base jugador 2
+tablero[2][0]='#';
+tablero[3][0]='#';
+//base jugador 3
+tablero[0][5]='$';
+tablero[1][5]='$';
+//base jugado 4
+tablero[2][5]='&';
+tablero[3][5]='&';
+//puntos de llegada jugadores
+tablero[1][2]='@';
+tablero[2][2]='#';
+tablero[2][3]='$';
+tablero[1][3]='&';
+//************//
+// base jugador 1 movimientos
+tablerofantasma[0][0]=1;
+tablerofantasma[1][0]=1;
+//base jugador 2 movimientos
+tablerofantasma[2][0]=2;
+tablerofantasma[3][0]=2;
+//base jugador 3 movimientos
+tablerofantasma[0][5]=3;
+tablerofantasma[1][5]=3;
+//base jugador 4 movimientos
+tablerofantasma[2][5]=4;
+tablerofantasma[3][5]=4;
+//puntos de llegada jugadores
+//jugador 1
+tablerofantasma[1][2]=1;
+jugadores[0].llegadax=1;
+jugadores[0].llegaday=2;
+jugadores[0].casillegadax=0;
+jugadores[0].casillegaday=2;
+
+//jugador 2
+tablerofantasma[2][2]=2;
+jugadores[1].llegadax=2;
+jugadores[1].llegaday=2;
+jugadores[1].casillegadax=1;
+jugadores[1].casillegaday=2;
+//jugador 3
+tablerofantasma[2][3]=3;
+jugadores[2].llegadax=2;
+jugadores[2].llegaday=3;
+jugadores[2].casillegadax=3;
+jugadores[2].casillegaday=3;
+//jugador 4
+tablerofantasma[1][3]=4;
+jugadores[3].llegadax=1;
+jugadores[3].llegaday=3;
+jugadores[3].casillegadax=1;
+jugadores[3].casillegaday=4;
+//salidas jugadores
+//jugador 1
+jugadores[0].salidax=0;
+jugadores[0].saliday=1;
+//judador 2
+jugadores[1].salidax=3;
+jugadores[1].saliday=1;
+//jugador 3
+jugadores[2].salidax=3;
+jugadores[2].saliday=4;
+//jugador 4
+jugadores[3].salidax=6;
+jugadores[3].saliday=4;
+//pasa turnos jugadores
+//jugador 1
+jugadores[0].pasaturnox=0;
+jugadores[0].pasaturnoy=4;
+//jugador 2
+jugadores[1].pasaturnox=0;
+jugadores[1].pasaturnoy=4;
+
 }
 void datos (struct parques jugadores [maxiju],int numjug)
 {
@@ -923,5 +835,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
     }
     while(finalista == false);
 }
+
+
 
 
