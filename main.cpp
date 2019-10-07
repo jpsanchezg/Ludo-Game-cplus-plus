@@ -187,14 +187,32 @@ void mapa(char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct 
 //jugador 4
     jugadores[3].salidax=6;
     jugadores[3].saliday=4;
-//pasa turnos jugadores
+//diagonales jugadores
 //jugador 1
-    jugadores[0].pasaturnox=0;
-    jugadores[0].pasaturnoy=4;
+    jugadores[0].diagonal1x = 3;
+    jugadores[0].diagonal1y = 4;
 //jugador 2
-    jugadores[1].pasaturnox=0;
-    jugadores[1].pasaturnoy=4;
-
+    jugadores[1].diagonal1x = 0;
+    jugadores[1].diagonal1y  = 4;
+    //jugador 3
+    jugadores[2].diagonal1x = 0;
+    jugadores[2].diagonal1y  = 1;
+    //jugador 4
+    jugadores[3].diagonal1x = 3;
+    jugadores[3].diagonal1y  = 1;
+    //diagonales jugadores
+//jugador 1
+    jugadores[0].diagonal2x = 3;
+    jugadores[0].diagonal2y = 4;
+//jugador 2
+    jugadores[1].diagonal2x = 0;
+    jugadores[1].diagonal2y  = 4;
+    //jugador 3
+    jugadores[2].diagonal2x = 0;
+    jugadores[2].diagonal2y  = 1;
+    //jugador 4
+    jugadores[3].diagonal2x = 3;
+    jugadores[3].diagonal2y  = 1;
 }
 void datos (struct parques jugadores [maxiju],int numjug)
 {
@@ -1024,7 +1042,12 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                 if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].ficha1x][1])
                                 {
                                     tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='-';
-                                    jugadores[i].ficha1x = jugadores[i].ficha1x + 6;
+                                    jugadores[i].ficha1x = jugadores[i].ficha1x + 3;
+                                    jugadores[i].ficha1y = jugadores[i].ficha1y + 3;
+                                    if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].diagonal1x][jugadores[i].diagonal1y])
+                                    {
+                                        jugadores[i].nu6 = false;
+                                    }
                                     if (jugadores[i].nombre ==jugadores[0].nombre)
                                     {
                                         tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='@';
