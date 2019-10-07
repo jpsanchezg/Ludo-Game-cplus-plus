@@ -27,15 +27,23 @@ struct parques
     int dadoy=0;
     int fichasfinales=0;
     int movfich = 0;
-    bool fichas =false;
-    bool todas;
-    bool ganador = false;
     int salidax=0,saliday=0;
     int llegadax=0,llegaday=0;
     int casillegadax=0,casillegaday=0;
     int ficha1x=0,ficha1y=0;
     int ficha2x=0,ficha2y=0;
     int pasaturnox=0,pasaturnoy=0;
+    int diagonal1x=0,diagonal1y=0;
+    int diagonal2x=0,diagonal2y=0;
+    bool fichas =false;
+    bool todas;
+    bool ganador = false;
+    bool nu1 =true;
+    bool nu2 =true;
+    bool nu3 =true;
+    bool nu4 =true;
+    bool nu5 =true;
+    bool nu6 =true;
 };
 using namespace std;
 
@@ -109,83 +117,83 @@ void mapa(char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct 
         {
             tablero[x][y]='-';
         }
-}
+    }
 //base jugador 1
-tablero[0][0]='@';
-tablero[1][0]='@';
+    tablero[0][0]='@';
+    tablero[1][0]='@';
 //base jugador 2
-tablero[2][0]='#';
-tablero[3][0]='#';
+    tablero[2][0]='#';
+    tablero[3][0]='#';
 //base jugador 3
-tablero[0][5]='$';
-tablero[1][5]='$';
+    tablero[0][5]='$';
+    tablero[1][5]='$';
 //base jugado 4
-tablero[2][5]='&';
-tablero[3][5]='&';
+    tablero[2][5]='&';
+    tablero[3][5]='&';
 //puntos de llegada jugadores
-tablero[1][2]='@';
-tablero[2][2]='#';
-tablero[2][3]='$';
-tablero[1][3]='&';
+    tablero[1][2]='@';
+    tablero[2][2]='#';
+    tablero[2][3]='$';
+    tablero[1][3]='&';
 //************//
 // base jugador 1 movimientos
-tablerofantasma[0][0]=1;
-tablerofantasma[1][0]=1;
+    tablerofantasma[0][0]=1;
+    tablerofantasma[1][0]=1;
 //base jugador 2 movimientos
-tablerofantasma[2][0]=2;
-tablerofantasma[3][0]=2;
+    tablerofantasma[2][0]=2;
+    tablerofantasma[3][0]=2;
 //base jugador 3 movimientos
-tablerofantasma[0][5]=3;
-tablerofantasma[1][5]=3;
+    tablerofantasma[0][5]=3;
+    tablerofantasma[1][5]=3;
 //base jugador 4 movimientos
-tablerofantasma[2][5]=4;
-tablerofantasma[3][5]=4;
+    tablerofantasma[2][5]=4;
+    tablerofantasma[3][5]=4;
 //puntos de llegada jugadores
 //jugador 1
-tablerofantasma[1][2]=1;
-jugadores[0].llegadax=1;
-jugadores[0].llegaday=2;
-jugadores[0].casillegadax=0;
-jugadores[0].casillegaday=2;
+    tablerofantasma[1][2]=1;
+    jugadores[0].llegadax=1;
+    jugadores[0].llegaday=2;
+    jugadores[0].casillegadax=0;
+    jugadores[0].casillegaday=2;
 
 //jugador 2
-tablerofantasma[2][2]=2;
-jugadores[1].llegadax=2;
-jugadores[1].llegaday=2;
-jugadores[1].casillegadax=1;
-jugadores[1].casillegaday=2;
+    tablerofantasma[2][2]=2;
+    jugadores[1].llegadax=2;
+    jugadores[1].llegaday=2;
+    jugadores[1].casillegadax=1;
+    jugadores[1].casillegaday=2;
 //jugador 3
-tablerofantasma[2][3]=3;
-jugadores[2].llegadax=2;
-jugadores[2].llegaday=3;
-jugadores[2].casillegadax=3;
-jugadores[2].casillegaday=3;
+    tablerofantasma[2][3]=3;
+    jugadores[2].llegadax=2;
+    jugadores[2].llegaday=3;
+    jugadores[2].casillegadax=3;
+    jugadores[2].casillegaday=3;
 //jugador 4
-tablerofantasma[1][3]=4;
-jugadores[3].llegadax=1;
-jugadores[3].llegaday=3;
-jugadores[3].casillegadax=1;
-jugadores[3].casillegaday=4;
+    tablerofantasma[1][3]=4;
+    jugadores[3].llegadax=1;
+    jugadores[3].llegaday=3;
+    jugadores[3].casillegadax=1;
+    jugadores[3].casillegaday=4;
 //salidas jugadores
 //jugador 1
-jugadores[0].salidax=0;
-jugadores[0].saliday=1;
+    jugadores[0].salidax=0;
+    jugadores[0].saliday=1;
 //judador 2
-jugadores[1].salidax=3;
-jugadores[1].saliday=1;
+    jugadores[1].salidax=3;
+    jugadores[1].saliday=1;
 //jugador 3
-jugadores[2].salidax=3;
-jugadores[2].saliday=4;
+    jugadores[2].salidax=3;
+    jugadores[2].saliday=4;
 //jugador 4
-jugadores[3].salidax=6;
-jugadores[3].saliday=4;
+    jugadores[3].salidax=6;
+    jugadores[3].saliday=4;
 //pasa turnos jugadores
 //jugador 1
-jugadores[0].pasaturnox=0;
-jugadores[0].pasaturnoy=4;
+    jugadores[0].pasaturnox=0;
+    jugadores[0].pasaturnoy=4;
 //jugador 2
-jugadores[1].pasaturnox=0;
-jugadores[1].pasaturnoy=4;
+    jugadores[1].pasaturnox=0;
+    jugadores[1].pasaturnoy=4;
 
 }
 void datos (struct parques jugadores [maxiju],int numjug)
@@ -382,67 +390,194 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                             {
                                 if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].ficha1x][1])
                                 {
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='-';
                                     jugadores[i].ficha1x = jugadores[i].ficha1x + 1;
+                                    if (jugadores[i].nombre ==jugadores[0].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='@';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=1;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[1].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='#';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=2;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[2].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='$';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=3;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[3].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='&';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=4;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
                                 }
                                 if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].ficha1x][4])
                                 {
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='-';
                                     jugadores[i].ficha1x = jugadores[i].ficha1x - 1;
+                                    if (jugadores[i].nombre ==jugadores[0].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='@';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=1;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[1].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='#';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=2;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[2].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='$';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=3;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[3].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='&';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=4;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
                                 }
                                 if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[0][jugadores[i].ficha1y])
                                 {
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='-';
                                     jugadores[i].ficha1y = jugadores[i].ficha1y - 1;
+                                    if (jugadores[i].nombre ==jugadores[0].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='@';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=1;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[1].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='#';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=2;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[2].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='$';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=3;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[3].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='&';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=4;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
                                 }
                                 if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[3][jugadores[i].ficha1y])
                                 {
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='-';
                                     jugadores[i].ficha1y = jugadores[i].ficha1y + 1;
+                                    if (jugadores[i].nombre ==jugadores[0].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='@';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=1;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[1].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='#';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=2;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[2].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='$';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=3;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[3].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='&';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=4;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
                                 }
                                 if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].casillegadax][jugadores[i].casillegaday])
                                 {
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='-';
                                     jugadores[i].ficha1x = jugadores[i].ficha1x + 1;
+                                    if (jugadores[i].nombre ==jugadores[0].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='@';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=1;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[1].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='#';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=2;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[2].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='$';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=3;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[3].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='&';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=4;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
                                 }
                                 if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].llegadax][jugadores[i].llegaday])
                                 {
-                                    jugadores[i].fichasfinales++;
+                                    jugadores[i].fichasfinales= jugadores[i].fichasfinales + 1;
                                     if (jugadores[i].fichasfinales == 2)
                                     {
                                         finalista=true;
                                         //  ganador()
                                     }
                                 }
-                                if (jugadores[i].nombre ==jugadores[0].nombre)
-                                {
-                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='@';
-                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=1;
-                                    vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                                }
-                                if (jugadores[i].nombre ==jugadores[1].nombre)
-                                {
-                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='#';
-                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=2;
-                                    vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                                }
-                                if (jugadores[i].nombre ==jugadores[2].nombre)
-                                {
-                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='$';
-                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=3;
-                                    vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                                }
-                                if (jugadores[i].nombre ==jugadores[3].nombre)
-                                {
-                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='&';
-                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=4;
-                                    vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                                }
+
                             }
                             if (dadox == 2)
                             {
                                 if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].ficha1x][1])
                                 {
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='-';
                                     jugadores[i].ficha1x = jugadores[i].ficha1x + 2;
                                     if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[4][1])
                                     {
                                         jugadores[i].ficha1x = jugadores[i].ficha1x -1;
                                         jugadores[i].ficha1y = jugadores[i].ficha1y +1;
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[0].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='@';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=1;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[1].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='#';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=2;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[2].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='$';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=3;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[3].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='&';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=4;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
                                     }
                                 }
                                 if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].ficha1x][4])
@@ -452,6 +587,30 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                     {
                                         jugadores[i].ficha1x = jugadores[i].ficha1x + 1;
                                         jugadores[i].ficha1y = jugadores[i].ficha1y - 1;
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[0].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='@';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=1;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[1].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='#';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=2;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[2].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='$';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=3;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[3].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='&';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=4;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
                                     }
                                 }
                                 if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[0][jugadores[i].ficha1y])
@@ -485,30 +644,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                         //  ganador()
                                     }
                                 }
-                                if (jugadores[i].nombre ==jugadores[0].nombre)
-                                {
-                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='@';
-                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=1;
-                                    vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                                }
-                                if (jugadores[i].nombre ==jugadores[1].nombre)
-                                {
-                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='#';
-                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=2;
-                                    vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                                }
-                                if (jugadores[i].nombre ==jugadores[2].nombre)
-                                {
-                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='$';
-                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=3;
-                                    vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                                }
-                                if (jugadores[i].nombre ==jugadores[3].nombre)
-                                {
-                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='&';
-                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=4;
-                                    vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                                }
+
                             }
                             if (dadox == 3)
                             {
@@ -747,8 +883,33 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                             {
                                 if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].ficha1x][1])
                                 {
-                                    jugadores[i].ficha1x = jugadores[i].ficha1x + 2;
-                                    if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[4][1])
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='-';
+                                    jugadores[i].ficha1x = jugadores[i].ficha1x + 6;
+                                    if (jugadores[i].nombre ==jugadores[0].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='@';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=1;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[1].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='#';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=2;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[2].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='$';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=3;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (jugadores[i].nombre ==jugadores[3].nombre)
+                                    {
+                                        tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='&';
+                                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=4;
+                                        vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                                    }
+                                    if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[diagonal1x][1])
                                     {
                                         jugadores[i].ficha1x = jugadores[i].ficha1x -1;
                                         jugadores[i].ficha1y = jugadores[i].ficha1y +1;
@@ -787,36 +948,12 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                 }
                                 if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[1][2])
                                 {
-                                    jugadores[i].fichasfinales++;
+                                    jugadores[i].fichasfinales = jugadores[i].fichasfinales + 1;
                                     if (jugadores[i].fichasfinales == 2)
                                     {
                                         finalista=true;
                                         //  ganador()
                                     }
-                                }
-                                if (jugadores[i].nombre ==jugadores[0].nombre)
-                                {
-                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='@';
-                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=1;
-                                    vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                                }
-                                if (jugadores[i].nombre ==jugadores[1].nombre)
-                                {
-                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='#';
-                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=2;
-                                    vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                                }
-                                if (jugadores[i].nombre ==jugadores[2].nombre)
-                                {
-                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='$';
-                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=3;
-                                    vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                                }
-                                if (jugadores[i].nombre ==jugadores[3].nombre)
-                                {
-                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='&';
-                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=4;
-                                    vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
                                 }
                             }
                         }
@@ -835,7 +972,3 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
     }
     while(finalista == false);
 }
-
-
-
-
