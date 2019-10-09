@@ -30,11 +30,16 @@ struct parques
     int salidax=0,saliday=0;
     int llegadax=0,llegaday=0;
     int ficha1x=0,ficha1y=0;
+    int basex=0,basey=0;
     int ficha2x=0,ficha2y=0;
     int contador1=0;
     int dcotador2=0;
+    int cambiox=0;
+    int cambioy=0;
+    int basefantasma=0;
+    char base;
     bool fichas =false;
-    bool todas;
+    bool todas=false;
     bool ganador = false;
     bool nu2 =true;
     bool nu3 =true;
@@ -48,6 +53,7 @@ int main()
 {
     struct parques jugadores [maxiju];
     int numjug=0,opcion=0,tamtabx=0,tamtaby=0;
+    int opmapa=0;
     srand(time(NULL));
     char tablero [maxix][maxiy];
     int tablerofantasma [maxix][maxiy];
@@ -61,28 +67,81 @@ int main()
         cin>>opcion;
         if (opcion == 1)
         {
-            cout<<"cuantos jugadores van a jugar?"<<endl;
+            cout<<"Cuantos jugadores van a jugar?"<<endl;
             cin>>numjug;
-            if(numjug == 1 )
+            cout<<"Que tipo de mapa escoges?"<<endl;
+            cout<<"1. Peque"<<endl;
+            cout<<"2. Grande"<<endl;
+            cout<<"3. Personalizado"<<endl;
+            cin>>opmapa;
+            if (opmapa == 1)
             {
-                cout<<"No puedes jugar solo, consiguete a alguien"<<endl;
-                cout<<"Vas a jugar contra la maquina en difultad normal"<<endl;
                 tamtabx = 4;
                 tamtaby = 6;
-                mapa(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                datos (jugadores,numjug);
-                vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                // juegoconlamaquina (tablero,jugadores,numjug,tamtab);
+                if(numjug == 1 )
+                {
+                    cout<<"No puedes jugar solo, consiguete a alguien"<<endl;
+                    cout<<"Vas a jugar contra la maquina en difultad normal"<<endl;
+
+                    mapa(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                    datos (jugadores,numjug);
+                    juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                    // juegoconlamaquina (tablero,jugadores,numjug,tamtab);
+                }
+                if(numjug >= 2)
+                {
+                    mapa(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                    datos (jugadores,numjug);
+                    juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+
+                }
             }
-            if(numjug >= 2)
+            if (opmapa == 2)
             {
-                tamtabx = 4;
-                tamtaby = 6;
-                mapa(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                datos (jugadores,numjug);
-                vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                tamtabx = 10;
+                tamtaby = 10;
+                if(numjug == 1 )
+                {
+                    cout<<"No puedes jugar solo, consiguete a alguien"<<endl;
+                    cout<<"Vas a jugar contra la maquina en difultad normal"<<endl;
+
+                    mapa(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                    datos (jugadores,numjug);
+                    juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                    // juegoconlamaquina (tablero,jugadores,numjug,tamtab);
+                }
+                if(numjug >= 2)
+                {
+                    mapa(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                    datos (jugadores,numjug);
+                    juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+
+                }
+
+            }
+            if (opmapa == 3)
+            {
+                cout<<"Digite el numero de filas"<<endl;
+                cin>>tamtabx;
+                cout<<"Digite el numero de columnas"<<endl;
+                cin>>tamtaby;
+                if(numjug == 1 )
+                {
+                    cout<<"No puedes jugar solo, consiguete a alguien"<<endl;
+                    cout<<"Vas a jugar contra la maquina en difultad normal"<<endl;
+
+                    mapa(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                    datos (jugadores,numjug);
+                    juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                    // juegoconlamaquina (tablero,jugadores,numjug,tamtab);
+                }
+                if(numjug >= 2)
+                {
+                    mapa(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+                    datos (jugadores,numjug);
+                    juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+
+                }
 
             }
         }
@@ -101,6 +160,11 @@ int main()
 }
 void mapa(char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby)
 {
+    int mitadx=0;
+    int mitady=0;
+    mitadx=tamtabx/2;
+    mitady=tamtaby/2;
+    cout<<mitadx<<" "<<mitady<<endl;
     for(int i = 0; i < tamtabx; i++)
     {
         for(int j = 0; j < tamtaby; j++)
@@ -108,6 +172,41 @@ void mapa(char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct 
             tablerofantasma[i][j]=0;
         }
     }
+    jugadores[0].salidax=0;
+    jugadores[0].saliday=1;
+    jugadores[0].llegadax=mitadx;
+    jugadores[0].llegaday=mitady;
+    jugadores[0].base='@';
+    jugadores[0].basefantasma=1;
+    jugadores[0].basex=0;
+    jugadores[0].basey=0;
+//jugador 2
+    jugadores[1].salidax=tamtabx-1;
+    jugadores[1].saliday=1;
+    jugadores[1].llegadax=mitadx+1;
+    jugadores[1].llegaday=mitady;
+    jugadores[1].base='&';
+    jugadores[1].basefantasma=2;
+    jugadores[1].basex=tamtabx-1;
+    jugadores[1].basey=0;
+//jugador 3
+    jugadores[2].salidax=tamtabx-1;
+    jugadores[2].saliday=tamtaby-2;
+    jugadores[2].llegadax=mitadx+1;
+    jugadores[2].llegaday=mitady+1;
+    jugadores[2].base='#';
+    jugadores[2].basefantasma=3;
+    jugadores[2].basex=tamtabx-1;
+    jugadores[2].basey=tamtaby-1;
+    //jugador 4
+    jugadores[3].salidax=0;
+    jugadores[3].saliday=tamtaby-2;
+    jugadores[3].llegadax=mitadx;
+    jugadores[3].llegaday=mitady+1;
+    jugadores[3].base='$';
+    jugadores[3].basefantasma=4;
+    jugadores[3].basex=0;
+    jugadores[3].basey=tamtaby-1;
     for(int x = 0; x < tamtabx; x++)
     {
         for(int y = 0; y < tamtaby; y++)
@@ -115,69 +214,15 @@ void mapa(char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct 
             tablero[x][y]='-';
         }
     }
-//base jugador 1
-    tablero[0][0]='@';
-    tablero[1][0]='@';
-//base jugador 2
-    tablero[2][0]='#';
-    tablero[3][0]='#';
-//base jugador 3
-    tablero[0][5]='$';
-    tablero[1][5]='$';
-//base jugado 4
-    tablero[2][5]='&';
-    tablero[3][5]='&';
-//puntos de llegada jugadores
-    tablero[1][2]='@';
-    tablero[2][2]='#';
-    tablero[2][3]='$';
-    tablero[1][3]='&';
-//************//
-// base jugador 1 movimientos
-    tablerofantasma[0][0]=1;
-    tablerofantasma[1][0]=1;
-//base jugador 2 movimientos
-    tablerofantasma[2][0]=2;
-    tablerofantasma[3][0]=2;
-//base jugador 3 movimientos
-    tablerofantasma[0][5]=3;
-    tablerofantasma[1][5]=3;
-//base jugador 4 movimientos
-    tablerofantasma[2][5]=4;
-    tablerofantasma[3][5]=4;
-//puntos de llegada jugadores
-//jugador 1
-    tablerofantasma[1][2]=1;
-    jugadores[0].llegadax=1;
-    jugadores[0].llegaday=2;
-//jugador 2
-    tablerofantasma[2][2]=2;
-    jugadores[1].llegadax=2;
-    jugadores[1].llegaday=2;
+    for(int i=0; i<4; i++)
+    {
+        tablero[jugadores[i].basex][jugadores[i].basey]=jugadores[i].base;
+        tablero[jugadores[i].llegadax][jugadores[i].llegaday]=jugadores[i].base;
+        tablerofantasma[jugadores[i].basex][jugadores[i].basey]=jugadores[i].basefantasma;
 
-//jugador 3
-    tablerofantasma[2][3]=3;
-    jugadores[2].llegadax=2;
-    jugadores[2].llegaday=3;
 
-//jugador 4
-    tablerofantasma[1][3]=4;
-    jugadores[3].llegadax=1;
-    jugadores[3].llegaday=3;
 
-//salidas jugadores
-//jugador 1
-    jugadores[0].salidax=0;
-    jugadores[0].saliday=1;
-//judador 2
-    jugadores[1].salidax=3;
-    jugadores[1].saliday=1;
-//jugador 3
-    jugadores[2].salidax=3;
-    jugadores[2].saliday=4;
-//jugador 4
-    jugadores[3].salidax=6;
-    jugadores[3].saliday=4;
+    }
 }
 void datos (struct parques jugadores [maxiju],int numjug)
 {
@@ -215,6 +260,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
         {
             i=0;
             turno++;
+
         }
         cout<<"Turno #"<<turno<<endl;
         cout<<"Juega "<<jugadores[i].nombre<<endl;
@@ -584,7 +630,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                         {
                                             tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='-';
                                             jugadores[i].ficha1x = jugadores[i].ficha1x + 2;
-                                            if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[4][1])
+                                            if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[tamtabx][1])
                                             {
                                                 jugadores[i].ficha1x = jugadores[i].ficha1x -1;
                                                 jugadores[i].ficha1y = jugadores[i].ficha1y +1;
@@ -649,9 +695,10 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                     }
                                     if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] != tablero[jugadores[i].salidax][jugadores[i].saliday])
                                     {
-                                        if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].ficha1x][4])
+                                        if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].ficha1x][jugadores[i].cambioy])
                                         {
-                                            tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='-';
+                                            tablero[jugadores[i].ficha1x]
+                                            [jugadores[i].ficha1y]='-';
                                             jugadores[i].ficha1x = jugadores[i].ficha1x - 2;
                                             if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[-1][4])
                                             {
@@ -1085,8 +1132,14 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                     if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].ficha1x][1])
                                     {
                                         tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='-';
-                                        jugadores[i].ficha1x = jugadores[i].ficha1x + 3;
-                                        jugadores[i].ficha1y = jugadores[i].ficha1y + 3;
+                                        jugadores[i].ficha1x = jugadores[i].ficha1x + 6;
+                                        if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[tamtabx][1])
+                                        {
+                                            jugadores[i].ficha1x = jugadores[i].ficha1x - 3;
+                                            jugadores[i].ficha1y = jugadores[i].ficha1y + 3;
+
+
+                                        }
 
                                         if (jugadores[i].nombre ==jugadores[0].nombre)
                                         {
@@ -1169,6 +1222,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
             lanzamientos = 3;
             contador =0;
         }
+        Sleep(2000);
         system("cls");
     }
     while(finalista == false);
@@ -1177,3 +1231,4 @@ void ganador ()
 {
     cout<<"has ganado felicidades jugador"<<endl;
 }
+
