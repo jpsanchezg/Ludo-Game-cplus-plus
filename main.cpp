@@ -38,7 +38,8 @@ struct parques
     int cambioy=0;
     int basefantasma=0;
     char base;
-    bool fichas =false;
+    bool fichas1 =false;
+    bool fichas2 =false;
     bool todas=false;
     bool ganador = false;
     bool nu2 =true;
@@ -288,7 +289,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
             {
                 cout<<"Lanzamiento #"<<contador+1<<endl;
                 dadox = rand() % 6 + 1;
-                if (jugadores[i].fichas==true)
+                if (jugadores[i].fichas1==true)
                 {
                     cout<<dadox<<endl;
                     if (turno>0)
@@ -296,7 +297,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                         salio=true;
                     }
                 }
-                if (jugadores[i].fichas == false)
+                if (jugadores[i].todas == false)
                 {
                     dadoy = rand() % 6 + 1;
                     cout<<dadox<<","<<dadoy<<endl;
@@ -329,7 +330,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
 
                             lanzamientos =1;
                             jugadores[i].todas=true;
-                            jugadores[i].fichas=true;
+                            jugadores[i].fichas1=true;
                             salio=true;
 
                         }
@@ -1343,5 +1344,6 @@ void ganador ()
 {
     cout<<"has ganado felicidades jugador"<<endl;
 }
+
 
 
