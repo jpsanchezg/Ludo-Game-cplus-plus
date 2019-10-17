@@ -2,7 +2,6 @@
 #include <iomanip>
 #include <time.h>
 #include <stdlib.h>
-#include <iomanip>
 #include <windows.h>
 
 #define maxiju 15
