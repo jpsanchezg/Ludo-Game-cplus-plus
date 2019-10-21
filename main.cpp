@@ -42,6 +42,7 @@ struct parques
     bool fichas2 =false;
     bool todas=false;
     bool ganador = false;
+    bool salio = false;
     bool nu2 =true;
     bool nu3 =true;
     bool nu4 =true;
@@ -289,19 +290,18 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
             {
                 cout<<"Lanzamiento #"<<contador+1<<endl;
                 dadox = rand() % 6 + 1;
-                if (jugadores[i].fichas1==true)
+                dadoy = rand() % 6 + 1;
+                 cout<<dadox<<","<<dadoy<<endl;
+
+                if (jugadores[i].fichas1==true || jugadores[i].fichas2==true )
                 {
-                    cout<<dadox<<endl;
-                    if (turno>0)
+                    if (turno > 0)
                     {
-                        salio=true;
+                        jugadores[i].salio=true;
                     }
                 }
                 if (jugadores[i].fichas1 == false || jugadores[i].fichas2 == false)
                 {
-                    dadoy = rand() % 6 + 1;
-                    cout<<dadox<<","<<dadoy<<endl;
-
                     if(dadox==1)
                     {
                         if(dadoy==1)
@@ -314,7 +314,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                 lanzamientos =1;
                                 jugadores[i].fichas2=true;
                                 jugadores[i].fichas1=true;
-                                salio=true;
+                                jugadores[i].salio=true;
                             }
                         }
                         if(dadoy != 1)
@@ -338,7 +338,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                 tablerofantasma[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].basefantasma;
                                 lanzamientos =1;
                                 jugadores[i].fichas1=true;
-                                salio=true;
+                                jugadores[i].salio=true;
                             }
                         }
                         if(dadoy != 2)
@@ -362,7 +362,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                 tablerofantasma[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].basefantasma;
                                 lanzamientos =1;
                                 jugadores[i].fichas1=true;
-                                salio=true;
+                                jugadores[i].salio=true;
                             }
                         }
                         if(dadoy != 3)
@@ -386,7 +386,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                 tablerofantasma[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].basefantasma;
                                 lanzamientos =1;
                                 jugadores[i].fichas1=true;
-                                salio=true;
+                                jugadores[i].salio=true;
                             }
                         }
                         if(dadoy != 4)
@@ -411,7 +411,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
 
                                 lanzamientos =1;
                                 jugadores[i].fichas1=true;
-                                salio=true;
+                                jugadores[i].salio=true;
                             }
                         }
                         if(dadoy != 5)
@@ -431,7 +431,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                 tablerofantasma[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].basefantasma;
                                 lanzamientos =1;
                                 jugadores[i].fichas1=true;
-                                salio=true;
+                                jugadores[i].salio=true;
 
                             }
                         }
@@ -442,13 +442,13 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                     }
                     if (contador == lanzamientos)
                     {
-                        salio = true;
+                        jugadores[i].salio = true;
                     }
                 }
             }
-            while (salio == false);
+            while (jugadores[i].salio == false);
 
-            if (turno >0)
+            if (turno > 0)
             {
                 if (jugadores[i].fichas1 == true)
                 {
@@ -489,6 +489,69 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                     {
                                         jugadores[i].ficha1x = jugadores[i].ficha1x - 1;
                                         jugadores[i].ficha1y = jugadores[i].ficha1y + 1;
+                                        if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].llegadax][jugadores[i].llegaday])
+                                        {
+                                            jugadores[i].fichasfinales= jugadores[i].fichasfinales + 1;
+                                            if (jugadores[i].fichasfinales == 2)
+                                            {
+                                                finalista=true;
+                                                //ganador();
+                                            }
+                                        }
+                                    }
+                                    jugadores[i].contador1= jugadores[i].contador1 +1;
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
+                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].basefantasma;
+                                }
+                                if (jugadores[i].nombre == jugadores[1].nombre)
+                                {
+                                    jugadores[i].ficha1y = jugadores[i].ficha1y + 1;
+                                    if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].salidax][jugadores[i].saliday])
+                                    {
+                                        jugadores[i].ficha1y = jugadores[i].ficha1y - 1;
+                                        jugadores[i].ficha1x = jugadores[i].ficha1x + 1;
+                                        if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].llegadax][jugadores[i].llegaday])
+                                        {
+                                            jugadores[i].fichasfinales= jugadores[i].fichasfinales + 1;
+                                            if (jugadores[i].fichasfinales == 2)
+                                            {
+                                                finalista=true;
+                                                //ganador();
+                                            }
+                                        }
+                                    }
+                                    jugadores[i].contador1= jugadores[i].contador1 +1;
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
+                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].basefantasma;
+                                }
+                                if (jugadores[i].nombre == jugadores[2].nombre)
+                                {
+                                    jugadores[i].ficha1x = jugadores[i].ficha1x - 1;
+                                    if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].salidax][jugadores[i].saliday])
+                                    {
+                                        jugadores[i].ficha1x = jugadores[i].ficha1x + 1;
+                                        jugadores[i].ficha1y = jugadores[i].ficha1y - 1;
+                                        if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].llegadax][jugadores[i].llegaday])
+                                        {
+                                            jugadores[i].fichasfinales= jugadores[i].fichasfinales + 1;
+                                            if (jugadores[i].fichasfinales == 2)
+                                            {
+                                                finalista=true;
+                                                //ganador();
+                                            }
+                                        }
+                                    }
+                                    jugadores[i].contador1= jugadores[i].contador1 +1;
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
+                                    tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].basefantasma;
+                                }
+                                   if (jugadores[i].nombre == jugadores[3].nombre)
+                                {
+                                    jugadores[i].ficha1y = jugadores[i].ficha1y - 1;
+                                    if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].salidax][jugadores[i].saliday])
+                                    {
+                                        jugadores[i].ficha1x = jugadores[i].ficha1x + 1;
+                                        jugadores[i].ficha1y = jugadores[i].ficha1y - 1;
                                         if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].llegadax][jugadores[i].llegaday])
                                         {
                                             jugadores[i].fichasfinales= jugadores[i].fichasfinales + 1;
@@ -949,3 +1012,4 @@ void ganador ()
 {
     cout<<"has ganado felicidades jugador"<<endl;
 }
+
