@@ -34,7 +34,7 @@ struct parques
     int ficha2x=0,ficha2y=0;
     int contador1=0;
     int contador2=0;
-    int lanzamientos = 0;
+    int lanzamientos = 4;
     int cambiox=0;
     int cambioy=0;
     int basefantasma=0;
@@ -268,17 +268,11 @@ void vista (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
 }
 void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby)
 {
-    int turno=0,i=0,respu=0,contador=0,lanzamientos=3,fichmov=0;
+    int turno=0,i=0,respu=0,contador=1,fichmov=0;
     int dadox=0,dadoy=0;
     do
     {
         vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-        if(i == numjug)
-        {
-            i=0;
-            turno++;
-
-        }
         cout<<"Turno #"<<turno<<endl;
         cout<<"Juega "<<jugadores[i].nombre<<endl;
         cout<<"Tirar dados? 1.si"<<endl;
@@ -287,7 +281,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
         {
             do
             {
-                cout<<"Lanzamiento #"<<contador+1<<endl;
+                cout<<"Lanzamiento #"<<contador<<endl;
                 dadox = rand() % 6 + 1;
                 dadoy = rand() % 6 + 1;
                 cout<<dadox<<","<<dadoy<<endl;
@@ -439,7 +433,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                             contador++;
                         }
                     }
-                    if (contador == lanzamientos)
+                    if (contador == jugadores[i].lanzamientos)
                     {
                         jugadores[i].salio = true;
                         contador = 0;
@@ -447,9 +441,9 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                 }
             }
             while (jugadores[i].salio == false);
-
             if (turno > 0)
             {
+
                 if (jugadores[i].fichas1 == true)
                 {
                     cout<<"que fichas quieres mover?: "<<endl;
@@ -459,7 +453,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                     tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
                     tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].basefantasma;
                 }
-                if (jugadores[i].fichas2 == true)
+                if (jugadores[i].fichas1 == true && jugadores[i].fichas2 == true)
                 {
                     cout<<"2. ficha 2"<<endl;
                     jugadores[i].ficha2x=jugadores[i].salidax;
@@ -469,6 +463,8 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
 
                 }
                 cin>>fichmov;
+                cout<<"pasa por aca 3"<<endl;
+
                 if(fichmov == 1)
                 {
                     cout<<"cuantas casillas quieres mover la ficha?"<<endl;
@@ -531,7 +527,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                     tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
                                     tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].basefantasma;
                                 }
-                                   if (jugadores[i].nombre == jugadores[3].nombre)
+                                if (jugadores[i].nombre == jugadores[3].nombre)
                                 {
                                     jugadores[i].ficha1y = jugadores[i].ficha1y - 1;
                                     if (tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].salidax][jugadores[i].saliday])
@@ -974,22 +970,41 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                         }
                     }
                 }
+                i++;
+
+                if(i == numjug)
+                {
+                    i=0;
+                    turno++;
+                }
+                if (jugadores[i].fichas1 == false)
+                {
+
+                    jugadores[i].salio = false;
+
+                    jugadores[i].lanzamientos = 4;
+                    contador =1;
+                }
+
+            }
+            i++;
+
+            if(i == numjug)
+            {
+                i=0;
+                turno++;
+            }
+            if (jugadores[i].fichas1 == false)
+            {
+
+                jugadores[i].salio = false;
+
+                jugadores[i].lanzamientos = 4;
+                contador =1;
             }
 
-
-
-
         }
 
-        jugadores[i].salio = false;
-        i++;
-        if (jugadores[i].fichas1 == false)
-        {
-            jugadores[i].lanzamientos = 3;
-            contador =0;
-        }
-        Sleep(2000);
-        system("cls");
     }
     while(jugadores[i].finalista == false);
 }
