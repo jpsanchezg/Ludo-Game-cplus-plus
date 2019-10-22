@@ -1004,7 +1004,8 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
             }
 
         }
-
+        Sleep(2000);
+        system("cls");
     }
     while(jugadores[i].finalista == false);
 }
