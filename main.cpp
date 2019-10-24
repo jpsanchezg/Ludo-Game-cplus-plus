@@ -22,7 +22,7 @@ void vista (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
 
 struct parques
 {
-    char nombre[30];
+    string nombre;
     int dadox=0;
     int dadoy=0;
     int fichasfinales=0;
