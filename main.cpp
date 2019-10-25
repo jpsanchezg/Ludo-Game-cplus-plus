@@ -62,7 +62,14 @@ int main()
     srand(time(NULL));
     char tablero [maxix][maxiy];
     int tablerofantasma [maxix][maxiy];
-    cout<<"Bienvenido al juego parques"<<endl;
+    cout<<"####### #     # ###  #####     ###  #####     ######     #    ######   #####  #     # #######  #####     ####### ### #     # #######"<<endl;
+    cout<<"   #    #     #  #  #     #     #  #     #    #     #   # #   #     # #     # #     # #       #     #       #     #  ##   ## #       "<<endl;
+    cout<<"   #    #     #  #  #           #  #          #     #  #   #  #     # #     # #     # #       #             #     #  # # # # #       "<<endl;
+    cout<<"   #    #######  #   #####      #   #####     ######  #     # ######  #     # #     # #####    #####        #     #  #  #  # #####   "<<endl;
+    cout<<"   #    #     #  #        #     #        #    #       ####### #   #   #   # # #     # #             #       #     #  #     # #       "<<endl;
+    cout<<"   #    #     #  #  #     #     #  #     #    #       #     # #    #  #    #  #     # #       #     #       #     #  #     # #       "<<endl;
+    cout<<"   #    #     # ###  #####     ###  #####     #       #     # #     #  #### #  #####  #######  #####        #    ### #     # ####### "<<endl;
+    cout<<endl;
     do
     {
         cout<<"MENU"<<endl;
