@@ -36,6 +36,7 @@ struct parques
     int ficha2x,ficha2y;
     int contador1=0;
     int contador2=0;
+    int totalcontador1=0,totalcontado2=0;
     int lanzamientos = 4;
     int cambiox,cambioy;
     int cambioy2,cambiox2;
@@ -62,13 +63,13 @@ int main()
     srand(time(NULL));
     char tablero [maxix][maxiy];
     int tablerofantasma [maxix][maxiy];
-    cout<<"####### #     # ###  #####     ###  #####     ######     #    ######   #####  #     # #######  #####     ####### ### #     # #######"<<endl;
-    cout<<"   #    #     #  #  #     #     #  #     #    #     #   # #   #     # #     # #     # #       #     #       #     #  ##   ## #       "<<endl;
-    cout<<"   #    #     #  #  #           #  #          #     #  #   #  #     # #     # #     # #       #             #     #  # # # # #       "<<endl;
-    cout<<"   #    #######  #   #####      #   #####     ######  #     # ######  #     # #     # #####    #####        #     #  #  #  # #####   "<<endl;
-    cout<<"   #    #     #  #        #     #        #    #       ####### #   #   #   # # #     # #             #       #     #  #     # #       "<<endl;
-    cout<<"   #    #     #  #  #     #     #  #     #    #       #     # #    #  #    #  #     # #       #     #       #     #  #     # #       "<<endl;
-    cout<<"   #    #     # ###  #####     ###  #####     #       #     # #     #  #### #  #####  #######  #####        #    ### #     # ####### "<<endl;
+    cout<<"####### #     # ###  #####     ###  #####     #       #     # ######  ####### #     #    ####### ### #     # #######"<<endl;
+    cout<<"   #    #     #  #  #     #     #  #     #    #       #     # #     # #     #  #   #        #     #  ##   ## #       "<<endl;
+    cout<<"   #    #     #  #  #           #  #          #       #     # #     # #     #   # #         #     #  # # # # #       "<<endl;
+    cout<<"   #    #######  #   #####      #   #####     #       #     # #     # #     #    #          #     #  #  #  # #####   "<<endl;
+    cout<<"   #    #     #  #        #     #        #    #       #     # #     # #     #   # #         #     #  #     # #       "<<endl;
+    cout<<"   #    #     #  #  #     #     #  #     #    #       #     # #     # #     #  #   #        #     #  #     # #       "<<endl;
+    cout<<"   #    #     # ###  #####     ###  #####     #######  #####  ######  ####### #     #       #    ### #     # ####### "<<endl;
     cout<<endl;
     do
     {
@@ -393,7 +394,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                         {
                             if (jugadores[i].fichas1 == false || jugadores[i].fichas2==false)
                             {
-                                
+
                                 if (jugadores[i].fichas1==false)
                                 {
                                     jugadores[i].ficha1x=jugadores[i].salidax;
@@ -418,7 +419,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                         {
                             if (jugadores[i].fichas1 == false || jugadores[i].fichas2==false)
                             {
-                             
+
                                 if (jugadores[i].fichas1==false)
                                 {
                                     cout<<"SALE 1 FICHA"<<endl;
@@ -511,6 +512,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                         if (jugadores[i].movfich == 1)
                         {
                             tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]='-';
+                            jugadores[i].contador1 = jugadores[i].contador1 + dadox;
                             while (movi == false)
                             {
                                 if (jugadores[i].ficha1x == jugadores[i].cambiox)
@@ -576,10 +578,14 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                                 tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].basefantasma;
 
                             }
+                            if (jugadores[i].contador1 == )
 
                             tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
                             tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].basefantasma;
+                            if ( tablero[jugadores[i].ficha1x][jugadores[i].ficha1y] == tablero[jugadores[i].salidax][jugadores[i].saliday] )
+                            {
 
+                            }
 
                         }
 
