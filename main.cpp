@@ -188,10 +188,16 @@ void mapa(char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct 
     jugadores[0].basefantasma=1;
     jugadores[0].basex=0;
     jugadores[0].basey=0;
-    jugadores[0].cambiox = tamtabx - 1;
-    jugadores[0].cambioy = tamtaby -2;
-    jugadores[0].cambiox2 = 0;
-    jugadores[0].cambioy2 = 1;
+    jugadores[0].limite1 = 9;
+    jugadores[0].limite2 = 16;
+    jugadores[0].limite3 = 25;
+    jugadores[0].limite4 = 31;
+    jugadores[0].posx1 = 9;
+    jugadores[0].posx2 = 0;
+    jugadores[0].posy1 = 1;
+    jugadores[0].posy2 = 8;
+
+
 //jugador 2
     jugadores[1].salidax=tamtabx-1;
     jugadores[1].saliday=1;
@@ -303,7 +309,7 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
     int dadox=0,dadoy=0;
     bool movi = false;
     cout<<"RECUERDEN SUS FICHAS JUGADORES "<<endl;
-    for (int u=0;u<numjug;u++)
+    for (int u=0; u<numjug; u++)
     {
 
         cout<<"JUGADOR # "<<u+1<<endl;
@@ -591,7 +597,37 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
 }
 void movimientojug1f1 (char tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby,int dadox,int dadoy)
 {
-    cout<<"hola"<<endl;
+    int suma=0;
+    if (jugadores[0].movfich == 1)
+    {
+        if (jugadores[0].contador1 <=jugadores[0].limite1)
+        {
+            jugadores[0].ficha1y = jugadores[0].posy1;
+            jugadores[0].ficha1x = jugadores[0].ficha1x +dadox;
+        }
+        if (jugadores[0].contador1 > jugadores[0].limite1 && jugadores[0].contador1 <=jugadores[0].limite2)
+        {
+            jugadores[0].ficha1x = jugadores[0].posx1;
+            suma = jugadores[0].limite1 - jugadores[0].contador1;
+            jugadores[0].ficha1y = jugadores[0].ficha1y + suma;
+        }
+        if (jugadores[0].contador1 >jugadores[0].limite2 && jugadores[0].contador1 <=jugadores[0].limite3)
+        {
+            jugadores[0].ficha1y = jugadores[0].posy2;
+            suma = jugadores[0].limite3 - jugadores[0].contador1;
+            jugadores[0].ficha1x = jugadores[0].ficha1x - suma;
+        }
+        if (jugadores[0].contador1 >jugadores[0].limite3 && jugadores[0].contador1 <=jugadores[0].limite4)
+        {
+            jugadores[0].ficha1x = jugadores[0].posx2;
+            suma = jugadores[0].limite1 - jugadores[0].contador1;
+            jugadores[0].ficha1y = jugadores[0].ficha1y - suma;
+        }
+        if (jugadores[0].contador1 >jugadores[0].limite3)
+        {
+            
+        }
+    }
 }
 void ganador ()
 {
