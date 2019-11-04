@@ -309,7 +309,7 @@ void vista (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
 }
 void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby)
 {
-    int turno=0,i=0,respu=0,contador=1,fichmov=0;
+    int turno=0,i=0,respu=0,contador=1;
     int dadox=0,dadoy=0;
     bool movi = false;
     cout<<"RECUERDEN SUS FICHAS JUGADORES "<<endl;
@@ -584,14 +584,16 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                     cin>>jugadores[i].movfich;
                     if(jugadores[i].fichmov == 1)
                     {
+
+
                         tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=' ';
                         if (jugadores[i].nombre == jugadores[0].nombre)
                         {
                             movimientojug1f1  (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                            reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
                         }
                         if (jugadores[i].nombre == jugadores[1].nombre)
                         {
+
                             /**movimientojug2f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                             reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);**/
                         }
@@ -602,19 +604,19 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                         }
                         if (jugadores[i].nombre == jugadores[3].nombre)
                         {
+                            cout<<"h6"<<endl;
+
                             /** movimientojug4f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                             reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);**/
                         }
                     }
-
-
                     if (jugadores[i].fichmov == 2)
                     {
                         tablero[jugadores[i].ficha2x][jugadores[i].ficha2y]=' ';
                         if (jugadores[i].nombre == jugadores[0].nombre)
                         {
                             movimientojug1f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                            reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
+
                         }
                         if (jugadores[i].nombre == jugadores[1].nombre)
                         {
@@ -632,13 +634,12 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
                             reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);**/
                         }
                     }
+                    reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
                 }
             }
         }
         i++;
         movi = false;
-
-
         if(i == numjug)
         {
             i=0;
@@ -653,8 +654,8 @@ void juego (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struc
             jugadores[i].lanzamientos = 4;
             contador =1;
         }
-        Sleep(2000);
-        system("cls");
+        /** Sleep(2000);
+         system("cls");**/
     }
     while(jugadores[i].ganador == false);
 
@@ -798,9 +799,6 @@ void movimientojug1f1 (char tablero [maxix][maxiy],int tablerofantasma [maxix][m
         tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y]=jugadores[0].basefantasma;
         tablero[jugadores[0].ficha1x][jugadores[0].ficha1y]=jugadores[0].base;
     }
-
-
-
 }
 void movimientojug1f2 (char tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby,int dadox,int dadoy)
 {
@@ -943,11 +941,11 @@ void movimientojug1f2 (char tablero [maxix][maxiy],int tablerofantasma [maxix][m
 }
 void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby,int i)
 {
-    if (jugadores[i].movfich == 1)
+    if (jugadores[i].fichmov == 1)
     {
-        if (jugadores[i].basefantasma == 0)
+        if (jugadores[i].basefantasma == 1)
         {
-            if (tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y] == 1 )
+            if (tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y] == 2 )
             {
                 if (tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y] == tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y])
                 {
@@ -958,7 +956,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[1].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y] == 2 )
+            if (tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y] == 3 )
             {
                 if (tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y] == tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y])
                 {
@@ -969,7 +967,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[2].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y] == 3 )
+            if (tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y] == 4 )
             {
                 if (tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y] == tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y])
                 {
@@ -981,9 +979,9 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                 }
             }
         }
-        if (jugadores[i].basefantasma == 1)
+        if (jugadores[i].basefantasma == 2)
         {
-            if (tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y] == 0 )
+            if (tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y] == 1 )
             {
                 if (tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y] == tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y])
                 {
@@ -994,7 +992,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[0].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y] == 2 )
+            if (tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y] == 3 )
             {
                 if (tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y] == tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y])
                 {
@@ -1005,7 +1003,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[2].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y] == 3 )
+            if (tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y] == 4 )
             {
                 if (tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y] == tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y])
                 {
@@ -1017,9 +1015,9 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                 }
             }
         }
-        if (jugadores[i].basefantasma == 2)
+        if (jugadores[i].basefantasma == 3)
         {
-            if (tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y] == 0 )
+            if (tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y] == 1 )
             {
                 if (tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y] == tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y])
                 {
@@ -1030,7 +1028,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[0].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y] == 1 )
+            if (tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y] == 2 )
             {
                 if (tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y] == tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y])
                 {
@@ -1041,7 +1039,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[1].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y] == 3 )
+            if (tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y] == 4 )
             {
                 if (tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y] == tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y])
                 {
@@ -1053,9 +1051,9 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                 }
             }
         }
-        if (jugadores[i].basefantasma == 3)
+        if (jugadores[i].basefantasma == 4)
         {
-            if (tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y] == 0 )
+            if (tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y] == 1 )
             {
                 if (tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y])
                 {
@@ -1066,7 +1064,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[0].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y] == 1 )
+            if (tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y] == 2 )
             {
                 if (tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y])
                 {
@@ -1077,7 +1075,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[1].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y] == 2 )
+            if (tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y] == 3 )
             {
                 if (tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y])
                 {
@@ -1090,11 +1088,11 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
             }
         }
     }
-     if (jugadores[i].movfich == 2)
+    if (jugadores[i].fichmov == 2)
     {
-        if (jugadores[i].basefantasma == 0)
+        if (jugadores[i].basefantasma == 1)
         {
-            if (tablerofantasma[jugadores[0].ficha2x][jugadores[0].ficha2y] == 1 )
+            if (tablerofantasma[jugadores[0].ficha2x][jugadores[0].ficha2y] == 2 )
             {
                 if (tablerofantasma[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y])
                 {
@@ -1105,7 +1103,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[1].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[0].ficha2x][jugadores[0].ficha2y] == 2 )
+            if (tablerofantasma[jugadores[0].ficha2x][jugadores[0].ficha2y] == 3 )
             {
                 if (tablerofantasma[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y])
                 {
@@ -1116,7 +1114,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[2].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[0].ficha2x][jugadores[0].ficha2y] == 3 )
+            if (tablerofantasma[jugadores[0].ficha2x][jugadores[0].ficha2y] == 4 )
             {
                 if (tablerofantasma[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y])
                 {
@@ -1128,9 +1126,9 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                 }
             }
         }
-        if (jugadores[i].basefantasma == 1)
+        if (jugadores[i].basefantasma == 2)
         {
-            if (tablerofantasma[jugadores[1].ficha2x][jugadores[1].ficha2y] == 0 )
+            if (tablerofantasma[jugadores[1].ficha2x][jugadores[1].ficha2y] == 1 )
             {
                 if (tablerofantasma[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y])
                 {
@@ -1141,7 +1139,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[0].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[1].ficha2x][jugadores[1].ficha2y] == 2 )
+            if (tablerofantasma[jugadores[1].ficha2x][jugadores[1].ficha2y] == 3 )
             {
                 if (tablerofantasma[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y])
                 {
@@ -1152,7 +1150,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[2].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[1].ficha2x][jugadores[1].ficha2y] == 3 )
+            if (tablerofantasma[jugadores[1].ficha2x][jugadores[1].ficha2y] == 4 )
             {
                 if (tablerofantasma[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y])
                 {
@@ -1164,9 +1162,9 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                 }
             }
         }
-        if (jugadores[i].basefantasma == 2)
+        if (jugadores[i].basefantasma == 3)
         {
-            if (tablerofantasma[jugadores[2].ficha2x][jugadores[2].ficha2y] == 0 )
+            if (tablerofantasma[jugadores[2].ficha2x][jugadores[2].ficha2y] == 1 )
             {
                 if (tablerofantasma[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y])
                 {
@@ -1177,7 +1175,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[0].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha2y] == 1 )
+            if (tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha2y] == 2 )
             {
                 if (tablerofantasma[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y])
                 {
@@ -1188,7 +1186,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[1].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[2].ficha2x][jugadores[2].ficha2y] == 3 )
+            if (tablerofantasma[jugadores[2].ficha2x][jugadores[2].ficha2y] == 4 )
             {
                 if (tablerofantasma[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablerofantasma[jugadores[3].ficha1x][jugadores[3].ficha1y])
                 {
@@ -1200,9 +1198,9 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                 }
             }
         }
-        if (jugadores[i].basefantasma == 3)
+        if (jugadores[i].basefantasma == 4)
         {
-            if (tablerofantasma[jugadores[3].ficha2x][jugadores[3].ficha2y] == 0 )
+            if (tablerofantasma[jugadores[3].ficha2x][jugadores[3].ficha2y] == 1 )
             {
                 if (tablerofantasma[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y])
                 {
@@ -1213,7 +1211,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[0].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[3].ficha2x][jugadores[3].ficha2y] == 1 )
+            if (tablerofantasma[jugadores[3].ficha2x][jugadores[3].ficha2y] == 2 )
             {
                 if (tablerofantasma[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablerofantasma[jugadores[1].ficha1x][jugadores[1].ficha1y])
                 {
@@ -1224,7 +1222,7 @@ void reglas (char tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struc
                     jugadores[1].fichas2 = false;
                 }
             }
-            if (tablerofantasma[jugadores[3].ficha2x][jugadores[3].ficha2y] == 2 )
+            if (tablerofantasma[jugadores[3].ficha2x][jugadores[3].ficha2y] == 3 )
             {
                 if (tablerofantasma[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablerofantasma[jugadores[2].ficha1x][jugadores[2].ficha1y])
                 {
