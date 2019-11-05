@@ -172,7 +172,7 @@ void mapaparadosjugadores(string tablero [maxix][maxiy],int tablerofantasma [max
     jugadores[1].saliday=tamtaby-2;
     jugadores[1].llegadax=mitadx;
     jugadores[1].llegaday=mitady;
-    jugadores[1].basefantasma=3;
+    jugadores[1].basefantasma=5;
     jugadores[1].basex=tamtabx-1;
     jugadores[1].basey=tamtaby-1;
     jugadores[1].limite1 = 7;
@@ -710,7 +710,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                             movimientojug2f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                             reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
                         }
-                        if (jugadores[i].basefantasma == 3)
+                        if (jugadores[i].basefantasma == 3 || jugadores[i].basefantasma == 5)
                         {
                             movimientojug3f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy,i);
                             reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
@@ -725,24 +725,24 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                     if (jugadores[i].fichmov == 2)
                     {
                         tablero[jugadores[i].ficha2x][jugadores[i].ficha2y]=' ';
-                        if (jugadores[i].nombre == jugadores[0].nombre)
+                        if (jugadores[i].basefantasma == 1)
                         {
                             movimientojug1f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                             reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
                         }
-                        if (jugadores[i].nombre == jugadores[1].nombre)
+                        if (jugadores[i].basefantasma == 2)
                         {
                             movimientojug2f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                             reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
 
                         }
-                        if (jugadores[i].nombre == jugadores[2].nombre)
+                        if (jugadores[i].basefantasma == 3 || jugadores[i].basefantasma == 5)
                         {
                             movimientojug3f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy,i);
                             reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
 
                         }
-                        if (jugadores[i].nombre == jugadores[3].nombre)
+                        if (jugadores[i].basefantasma == 4)
                         {
                             //movimientojug4f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                         }
@@ -1940,10 +1940,10 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].contador2 =0;
             }
         }
-        if (jugadores[i].basefantasma == 2)
+        if (jugadores[i].basefantasma == 2 || jugadores[i].basefantasma == 5 )
         {
             cout<<"hola j2"<<endl;
-            if (jugadores[1].basefantasma != 2)
+            if (jugadores[1].basefantasma != 2 || jugadores[i].basefantasma != 5)
             {
                 if (tablero[jugadores[1].ficha1x][jugadores[1].ficha1y] == tablero[jugadores[0].ficha1x][jugadores[0].ficha1y])
                 {
@@ -2304,3 +2304,4 @@ void ganador ()
 {
     cout<<"has ganado felicidades jugador"<<endl;
 }
+
