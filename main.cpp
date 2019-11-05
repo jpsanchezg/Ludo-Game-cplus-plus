@@ -7,7 +7,7 @@
 #include <windows.h>
 using namespace std;
 
-#define maxiju 15
+#define maxiju 4
 #define maxix 100
 #define maxiy 100
 /** juan pablo sanchez gaitan**/
@@ -15,6 +15,8 @@ using namespace std;
 void datos (string tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug);
 
 void mapatodoslosjugadores(string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby);
+
+void mapaparadosjugadores (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby);
 
 //movimientos para la ficha 1
 void movimientojug1f1 (string tablero [maxix][maxiy],int tablerofantasma  [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby,int dadox,int dadoy);
@@ -43,16 +45,12 @@ void vista (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
 struct parques
 {
     string nombre;
-    int nux;
-    int nuy;
     int fichmov =0;
-    int fichasfinales=0;
     int movfich = 0;
     int salidax=0,saliday=0;
     int llegadax=0,llegaday=0;
     int ficha1x=0,ficha1y=0;
     int ficha2x=0,ficha2y=0;
-    int x1,y1,x2,y2;
     int basex=0,basey=0;
     int contador1=0;
     int contador2=0;
@@ -66,7 +64,6 @@ struct parques
     bool fichas2 =false;
     bool ficha1final = false;
     bool ficha2final = false;
-    bool todas=false;
     bool ganador = false;
     bool salio = false;
 };
@@ -106,21 +103,25 @@ int main()
             if(numjug == 1 )
             {
                 cout<<"No puedes jugar solo, consiguete a alguien"<<endl;
-                cout<<"Vas a jugar contra la maquina en difultad normal"<<endl;
                 system("cls");
-
-                mapatodoslosjugadores(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+            }
+            if (numjug == 2)
+            {
+                mapaparadosjugadores(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
                 datos (tablero,jugadores,numjug);
                 juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
-                // juegoconlamaquina (tablero,jugadores,numjug,tamtab);
             }
-            if(numjug >= 2)
+            if(numjug > 2 && numjug <=4)
             {
                 system("cls");
                 mapatodoslosjugadores(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
                 datos (tablero,jugadores,numjug);
                 juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
 
+            }
+            if (numjug > 4)
+            {
+                cout<<"Ingresaste "<<numjug<<" jugadores, el mapa esta hecho para 4 jugadores maximo"<<endl;
             }
         }
         if (opcion == 2)
@@ -139,19 +140,64 @@ int main()
     }
     while(opcion !=3);
 }
+void mapaparadosjugadores(string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby)
+{
+    int mitadx=0;
+    int mitady=0,nojuegox1=0,nojuegox2=0;
+    mitadx=tamtabx/2;
+    mitady=tamtaby/2;
+
+    //jugador 1
+    jugadores[0].salidax=0;
+    jugadores[0].saliday=1;
+    jugadores[0].llegadax=mitadx-1;
+    jugadores[0].llegaday=mitady-1;
+    jugadores[0].basefantasma=1;
+    jugadores[0].basex= 0;
+    jugadores[0].basey= 0;
+    jugadores[0].limite1 = 9;
+    jugadores[0].limite2 = 16;
+    jugadores[0].limite3 = 25;
+    jugadores[0].limite4 = 32;
+    jugadores[0].limite5 = 39;
+    jugadores[0].posx1 = 9;
+    jugadores[0].posx2 = 0;
+    jugadores[0].posy1 = 1;
+    jugadores[0].posy2 = 8;
+//jugador 2
+    jugadores[1].salidax=tamtabx-1;
+    jugadores[1].saliday=tamtaby-2;
+    jugadores[1].llegadax=mitadx;
+    jugadores[1].llegaday=mitady;
+    jugadores[1].basefantasma=3;
+    jugadores[1].basex=tamtabx-1;
+    jugadores[1].basey=tamtaby-1;
+    jugadores[1].limite1 = 7;
+    jugadores[1].limite2 = 16;
+    jugadores[1].limite3 = 23;
+    jugadores[1].limite4 = 32;
+    jugadores[1].posx1 = 9;
+    jugadores[1].posx2 = 0;
+    jugadores[1].posy1 = 1;
+    jugadores[1].posy2 = 8;
+
+    nojuegox1=jugadores[0].basex;
+    nojuegox2=jugadores[3].basex;
+    for (int i=0; i<tamtabx; i++)
+    {
+        tablero[i][0]='x';
+        tablero[i][tamtaby-1]='x';
+    }
+
+}
 void mapatodoslosjugadores(string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby)
 {
     int mitadx=0;
     int mitady=0,nojuegox1=0,nojuegox2=0;
     mitadx=tamtabx/2;
     mitady=tamtaby/2;
-    for(int i = 0; i < tamtabx; i++)
-    {
-        for(int j = 0; j < tamtaby; j++)
-        {
-            tablerofantasma[i][j]=0;
-        }
-    }
+
+    //jugador 1
     jugadores[0].salidax=0;
     jugadores[0].saliday=1;
     jugadores[0].llegadax=mitadx-1;
@@ -200,6 +246,10 @@ void mapatodoslosjugadores(string tablero [maxix][maxiy],int tablerofantasma [ma
     jugadores[2].limite2 = 16;
     jugadores[2].limite3 = 23;
     jugadores[2].limite4 = 32;
+    jugadores[2].posx1 = 9;
+    jugadores[2].posx2 = 0;
+    jugadores[2].posy1 = 1;
+    jugadores[2].posy2 = 8;
     //jugador 4
     jugadores[3].salidax=0;
     jugadores[3].saliday=tamtaby-2;
@@ -212,6 +262,10 @@ void mapatodoslosjugadores(string tablero [maxix][maxiy],int tablerofantasma [ma
     jugadores[3].limite2 = 16;
     jugadores[3].limite3 = 25;
     jugadores[3].limite4 = 31;
+    jugadores[3].posx1 = 9;
+    jugadores[3].posx2 = 0;
+    jugadores[3].posy1 = 1;
+    jugadores[3].posy2 = 8;
 
 
     //no juego 1
@@ -221,10 +275,6 @@ void mapatodoslosjugadores(string tablero [maxix][maxiy],int tablerofantasma [ma
     {
         tablero[i][0]='x';
         tablero[i][tamtaby-1]='x';
-    }
-    for(int i=0; i<4; i++)
-    {
-        tablerofantasma[jugadores[i].basex][jugadores[i].basey]=jugadores[i].basefantasma;
     }
 }
 void datos (string tablero [maxix][maxiy],struct parques jugadores [maxiju],int numjug)
@@ -548,14 +598,6 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                             contador++;
                         }
                     }
-                    if (turno == 3)
-                    {
-                        jugadores[i].lanzamientos =1;
-                        jugadores[i].fichas1=true;
-                        contador = 0;
-                        jugadores[i].salio = true;
-
-                    }
                     if (contador == jugadores[i].lanzamientos)
                     {
                         jugadores[i].salio = true;
@@ -564,6 +606,16 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                 }
             }
             while (jugadores[i].salio == false);
+            if (jugadores[i].fichas1== false)
+            {
+                if (turno == 3)
+                {
+                    jugadores[i].lanzamientos =1;
+                    jugadores[i].fichas1=true;
+                    contador = 0;
+                    jugadores[i].salio = true;
+                }
+            }
 
             if (turno > 0)
             {
@@ -593,23 +645,23 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                     if(jugadores[i].fichmov == 1)
                     {
                         tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=' ';
-                        tablerofantasma[jugadores[i].ficha1x][jugadores[i].ficha1y]=0;
-                        if (jugadores[i].nombre == jugadores[0].nombre)
+                        if (jugadores[i].basefantasma == 1)
                         {
                             movimientojug1f1  (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                             reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
                         }
-                        if (jugadores[i].nombre == jugadores[1].nombre)
+                        if (jugadores[i].basefantasma == 2)
                         {
-                            cout<<"hola"<<endl;
                             movimientojug2f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                             reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
                         }
-                        if (jugadores[i].nombre == jugadores[2].nombre)
+                        if (jugadores[i].basefantasma == 3)
                         {
-                            //movimientojug3f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                            movimientojug3f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                            reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
+
                         }
-                        if (jugadores[i].nombre == jugadores[3].nombre)
+                        if (jugadores[i].basefantasma == 4)
                         {
 
                             //movimientojug4f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
@@ -625,18 +677,27 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                         }
                         if (jugadores[i].nombre == jugadores[1].nombre)
                         {
-                            // movimientojug2f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                            movimientojug2f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                            reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
+
                         }
                         if (jugadores[i].nombre == jugadores[2].nombre)
                         {
-                            //movimientojug3f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                            movimientojug3f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                                                        reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
+
                         }
                         if (jugadores[i].nombre == jugadores[3].nombre)
                         {
                             //movimientojug4f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                         }
                     }
-
+                    if (jugadores[i].ficha1final == true && jugadores[i].ficha2final ==true)
+                    {
+                        jugadores[i].ganador = true;
+                        system("cls");
+                        void ganador();
+                    }
                 }
             }
         }
@@ -655,8 +716,8 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
             jugadores[i].lanzamientos = 4;
             contador =1;
         }
-       /** Sleep(2000);
-         system("cls");**/
+        /** Sleep(2000);
+          system("cls");**/
     }
     while(jugadores[i].ganador == false);
 
@@ -689,8 +750,6 @@ void movimientojug1f1 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
             jugadores[0].ficha1x = jugadores[0].posx1;
         }
         tablero[jugadores[0].ficha1x][jugadores[0].ficha1y]=jugadores[0].base;
-
-        tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y]=jugadores[0].basefantasma;
     }
     if (jugadores[0].contador1 > jugadores[0].limite1 && jugadores[0].contador1 <jugadores[0].limite2)
     {
@@ -698,7 +757,6 @@ void movimientojug1f1 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
         suma = jugadores[0].contador1 - tamx;
         jugadores[0].ficha1y = suma;
         tablero[jugadores[0].ficha1x][jugadores[0].ficha1y]=jugadores[0].base;
-        tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y]=jugadores[0].basefantasma;
     }
     if (jugadores[0].contador1 >= jugadores[0].limite2 && jugadores[0].contador1 <=jugadores[0].limite3)
     {
@@ -706,7 +764,6 @@ void movimientojug1f1 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
         suma = jugadores[0].limite3 - jugadores[0].contador1 ;
         jugadores[0].ficha1x = suma;
         tablero[jugadores[0].ficha1x][jugadores[0].ficha1y]=jugadores[0].base;
-        tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y]=jugadores[0].basefantasma;
     }
     if (jugadores[0].contador1 > jugadores[0].limite3 && jugadores[0].contador1 <=jugadores[0].limite4)
     {
@@ -722,27 +779,27 @@ void movimientojug1f1 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
         }
         if(jugadores[0].contador1== jugadores[0].limite3 +3)
         {
-             jugadores[0].ficha1x = jugadores[0].posx2;
+            jugadores[0].ficha1x = jugadores[0].posx2;
             jugadores[0].ficha1y = jugadores[0].posy2 -3;
         }
         if(jugadores[0].contador1== jugadores[0].limite3 +4)
         {
-             jugadores[0].ficha1x = jugadores[0].posx2;
+            jugadores[0].ficha1x = jugadores[0].posx2;
             jugadores[0].ficha1y = jugadores[0].posy2 -4;
         }
         if(jugadores[0].contador1== jugadores[0].limite3 +5)
         {
-             jugadores[0].ficha1x = jugadores[0].posx2;
+            jugadores[0].ficha1x = jugadores[0].posx2;
             jugadores[0].ficha1y = jugadores[0].posy2 -5;
         }
         if(jugadores[0].contador1== jugadores[0].limite3 +6)
         {
-             jugadores[0].ficha1x = jugadores[0].posx2;
+            jugadores[0].ficha1x = jugadores[0].posx2;
             jugadores[0].ficha1y = jugadores[0].posy2 -6;
         }
         if(jugadores[0].contador1== jugadores[0].limite4)
         {
-             jugadores[0].ficha1x = jugadores[0].posx2;
+            jugadores[0].ficha1x = jugadores[0].posx2;
             jugadores[0].ficha1y = jugadores[0].posy1;
         }
         tablero[jugadores[0].ficha1x][jugadores[0].ficha1y]=jugadores[0].base;
@@ -785,11 +842,9 @@ void movimientojug1f1 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
             jugadores[0].ficha1x = jugadores[0].posx2+4;
             jugadores[0].ficha1y = jugadores[0].posy1+3;
             cout<<"La ficha llego al final"<<endl;
-            jugadores[0].fichasfinales = jugadores[0].fichasfinales + 1;
             jugadores[0].ficha1final =true;
 
         }
-        tablerofantasma[jugadores[0].ficha1x][jugadores[0].ficha1y]=jugadores[0].basefantasma;
         tablero[jugadores[0].ficha1x][jugadores[0].ficha1y]=jugadores[0].base;
 
     }
@@ -848,87 +903,78 @@ void movimientojug1f2 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
     }
     if (jugadores[0].contador2 > jugadores[0].limite3 && jugadores[0].contador2 <=jugadores[0].limite4)
     {
+        jugadores[0].ficha2x = jugadores[0].posx2;
         if(jugadores[0].contador2== jugadores[0].limite3 +1)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax;
-            jugadores[0].ficha2y = tamtaby -3;
+            jugadores[0].ficha2y = jugadores[0].posy2 -1;
         }
         if(jugadores[0].contador2== jugadores[0].limite3 +2)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax;
-            jugadores[0].ficha2y = tamtaby -4 ;
+            jugadores[0].ficha2y = jugadores[0].posy2 -2 ;
         }
         if(jugadores[0].contador2== jugadores[0].limite3 +3)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax;
-            jugadores[0].ficha2y = tamtaby -5;
+            jugadores[0].ficha2y = jugadores[0].posy2 -3;
         }
         if(jugadores[0].contador2== jugadores[0].limite3 +4)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax;
-            jugadores[0].ficha2y = tamtaby -6;
+            jugadores[0].ficha2y = jugadores[0].posy2 -4;
         }
         if(jugadores[0].contador2== jugadores[0].limite3 +5)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax;
-            jugadores[0].ficha2y =tamtaby -7;
+            jugadores[0].ficha2y =jugadores[0].posy2 -5;
         }
         if(jugadores[0].contador2== jugadores[0].limite3 +6)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax;
-            jugadores[0].ficha2y = tamtaby -8;
+            jugadores[0].ficha2y = jugadores[0].posy2 -6;
         }
         if(jugadores[0].contador2== jugadores[0].limite4)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax;
-            jugadores[0].ficha2y = tamtaby -9;
+            jugadores[0].ficha2y = jugadores[0].posy1;
         }
-        tablerofantasma[jugadores[0].ficha2x][jugadores[0].ficha2y]=jugadores[0].basefantasma;
         tablero[jugadores[0].ficha2x][jugadores[0].ficha2y]=jugadores[0].base;
     }
     if (jugadores[0].contador2 > jugadores[0].limite4 && jugadores[0].contador2 <=jugadores[0].limite5)
     {
-        jugadores[0].ficha2y = jugadores[0].saliday;
+        jugadores[0].ficha2y = jugadores[0].posy1;
         if (jugadores[0].contador2 == jugadores[0].limite4+1)
         {
-            jugadores[0].ficha2x =jugadores[0].salidax+1;
+            jugadores[0].ficha2x =jugadores[0].posx2+1;
 
         }
         if (jugadores[0].contador2 == jugadores[0].limite4+2)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax+2;
+            jugadores[0].ficha2x = jugadores[0].posx2 + 2;
 
         }
         if (jugadores[0].contador2 == jugadores[0].limite4+3)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax+3;
+            jugadores[0].ficha2x = jugadores[0].posx2+3;
 
         }
         if (jugadores[0].contador2 == jugadores[0].limite4+4)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax+4;
+            jugadores[0].ficha2x = jugadores[0].posx2+4;
 
         }
         if (jugadores[0].contador2 == jugadores[0].limite4+5)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax+4;
-            jugadores[0].ficha2y = jugadores[0].saliday+1;
+            jugadores[0].ficha2x = jugadores[0].posx2+4;
+            jugadores[0].ficha2y = jugadores[0].posy1+1;
         }
         if (jugadores[0].contador2 == jugadores[0].limite4+6)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax+4;
-            jugadores[0].ficha2y = jugadores[0].saliday+2;
+            jugadores[0].ficha2x = jugadores[0].posx2+4;
+            jugadores[0].ficha2y = jugadores[0].posy1+2;
         }
         if (jugadores[0].contador2 == jugadores[0].limite5)
         {
-            jugadores[0].ficha2x = jugadores[0].salidax+4;
-            jugadores[0].ficha2y = jugadores[0].saliday+3;
+            jugadores[0].ficha2x = jugadores[0].posx2+4;
+            jugadores[0].ficha2y = jugadores[0].posy1+3;
             cout<<"La ficha llego al final"<<endl;
-            jugadores[0].fichasfinales = jugadores[0].fichasfinales + 1;
             jugadores[0].ficha2final =true;
 
         }
-        tablerofantasma[jugadores[0].ficha2x][jugadores[0].ficha2y]=jugadores[0].basefantasma;
         tablero[jugadores[0].ficha2x][jugadores[0].ficha2y]=jugadores[0].base;
 
     }
@@ -936,7 +982,6 @@ void movimientojug1f2 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
     {
         cout<<"No puedes mover la ficha"<<endl;
         jugadores[0].contador2 = jugadores[0].contador2 -dado;
-        tablerofantasma[jugadores[0].ficha2x][jugadores[0].ficha2y]=jugadores[0].basefantasma;
         tablero[jugadores[0].ficha2x][jugadores[0].ficha2y]=jugadores[0].base;
     }
 }
@@ -1141,7 +1186,6 @@ void movimientojug2f1 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
             jugadores[1].ficha1y = jugadores[1].posy1+3;
             jugadores[1].ficha1x = jugadores[1].posx1-4;
             cout<<"La ficha llego al final"<<endl;
-            jugadores[1].fichasfinales = jugadores[1].fichasfinales + 1;
             jugadores[1].ficha1final =true;
 
         }
@@ -1155,6 +1199,7 @@ void movimientojug2f1 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
         tablero[jugadores[1].ficha1x][jugadores[1].ficha1y]=jugadores[1].base;
     }
 }
+//jugador 2 movimiento ficha 2
 void movimientojug2f2 (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby,int dadox,int dadoy)
 {
 
@@ -1353,7 +1398,6 @@ void movimientojug2f2 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
             jugadores[1].ficha2y = jugadores[1].posy1+3;
             jugadores[1].ficha2x = jugadores[1].posx1-4;
             cout<<"La ficha llego al final"<<endl;
-            jugadores[1].fichasfinales = jugadores[1].fichasfinales + 1;
             jugadores[1].ficha2final =true;
 
         }
@@ -1365,6 +1409,431 @@ void movimientojug2f2 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
         cout<<"No puedes mover la ficha"<<endl;
         jugadores[1].contador2 = jugadores[1].contador2 -dado;
         tablero[jugadores[1].ficha2x][jugadores[1].ficha2y]=jugadores[1].base;
+    }
+}
+//jugador 3 mivimiento ficha 1
+void movimientojug3f1 (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby,int dadox,int dadoy)
+{
+    int suma=0;
+    int dado = 0;
+    int tamx = tamtabx-2;
+    if (jugadores[2].movfich == 1)
+    {
+        dado=dadox;
+    }
+    if (jugadores[2].movfich == 2)
+    {
+        dado=dadoy;
+    }
+    jugadores[2].contador1 = jugadores[2].contador1 + dado;
+    if (jugadores[2].contador1 <=jugadores[2].limite1)
+    {
+        jugadores[2].ficha1y = jugadores[2].posy2;
+        if (jugadores[2].contador1 == 1)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx1-1;
+        }
+        if (jugadores[2].contador1 == 2)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx1-2;
+        }
+        if (jugadores[2].contador1 == 3)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx1- 3;
+        }
+        if (jugadores[2].contador1 == 4)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx1 - 4;
+        }
+        if (jugadores[2].contador1 == 5)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx1-5;
+        }
+        if (jugadores[2].contador1 == 6)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx1-6;
+        }
+        if (jugadores[2].contador1 == 7)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx1-7;
+        }
+        if (jugadores[2].contador1 == 8)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx1-8;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite1)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx2;
+        }
+        tablero[jugadores[2].ficha1x][jugadores[2].ficha1y]=jugadores[2].base;
+    }
+    if (jugadores[2].contador1 > jugadores[2].limite1 && jugadores[2].contador1 <= jugadores[2].limite2)
+    {
+        jugadores[2].ficha1x = jugadores[2].posx2;
+        if (jugadores[2].contador1 == jugadores[2].limite1 +1)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy2-1;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite1 +2)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy2 - 2;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite1 + 3)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy2-3;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite1 + 4)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy2-4;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite1 + 5)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy2-5;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite1 + 6)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy2-6;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite2)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy1;
+        }
+        tablero[jugadores[2].ficha1x][jugadores[2].ficha1y]=jugadores[2].base;
+    }
+    if (jugadores[2].contador1 > jugadores[2].limite2 && jugadores[2].contador1 <=jugadores[2].limite3)
+    {
+        jugadores[2].ficha1y = jugadores[2].posy1;
+        if (jugadores[2].contador1 == jugadores[2].limite2 + 1)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx2 + 1;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite2 + 2)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx2 + 2;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite2 + 3)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx2 + 3;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite2 + 4)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx2 + 4;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite2 + 5)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx2 + 5;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite2 + 6)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx2 + 6;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite2 + 7)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx2 + 7;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite2 + 8)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx2 + 8;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite3)
+        {
+            jugadores[2].ficha1x = jugadores[2].posx1;
+        }
+        tablero[jugadores[2].ficha1x][jugadores[2].ficha1y]=jugadores[2].base;
+    }
+    if (jugadores[2].contador1 > jugadores[2].limite3 && jugadores[2].contador1 <=jugadores[2].limite4)
+    {
+        jugadores[2].ficha1x = jugadores[2].posx1;
+        if(jugadores[2].contador1== jugadores[2].limite3 +1)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy1 +1;
+        }
+        if(jugadores[2].contador1== jugadores[2].limite3 +2)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy1 +2;
+        }
+        if(jugadores[2].contador1== jugadores[2].limite3 +3)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy1 +3;
+        }
+        if(jugadores[2].contador1== jugadores[2].limite3 +4)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy1 + 4;
+        }
+        if(jugadores[2].contador1== jugadores[2].limite3 +5)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy1 + 5;
+        }
+        if(jugadores[2].contador1== jugadores[2].limite3 +6)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy1 + 6;
+        }
+        if(jugadores[2].contador1== jugadores[2].limite4)
+        {
+            jugadores[2].ficha1y = jugadores[2].posy2;
+        }
+        tablero[jugadores[2].ficha1x][jugadores[2].ficha1y]=jugadores[2].base;
+    }
+    if (jugadores[2].contador1 > jugadores[2].limite4 && jugadores[2].contador1 <=jugadores[2].limite5)
+    {
+        jugadores[2].ficha1y = jugadores[2].posy2;
+        if (jugadores[2].contador1 == jugadores[2].limite4+1)
+        {
+            jugadores[2].ficha1x =jugadores[2].posx1 - 1;
+
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite4+2)
+        {
+            jugadores[2].ficha1x =jugadores[2].posx1 - 2;
+
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite4+3)
+        {
+            jugadores[2].ficha1x =jugadores[2].posx1 - 3;
+
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite4+4)
+        {
+            jugadores[2].ficha1x =jugadores[2].posx1-4;
+
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite4+5)
+        {
+            jugadores[2].ficha1x =jugadores[2].posx1-4;
+            jugadores[2].ficha1y = jugadores[2].posy2-1;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite4+6)
+        {
+            jugadores[2].ficha1x =jugadores[2].posx1-4;
+            jugadores[2].ficha1y = jugadores[2].posy2-2;
+        }
+        if (jugadores[2].contador1 == jugadores[2].limite5)
+        {
+            jugadores[2].ficha1x =jugadores[2].posx1-4;
+            jugadores[2].ficha1y = jugadores[2].posy2-3;
+            cout<<"La ficha llego al final"<<endl;
+            jugadores[2].ficha1final =true;
+        }
+        tablero[jugadores[2].ficha1x][jugadores[2].ficha1y]=jugadores[2].base;
+
+    }
+    if (jugadores[2].contador1 > jugadores[2].limite5)
+    {
+        cout<<"No puedes mover la ficha"<<endl;
+        jugadores[2].contador1 = jugadores[2].contador1 -dado;
+        tablero[jugadores[2].ficha1x][jugadores[2].ficha1y]=jugadores[2].base;
+    }
+}
+void movimientojug3f2 (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby,int dadox,int dadoy)
+{
+    int suma=0;
+    int dado = 0;
+    int tamx = tamtabx-2;
+    if (jugadores[2].movfich == 1)
+    {
+        dado=dadox;
+    }
+    if (jugadores[2].movfich == 2)
+    {
+        dado=dadoy;
+    }
+    jugadores[2].contador2 = jugadores[2].contador2 + dado;
+    if (jugadores[2].contador2 <=jugadores[2].limite1)
+    {
+        jugadores[2].ficha2y = jugadores[2].posy2;
+        if (jugadores[2].contador2 == 1)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx1-1;
+        }
+        if (jugadores[2].contador2 == 2)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx1-2;
+        }
+        if (jugadores[2].contador2 == 3)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx1- 3;
+        }
+        if (jugadores[2].contador2 == 4)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx1 - 4;
+        }
+        if (jugadores[2].contador2 == 5)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx1-5;
+        }
+        if (jugadores[2].contador2 == 6)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx1-6;
+        }
+        if (jugadores[2].contador2 == 7)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx1-7;
+        }
+        if (jugadores[2].contador2 == 8)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx1-8;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite1)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx2;
+        }
+        tablero[jugadores[2].ficha2x][jugadores[2].ficha2y]=jugadores[2].base;
+    }
+    if (jugadores[2].contador2 > jugadores[2].limite1 && jugadores[2].contador2 <= jugadores[2].limite2)
+    {
+        jugadores[2].ficha2x = jugadores[2].posx2;
+        if (jugadores[2].contador2 == jugadores[2].limite1 +1)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy2-1;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite1 +2)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy2 - 2;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite1 + 3)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy2-3;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite1 + 4)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy2-4;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite1 + 5)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy2-5;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite1 + 6)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy2-6;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite2)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy1;
+        }
+        tablero[jugadores[2].ficha2x][jugadores[2].ficha2y]=jugadores[2].base;
+    }
+    if (jugadores[2].contador2 > jugadores[2].limite2 && jugadores[2].contador2 <=jugadores[2].limite3)
+    {
+        jugadores[2].ficha2y = jugadores[2].posy1;
+        if (jugadores[2].contador2 == jugadores[2].limite2 + 1)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx2 + 1;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite2 + 2)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx2 + 2;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite2 + 3)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx2 + 3;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite2 + 4)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx2 + 4;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite2 + 5)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx2 + 5;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite2 + 6)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx2 + 6;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite2 + 7)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx2 + 7;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite2 + 8)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx2 + 8;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite3)
+        {
+            jugadores[2].ficha2x = jugadores[2].posx1;
+        }
+        tablero[jugadores[2].ficha2x][jugadores[2].ficha2y]=jugadores[2].base;
+    }
+    if (jugadores[2].contador2 > jugadores[2].limite3 && jugadores[2].contador2 <=jugadores[2].limite4)
+    {
+        jugadores[2].ficha2x = jugadores[2].posx1;
+        if(jugadores[2].contador2 == jugadores[2].limite3 +1)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy1 +1;
+        }
+        if(jugadores[2].contador2 == jugadores[2].limite3 +2)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy1 +2;
+        }
+        if(jugadores[2].contador2 == jugadores[2].limite3 +3)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy1 +3;
+        }
+        if(jugadores[2].contador2 == jugadores[2].limite3 +4)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy1 + 4;
+        }
+        if(jugadores[2].contador2 == jugadores[2].limite3 +5)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy1 + 5;
+        }
+        if(jugadores[2].contador2 == jugadores[2].limite3 +6)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy1 + 6;
+        }
+        if(jugadores[2].contador2 == jugadores[2].limite4)
+        {
+            jugadores[2].ficha2y = jugadores[2].posy2;
+        }
+        tablero[jugadores[2].ficha2x][jugadores[2].ficha2y]=jugadores[2].base;
+    }
+    if (jugadores[2].contador2 > jugadores[2].limite4 && jugadores[2].contador2 <=jugadores[2].limite5)
+    {
+        jugadores[2].ficha2y = jugadores[2].posy2;
+        if (jugadores[2].contador2 == jugadores[2].limite4+1)
+        {
+            jugadores[2].ficha2x =jugadores[2].posx1 - 1;
+
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite4+2)
+        {
+            jugadores[2].ficha2x =jugadores[2].posx1 - 2;
+
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite4+3)
+        {
+            jugadores[2].ficha2x =jugadores[2].posx1 - 3;
+
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite4+4)
+        {
+            jugadores[2].ficha2x =jugadores[2].posx1-4;
+
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite4+5)
+        {
+            jugadores[2].ficha2x =jugadores[2].posx1-4;
+            jugadores[2].ficha2y = jugadores[2].posy2-1;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite4+6)
+        {
+            jugadores[2].ficha2x =jugadores[2].posx1-4;
+            jugadores[2].ficha2y = jugadores[2].posy2-2;
+        }
+        if (jugadores[2].contador2 == jugadores[2].limite5)
+        {
+            jugadores[2].ficha2x =jugadores[2].posx1-4;
+            jugadores[2].ficha2y = jugadores[2].posy2-3;
+            cout<<"La ficha llego al final"<<endl;
+            jugadores[2].ficha2final =true;
+        }
+        tablero[jugadores[2].ficha2x][jugadores[2].ficha2y]=jugadores[2].base;
+
+    }
+    if (jugadores[2].contador2 > jugadores[2].limite5)
+    {
+        cout<<"No puedes mover la ficha"<<endl;
+        jugadores[2].contador2 = jugadores[2].contador1 -dado;
+        tablero[jugadores[2].ficha2x][jugadores[2].ficha2y]=jugadores[2].base;
     }
 }
 void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby,int i)
