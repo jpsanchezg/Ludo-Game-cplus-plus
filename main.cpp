@@ -2304,4 +2304,4 @@ void ganador ()
 {
     cout<<"has ganado felicidades jugador"<<endl;
 }
-
+de
