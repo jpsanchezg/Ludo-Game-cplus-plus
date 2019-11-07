@@ -51,8 +51,8 @@ struct parques
     int movfich = 0;
     int salidax,saliday;
     int llegadax,llegaday;
-    int ficha1x,ficha1y;
-    int ficha2x,ficha2y;
+    int ficha1x=0,ficha1y=0;
+    int ficha2x=0,ficha2y=0;
     int basex=0,basey=0;
     int contador1;
     int contador2;
@@ -190,6 +190,8 @@ void mapaparadosjugadores(string tablero [maxix][maxiy],int tablerofantasma [max
     for(int x=0; x<numjug; x++)
     {
         jugadores[x].lanzamientos =4;
+        jugadores[x].contador1=0;
+        jugadores[x].contador2=0;
     }
     for (int i=0; i<tamtabx; i++)
     {
@@ -284,6 +286,8 @@ void mapatodoslosjugadores(string tablero [maxix][maxiy],int tablerofantasma [ma
     for(int x=0; x<numjug; x++)
     {
         jugadores[x].lanzamientos =4;
+        jugadores[x].contador1=0;
+        jugadores[x].contador2=0;
     }
     for (int i=0; i<tamtabx; i++)
     {
@@ -486,7 +490,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                                     jugadores[i].fichas2=true;
                                     jugadores[i].ficha2x=jugadores[i].salidax;
                                     jugadores[i].ficha2y=jugadores[i].saliday;
-                                    tablero[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].base;
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
                                     tablerofantasma[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].basefantasma;
                                     jugadores[i].lanzamientos =1;
                                     jugadores[i].fichas1=true;
@@ -518,7 +522,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                                     jugadores[i].ficha1x=jugadores[i].salidax;
                                     jugadores[i].ficha1y=jugadores[i].saliday;
                                     cout<<"SALE 1 FICHA"<<endl;
-                                    tablero[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].base;
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
                                     tablerofantasma[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].basefantasma;
                                     jugadores[i].lanzamientos =1;
                                     jugadores[i].fichas1=true;
@@ -550,8 +554,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                                     jugadores[i].ficha1x=jugadores[i].salidax;
                                     jugadores[i].ficha1y=jugadores[i].saliday;
                                     cout<<"SALE 1 FICHA"<<endl;
-                                    tablero[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].base;
-                                    tablerofantasma[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].basefantasma;
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
                                     jugadores[i].lanzamientos =1;
                                     jugadores[i].fichas1=true;
                                     jugadores[i].salio=true;
@@ -582,7 +585,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                                     jugadores[i].ficha1x=jugadores[i].salidax;
                                     jugadores[i].ficha1y=jugadores[i].saliday;
                                     cout<<"SALE 1 FICHA"<<endl;
-                                    tablero[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].base;
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
                                     tablerofantasma[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].basefantasma;
                                     jugadores[i].lanzamientos =1;
                                     jugadores[i].fichas1=true;
@@ -614,9 +617,8 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                                     cout<<"SALE 1 FICHA"<<endl;
                                     jugadores[i].ficha1x=jugadores[i].salidax;
                                     jugadores[i].ficha1y=jugadores[i].saliday;
-                                    tablero[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].base;
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
                                     tablerofantasma[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].basefantasma;
-
                                     jugadores[i].lanzamientos =1;
                                     jugadores[i].fichas1=true;
                                     jugadores[i].salio=true;
@@ -649,7 +651,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                                     jugadores[i].ficha1y=jugadores[i].saliday;
                                     jugadores[i].ficha2x=jugadores[i].salidax;
                                     jugadores[i].ficha2y=jugadores[i].saliday;
-                                    tablero[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].base;
+                                    tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
                                     tablerofantasma[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].basefantasma;
                                     jugadores[i].lanzamientos =1;
                                     jugadores[i].fichas1=true;
@@ -664,10 +666,10 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                             contador++;
                         }
                     }
-                    if (contador == jugadores[i].lanzamientos)
+                    if (contador >= jugadores[i].lanzamientos)
                     {
                         jugadores[i].salio = true;
-                        contador = 0;
+                        contador = 1;
                     }
                 }
             }
@@ -716,17 +718,14 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                         if (jugadores[i].basefantasma == 1)
                         {
                             movimientojug1f1  (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                            reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
                         }
                         if (jugadores[i].basefantasma == 2)
                         {
                             movimientojug2f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                            reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
                         }
                         if (jugadores[i].basefantasma == 3 || jugadores[i].basefantasma == 5)
                         {
                             movimientojug3f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy,i);
-                            reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
 
                         }
                         if (jugadores[i].basefantasma == 4)
@@ -734,6 +733,8 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
 
                             //movimientojug4f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                         }
+                        reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
+
                     }
                     if (jugadores[i].fichmov == 2)
                     {
@@ -741,24 +742,21 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                         if (jugadores[i].basefantasma == 1)
                         {
                             movimientojug1f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                            reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
                         }
                         if (jugadores[i].basefantasma == 2)
                         {
                             movimientojug2f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                            reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
-
                         }
                         if (jugadores[i].basefantasma == 3 || jugadores[i].basefantasma == 5)
                         {
                             movimientojug3f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy,i);
-                            reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
-
                         }
                         if (jugadores[i].basefantasma == 4)
                         {
                             //movimientojug4f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                         }
+                        reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
+
                     }
                     if (jugadores[i].ficha1final == true && jugadores[i].ficha2final ==true)
                     {
@@ -771,6 +769,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
         }
         i++;
         movi = false;
+        contador =1;
         if(i == numjug)
         {
             i=0;
@@ -805,12 +804,13 @@ void movimientojug1f1 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
         dado=dadoy;
     }
     jugadores[0].contador1 = jugadores[0].contador1 + dado;
+    cout<<jugadores[0].contador1<<endl;
     if (jugadores[0].contador1 <=jugadores[0].limite1)
     {
         jugadores[0].ficha1y = jugadores[0].posy1;
         if (jugadores[0].contador1 < jugadores[0].limite1)
         {
-            jugadores[0].ficha1x = jugadores[0].ficha1x +dado;
+            jugadores[0].ficha1x = jugadores[0].ficha1x + dado;
         }
         if (jugadores[0].contador1 == jugadores[0].limite1)
         {
@@ -821,9 +821,36 @@ void movimientojug1f1 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
     if (jugadores[0].contador1 > jugadores[0].limite1 && jugadores[0].contador1 <jugadores[0].limite2)
     {
         jugadores[0].ficha1x = jugadores[0].posx1;
-        suma = jugadores[0].contador1 - tamx;
-        jugadores[0].ficha1y = suma;
+        if (jugadores[0].contador1 == jugadores[0].limite1+1)
+        {
+            jugadores[0].ficha1y =  jugadores[0].posy1 + 1;
+        }
+        if (jugadores[0].contador1 == jugadores[0].limite1 + 2)
+        {
+            jugadores[0].ficha1y =  jugadores[0].posy1 + 2;
+        }
+        if (jugadores[0].contador1 == jugadores[0].limite1+3)
+        {
+            jugadores[0].ficha1y =  jugadores[0].posy1 + 3;
+        }
+        if (jugadores[0].contador1 == jugadores[0].limite1+4)
+        {
+            jugadores[0].ficha1y =  jugadores[0].posy1 + 4;
+        }
+        if (jugadores[0].contador1 == jugadores[0].limite1+5)
+        {
+            jugadores[0].ficha1y =  jugadores[0].posy1 + 5;
+        }
+        if (jugadores[0].contador1 == jugadores[0].limite1+6)
+        {
+            jugadores[0].ficha1y =  jugadores[0].posy1 + 6;
+        }
+        if (jugadores[0].contador1 == jugadores[0].limite2)
+        {
+            jugadores[0].ficha1y =  jugadores[0].posy2;
+        }
         tablero[jugadores[0].ficha1x][jugadores[0].ficha1y]=jugadores[0].base;
+
     }
     if (jugadores[0].contador1 >= jugadores[0].limite2 && jugadores[0].contador1 <=jugadores[0].limite3)
     {
@@ -953,14 +980,36 @@ void movimientojug1f2 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
     if (jugadores[0].contador2 > jugadores[0].limite1 && jugadores[0].contador2 <jugadores[0].limite2)
     {
         jugadores[0].ficha2x = jugadores[0].posx1;
-        if (jugadores[0].contador2 < jugadores[0].limite2)
+        if (jugadores[0].contador2 == jugadores[0].limite1+1)
         {
-            jugadores[0].ficha2y =  jugadores[0].ficha2y + dado;
+            jugadores[0].ficha2y =  jugadores[0].posy1 + 1;
+        }
+        if (jugadores[0].contador2 == jugadores[0].limite1 + 2)
+        {
+            jugadores[0].ficha2y =  jugadores[0].posy1 + 2;
+        }
+        if (jugadores[0].contador2 == jugadores[0].limite1+3)
+        {
+            jugadores[0].ficha2y =  jugadores[0].posy1 + 3;
+        }
+        if (jugadores[0].contador2 == jugadores[0].limite1+4)
+        {
+            jugadores[0].ficha2y =  jugadores[0].posy1 + 4;
+        }
+        if (jugadores[0].contador2 == jugadores[0].limite1+5)
+        {
+            jugadores[0].ficha2y =  jugadores[0].posy1 + 5;
+        }
+        if (jugadores[0].contador2 == jugadores[0].limite1+6)
+        {
+            jugadores[0].ficha2y =  jugadores[0].posy1 + 6;
         }
         if (jugadores[0].contador2 == jugadores[0].limite2)
         {
             jugadores[0].ficha2y = jugadores[0].posy2;
         }
+        tablero[jugadores[0].ficha2x][jugadores[0].ficha2y]=jugadores[0].base;
+
     }
     if (jugadores[0].contador2 >= jugadores[0].limite2 && jugadores[0].contador2 <=jugadores[0].limite3)
     {
@@ -1910,7 +1959,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
         {
             if (tablero[jugadores[0].ficha1x][jugadores[0].ficha1y] == tablero[jugadores[1].ficha1x][jugadores[1].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[1].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[1].fichas1 = false;
                 jugadores[1].ficha1x = jugadores[1].basex;
                 jugadores[1].ficha1y = jugadores[1].basey;
@@ -1919,7 +1967,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[0].ficha1x][jugadores[0].ficha1y] == tablero[jugadores[1].ficha2x][jugadores[1].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[1].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[1].fichas2 = false;
                 jugadores[1].ficha2x = jugadores[1].basex;
                 jugadores[1].ficha2y = jugadores[1].basey;
@@ -1929,7 +1976,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[0].ficha1x][jugadores[0].ficha1y] == tablero[jugadores[2].ficha1x][jugadores[2].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[2].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[2].fichas1 = false;
                 jugadores[2].ficha1x = jugadores[2].basex;
                 jugadores[2].ficha1y = jugadores[2].basey;
@@ -1939,7 +1985,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[0].ficha1x][jugadores[0].ficha1y] == tablero[jugadores[2].ficha2x][jugadores[2].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[2].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[2].fichas2 = false;
                 jugadores[2].ficha2x = jugadores[2].basex;
                 jugadores[2].ficha2y = jugadores[2].basey;
@@ -1949,7 +1994,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[0].ficha1x][jugadores[0].ficha1y] == tablero[jugadores[3].ficha1x][jugadores[3].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[3].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[3].fichas1 = false;
                 jugadores[3].ficha1x = jugadores[3].basex;
                 jugadores[3].ficha1y = jugadores[3].basey;
@@ -1959,7 +2003,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[0].ficha1x][jugadores[0].ficha1y] == tablero[jugadores[3].ficha2x][jugadores[3].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[3].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[3].fichas2 = false;
                 jugadores[3].ficha2x = jugadores[3].basex;
                 jugadores[3].ficha2y = jugadores[3].basey;
@@ -1972,17 +2015,14 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
         {
             if (tablero[jugadores[1].ficha1x][jugadores[1].ficha1y] == tablero[jugadores[0].ficha1x][jugadores[0].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[0].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[0].fichas1 = false;
                 jugadores[0].ficha1x = jugadores[0].basex;
                 jugadores[0].ficha1y = jugadores[0].basey;
                 jugadores[0].contador1 =0;
                 jugadores[0].lanzamientos =1;
-
             }
             if (tablero[jugadores[1].ficha1x][jugadores[1].ficha1y] == tablero[jugadores[0].ficha2x][jugadores[0].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[0].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[0].fichas2 = false;
                 jugadores[0].ficha2x = jugadores[0].basex;
                 jugadores[0].ficha2y = jugadores[0].basey;
@@ -1992,17 +2032,14 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[1].ficha1x][jugadores[1].ficha1y] == tablero[jugadores[2].ficha1x][jugadores[2].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[2].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[2].fichas1 = false;
                 jugadores[2].ficha1x = jugadores[2].basex;
                 jugadores[2].ficha1y = jugadores[2].basey;
                 jugadores[2].contador1 =0;
                 jugadores[2].lanzamientos =1;
-
             }
             if (tablero[jugadores[1].ficha1x][jugadores[1].ficha1y] == tablero[jugadores[2].ficha2x][jugadores[2].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[2].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[2].fichas2 = false;
                 jugadores[2].ficha2x = jugadores[2].basex;
                 jugadores[2].ficha2y = jugadores[2].basey;
@@ -2013,7 +2050,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
 
             if (tablero[jugadores[1].ficha1x][jugadores[1].ficha1y] == tablero[jugadores[3].ficha1x][jugadores[3].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[3].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[3].fichas1 = false;
                 jugadores[3].ficha1x = jugadores[3].basex;
                 jugadores[3].ficha1y = jugadores[3].basey;
@@ -2023,21 +2059,17 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[1].ficha1x][jugadores[1].ficha1y] == tablero[jugadores[3].ficha2x][jugadores[3].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[3].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[3].fichas2 = false;
                 jugadores[3].ficha2x = jugadores[3].basex;
                 jugadores[3].ficha2y = jugadores[3].basey;
                 jugadores[3].contador2 =0;
                 jugadores[3].lanzamientos =1;
-
             }
-
         }
         if (jugadores[i].basefantasma == 3)
         {
             if (tablero[jugadores[2].ficha1x][jugadores[2].ficha1y] == tablero[jugadores[0].ficha1x][jugadores[0].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[0].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[0].fichas1 = false;
                 jugadores[0].ficha1x = jugadores[0].basex;
                 jugadores[0].ficha1y = jugadores[0].basey;
@@ -2047,7 +2079,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[2].ficha1x][jugadores[2].ficha1y] == tablero[jugadores[0].ficha2x][jugadores[0].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[0].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[0].fichas2 = false;
                 jugadores[0].ficha2x = jugadores[0].basex;
                 jugadores[0].ficha2y = jugadores[0].basey;
@@ -2057,7 +2088,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[2].ficha1x][jugadores[2].ficha1y] == tablero[jugadores[1].ficha1x][jugadores[1].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[1].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[1].fichas1 = false;
                 jugadores[1].ficha1x = jugadores[1].basex;
                 jugadores[1].ficha1y = jugadores[1].basey;
@@ -2067,7 +2097,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[2].ficha1x][jugadores[2].ficha1y] == tablero[jugadores[1].ficha2x][jugadores[1].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[1].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[1].fichas2 = false;
                 jugadores[1].ficha2x = jugadores[1].basex;
                 jugadores[1].ficha2y = jugadores[1].basey;
@@ -2076,7 +2105,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[2].ficha1x][jugadores[2].ficha1y] == tablero[jugadores[3].ficha1x][jugadores[3].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[3].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[3].fichas1 = false;
                 jugadores[3].ficha1x = jugadores[3].basex;
                 jugadores[3].ficha1y= jugadores[3].basey;
@@ -2085,7 +2113,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[2].ficha1x][jugadores[2].ficha1y] == tablero[jugadores[3].ficha2x][jugadores[3].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[3].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[3].fichas2 = false;
                 jugadores[3].ficha2x = jugadores[3].basex;
                 jugadores[3].ficha2y = jugadores[3].basey;
@@ -2097,17 +2124,14 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
         {
             if (tablero[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablero[jugadores[0].ficha1x][jugadores[0].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[0].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[0].fichas1 = false;
                 jugadores[0].ficha1x = jugadores[0].basex;
                 jugadores[0].ficha1y = jugadores[0].basey;
                 jugadores[0].contador1 =0;
                 jugadores[0].lanzamientos =1;
-
             }
             if (tablero[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablero[jugadores[0].ficha2x][jugadores[0].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[0].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[0].fichas2 = false;
                 jugadores[0].ficha2x = jugadores[0].basex;
                 jugadores[0].ficha2y = jugadores[0].basey;
@@ -2116,7 +2140,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablero[jugadores[1].ficha1x][jugadores[1].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[1].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[1].fichas1 = false;
                 jugadores[1].ficha1x = jugadores[1].basex;
                 jugadores[1].ficha1y = jugadores[1].basey;
@@ -2125,7 +2148,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablero[jugadores[1].ficha2x][jugadores[1].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[1].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[1].fichas2 = false;
                 jugadores[1].ficha2x = jugadores[1].basex;
                 jugadores[1].ficha2y = jugadores[1].basey;
@@ -2135,7 +2157,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
 
             if (tablero[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablero[jugadores[2].ficha1x][jugadores[2].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[2].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[2].fichas1 = false;
                 jugadores[2].ficha1x = jugadores[2].basex;
                 jugadores[2].ficha1y = jugadores[2].basey;
@@ -2144,8 +2165,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablero[jugadores[2].ficha2x][jugadores[2].ficha2y])
             {
-
-                cout<<"EL JUGADOR "<<jugadores[2].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[2].fichas2 = false;
                 jugadores[2].ficha2x = jugadores[2].basex;
                 jugadores[2].ficha2y = jugadores[2].basey;
@@ -2160,7 +2179,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
         {
             if (tablero[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablero[jugadores[1].ficha1x][jugadores[1].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[1].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[1].fichas1 = false;
                 jugadores[1].ficha1x = jugadores[1].basex;
                 jugadores[1].ficha1y = jugadores[1].basey;
@@ -2169,7 +2187,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablero[jugadores[1].ficha2x][jugadores[1].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[1].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[1].fichas2 = false;
                 jugadores[1].ficha2x = jugadores[1].basex;
                 jugadores[1].ficha2y = jugadores[1].basey;
@@ -2178,7 +2195,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablero[jugadores[2].ficha1x][jugadores[2].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[2].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[2].fichas1 = false;
                 jugadores[2].ficha1x = jugadores[2].basex;
                 jugadores[2].ficha1y = jugadores[2].basey;
@@ -2187,8 +2203,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablero[jugadores[2].ficha2x][jugadores[2].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[2].nombre<<" SE VA A LA CARCEL"<<endl;
-
                 jugadores[2].fichas2 = false;
                 jugadores[2].ficha2x = jugadores[2].basex;
                 jugadores[2].ficha2y = jugadores[2].basey;
@@ -2197,28 +2211,25 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablero[jugadores[3].ficha1x][jugadores[3].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[3].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[3].fichas1 = false;
                 jugadores[3].ficha1x = jugadores[3].basex;
                 jugadores[3].ficha1y = jugadores[3].basey;
                 jugadores[3].contador1 =0;
-                jugadores[2].lanzamientos =1;
+                jugadores[3].lanzamientos =1;
             }
             if (tablero[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablero[jugadores[3].ficha2x][jugadores[3].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[3].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[3].fichas2 = false;
                 jugadores[3].ficha2x = jugadores[3].basex;
                 jugadores[3].ficha2y = jugadores[3].basey;
                 jugadores[3].contador2 =0;
-                jugadores[2].lanzamientos =1;
+                jugadores[3].lanzamientos =1;
             }
         }
         if (jugadores[i].basefantasma == 2 || jugadores[i].basefantasma == 5)
         {
             if (tablero[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablero[jugadores[0].ficha1x][jugadores[0].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[0].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[0].fichas1 = false;
                 jugadores[0].ficha1x = jugadores[0].basex;
                 jugadores[0].ficha1y = jugadores[0].basey;
@@ -2227,7 +2238,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablero[jugadores[0].ficha2x][jugadores[0].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[0].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[0].fichas2 = false;
                 jugadores[0].ficha2x = jugadores[0].basex;
                 jugadores[0].ficha2y = jugadores[0].basey;
@@ -2236,8 +2246,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablero[jugadores[2].ficha1x][jugadores[2].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[2].nombre<<" SE VA A LA CARCEL"<<endl;
-
                 jugadores[2].fichas1 = false;
                 jugadores[2].ficha1x = jugadores[2].basex;
                 jugadores[2].ficha1y = jugadores[2].basey;
@@ -2246,8 +2254,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablero[jugadores[2].ficha2x][jugadores[2].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[2].nombre<<" SE VA A LA CARCEL"<<endl;
-
                 jugadores[2].fichas2 = false;
                 jugadores[2].ficha2x = jugadores[2].basex;
                 jugadores[2].ficha2y = jugadores[2].basey;
@@ -2256,7 +2262,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablero[jugadores[3].ficha1x][jugadores[3].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[3].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[3].fichas1 = false;
                 jugadores[3].ficha1x = jugadores[3].basex;
                 jugadores[3].ficha1y = jugadores[3].basey;
@@ -2265,7 +2270,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablero[jugadores[3].ficha2x][jugadores[3].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[3].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[3].fichas2 = false;
                 jugadores[3].ficha2x = jugadores[3].basex;
                 jugadores[3].ficha2y = jugadores[3].basey;
@@ -2277,7 +2281,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
         {
             if (tablero[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablero[jugadores[0].ficha1x][jugadores[0].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[0].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[0].fichas1 = false;
                 jugadores[0].ficha1x = jugadores[0].basex;
                 jugadores[0].ficha1y = jugadores[0].basey;
@@ -2286,8 +2289,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablero[jugadores[0].ficha2x][jugadores[0].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[0].nombre<<" SE VA A LA CARCEL"<<endl;
-
                 jugadores[0].fichas2 = false;
                 jugadores[0].ficha2x = jugadores[0].basex;
                 jugadores[0].ficha2y = jugadores[0].basey;
@@ -2296,7 +2297,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablero[jugadores[1].ficha1x][jugadores[1].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[1].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[1].fichas1 = false;
                 jugadores[1].ficha1x = jugadores[1].basex;
                 jugadores[1].ficha1y = jugadores[1].basey;
@@ -2305,7 +2305,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablero[jugadores[1].ficha2x][jugadores[1].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[1].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[1].fichas2 = false;
                 jugadores[1].ficha2x = jugadores[1].basex;
                 jugadores[1].ficha2y = jugadores[1].basey;
@@ -2314,7 +2313,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablero[jugadores[3].ficha1x][jugadores[3].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[3].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[3].fichas1 = false;
                 jugadores[3].ficha1x = jugadores[3].basex;
                 jugadores[3].ficha1y = jugadores[3].basey;
@@ -2323,7 +2321,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablero[jugadores[3].ficha2x][jugadores[3].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[3].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[3].fichas2 = false;
                 jugadores[3].ficha2x = jugadores[3].basex;
                 jugadores[3].ficha2y = jugadores[3].basey;
@@ -2335,7 +2332,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
         {
             if (tablero[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablero[jugadores[0].ficha1x][jugadores[0].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[0].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[0].fichas1 = false;
                 jugadores[0].ficha1x = jugadores[0].basex;
                 jugadores[0].ficha1y = jugadores[0].basey;
@@ -2344,7 +2340,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablero[jugadores[0].ficha2x][jugadores[0].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[0].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[0].fichas2 = false;
                 jugadores[0].ficha2x = jugadores[0].basex;
                 jugadores[0].ficha2y = jugadores[0].basey;
@@ -2353,7 +2348,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablero[jugadores[1].ficha1x][jugadores[1].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[1].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[1].fichas1 = false;
                 jugadores[1].ficha1x = jugadores[1].basex;
                 jugadores[1].ficha1y = jugadores[1].basey;
@@ -2362,7 +2356,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablero[jugadores[1].ficha2x][jugadores[1].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[1].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[1].fichas2 = false;
                 jugadores[1].ficha2x = jugadores[1].basex;
                 jugadores[1].ficha2y = jugadores[1].basey;
@@ -2371,7 +2364,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablero[jugadores[2].ficha1x][jugadores[2].ficha1y])
             {
-                cout<<"EL JUGADOR "<<jugadores[2].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[2].fichas1 = false;
                 jugadores[2].ficha1x = jugadores[2].basex;
                 jugadores[2].ficha1y = jugadores[2].basey;
@@ -2380,7 +2372,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             }
             if (tablero[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablero[jugadores[2].ficha2x][jugadores[2].ficha2y])
             {
-                cout<<"EL JUGADOR "<<jugadores[2].nombre<<" SE VA A LA CARCEL"<<endl;
                 jugadores[2].fichas2 = false;
                 jugadores[2].ficha2x = jugadores[2].basex;
                 jugadores[2].ficha2y = jugadores[2].basey;
