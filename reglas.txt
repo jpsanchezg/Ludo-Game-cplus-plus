@@ -1,2 +1,5 @@
 las reglas de este juego son las siguientes:
-1. 
+1. Tienes 2 fichas las cuales tienes que llevar a la base final para poder ganar
+2. Tienes 3 lanzamientos para sacar pares en la ronda 1 si no logras sacar ningun par de fichas
+cuando llegues a la ronda 3 se te sacara una ficha automaticamente.
+3.
