@@ -43,6 +43,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
 //vista del mapa
 void vista (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby);
 
+void ganador(int i,struct parques jugadores [maxiju]);
 
 struct parques
 {
@@ -51,8 +52,8 @@ struct parques
     int movfich = 0;
     int salidax,saliday;
     int llegadax,llegaday;
-    int ficha1x=0,ficha1y=0;
-    int ficha2x=0,ficha2y=0;
+    int ficha1x=-1,ficha1y=-1;
+    int ficha2x=-1,ficha2y=-1;
     int basex=0,basey=0;
     int contador1;
     int contador2;
@@ -81,30 +82,30 @@ int main()
     srand(time(NULL));
     string tablero [maxix][maxiy];
     int tablerofantasma [maxix][maxiy];
-    cout<<"####### #     # ###  #####     ###  #####     #       #     # ######  ####### #     #    ####### ### #     # #######"<<endl;
-    cout<<"   #    #     #  #  #     #     #  #     #    #       #     # #     # #     #  #   #        #     #  ##   ## #       "<<endl;
-    cout<<"   #    #     #  #  #           #  #          #       #     # #     # #     #   # #         #     #  # # # # #       "<<endl;
-    cout<<"   #    #######  #   #####      #   #####     #       #     # #     # #     #    #          #     #  #  #  # #####   "<<endl;
-    cout<<"   #    #     #  #        #     #        #    #       #     # #     # #     #   # #         #     #  #     # #       "<<endl;
-    cout<<"   #    #     #  #  #     #     #  #     #    #       #     # #     # #     #  #   #        #     #  #     # #       "<<endl;
-    cout<<"   #    #     # ###  #####     ###  #####     #######  #####  ######  ####### #     #       #    ### #     # ####### "<<endl;
-    cout<<endl;
     do
     {
-        cout<<"MENU"<<endl;
-        cout<<"1. JUGAR"<<endl;
-        cout<<"2. REGLAS"<<endl;
-        cout<<"3. SALIR"<<endl;
+        cout<<"\t\t####### #     # ###  #####     ###  #####     #       #     # ######  ####### #     #    ####### ### #     # #######"<<endl;
+        cout<<"\t\t   #    #     #  #  #     #     #  #     #    #       #     # #     # #     #  #   #        #     #  ##   ## #       "<<endl;
+        cout<<"\t\t   #    #     #  #  #           #  #          #       #     # #     # #     #   # #         #     #  # # # # #       "<<endl;
+        cout<<"\t\t   #    #######  #   #####      #   #####     #       #     # #     # #     #    #          #     #  #  #  # #####   "<<endl;
+        cout<<"\t\t   #    #     #  #        #     #        #    #       #     # #     # #     #   # #         #     #  #     # #       "<<endl;
+        cout<<"\t\t   #    #     #  #  #     #     #  #     #    #       #     # #     # #     #  #   #        #     #  #     # #       "<<endl;
+        cout<<"\t\t   #    #     # ###  #####     ###  #####     #######  #####  ######  ####### #     #       #    ### #     # ####### "<<endl;
+        cout<<endl;
+        cout<<"\t\t\t\t\t\t\t\t\tMENU"<<endl;
+        cout<<"\t\t\t\t\t\t\t\t\t1. JUGAR"<<endl;
+        cout<<"\t\t\t\t\t\t\t\t\t2. REGLAS"<<endl;
+        cout<<"\t\t\t\t\t\t\t\t\t3. SALIR"<<endl;
         cin>>opcion;
         if (opcion == 1)
         {
-            cout<<"Cuantos jugadores van a jugar?"<<endl;
+            cout<<"\t\t\t\t\t\t\t\t\tCuantos jugadores van a jugar?"<<endl;
             cin>>numjug;
             tamtabx = 10;
             tamtaby = 10;
             if(numjug == 1 )
             {
-                cout<<"No puedes jugar solo, consiguete a alguien"<<endl;
+                cout<<"\t\t\t\t\t\t\t\t\tNo puedes jugar solo, consiguete a alguien"<<endl;
                 system("cls");
             }
             if (numjug == 2)
@@ -124,17 +125,20 @@ int main()
             }
             if (numjug > 4)
             {
-                cout<<"Ingresaste "<<numjug<<" jugadores, el mapa esta hecho para 4 jugadores maximo"<<endl;
+                cout<<"\t\t\t\t\t\t\t\t\tIngresaste "<<numjug<<" jugadores, el mapa esta hecho para 4 jugadores maximo"<<endl;
             }
         }
         if (opcion == 2)
         {
+            system("cls");
             archi.open("reglas.txt",ios::in);
             while(!archi.eof())
             {
                 getline(archi,texto);
                 cout<<texto<<endl;
             }
+            Sleep(5000);
+            system("cls");
         }
         if (opcion == 3)
         {
@@ -184,9 +188,6 @@ void mapaparadosjugadores(string tablero [maxix][maxiy],int tablerofantasma [max
     jugadores[1].posx2 = 0;
     jugadores[1].posy1 = 1;
     jugadores[1].posy2 = 8;
-
-    nojuegox1=jugadores[0].basex;
-    nojuegox2=jugadores[3].basex;
     for(int x=0; x<numjug; x++)
     {
         jugadores[x].lanzamientos =4;
@@ -719,53 +720,53 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                         {
                             movimientojug1f1  (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                         }
-                        if (jugadores[i].basefantasma == 2)
-                        {
-                            movimientojug2f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                        }
-                        if (jugadores[i].basefantasma == 3 || jugadores[i].basefantasma == 5)
-                        {
-                            movimientojug3f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy,i);
-
-                        }
-                        if (jugadores[i].basefantasma == 4)
-                        {
-
-                            //movimientojug4f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                        }
-                        reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
-
                     }
-                    if (jugadores[i].fichmov == 2)
+                    if (jugadores[i].basefantasma == 2)
                     {
-                        tablero[jugadores[i].ficha2x][jugadores[i].ficha2y]=' ';
-                        if (jugadores[i].basefantasma == 1)
-                        {
-                            movimientojug1f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                        }
-                        if (jugadores[i].basefantasma == 2)
-                        {
-                            movimientojug2f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                        }
-                        if (jugadores[i].basefantasma == 3 || jugadores[i].basefantasma == 5)
-                        {
-                            movimientojug3f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy,i);
-                        }
-                        if (jugadores[i].basefantasma == 4)
-                        {
-                            //movimientojug4f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                        }
-                        reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
+                        movimientojug2f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                    }
+                    if (jugadores[i].basefantasma == 3 || jugadores[i].basefantasma == 5)
+                    {
+                        movimientojug3f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy,i);
 
                     }
-                    if (jugadores[i].ficha1final == true && jugadores[i].ficha2final ==true)
+                    if (jugadores[i].basefantasma == 4)
                     {
-                        jugadores[i].ganador = true;
-                        system("cls");
-                        void ganador();
+                        movimientojug4f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                     }
+                    reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
+
+                }
+                if (jugadores[i].fichmov == 2)
+                {
+                    tablero[jugadores[i].ficha2x][jugadores[i].ficha2y]=' ';
+                    if (jugadores[i].basefantasma == 1)
+                    {
+                        movimientojug1f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                    }
+                    if (jugadores[i].basefantasma == 2)
+                    {
+                        movimientojug2f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                    }
+                    if (jugadores[i].basefantasma == 3 || jugadores[i].basefantasma == 5)
+                    {
+                        movimientojug3f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy,i);
+                    }
+                    if (jugadores[i].basefantasma == 4)
+                    {
+                        movimientojug4f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                    }
+                    reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
+
+                }
+                if (jugadores[i].ficha1final == true && jugadores[i].ficha2final ==true)
+                {
+                    jugadores[i].ganador = true;
+                    system("cls");
+                    ganador(i,jugadores);
                 }
             }
+
         }
         i++;
         movi = false;
@@ -782,8 +783,8 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
             jugadores[i].salio = false;
             contador =1;
         }
-        /** Sleep(2000);
-          system("cls");**/
+        Sleep(2000);
+        system("cls");
     }
     while(jugadores[i].ganador == false);
 
@@ -2758,7 +2759,66 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
         }
     }
 }
-void ganador ()
+void ganador (int i, struct parques jugadores [maxiju])
 {
-    cout<<"has ganado felicidades jugador"<<endl;
+    cout<<"####### ####### #       ###  #####  ### #######    #     #####  ### ####### #     # #######  #####  "<<endl;
+    cout<<"#       #       #        #  #     #  #     #      # #   #     #  #  #     # ##    # #       #     # "<<endl;
+    cout<<"#       #       #        #  #        #     #     #   #  #        #  #     # # #   # #       #       "<<endl;
+    cout<<"#####   #####   #        #  #        #     #    #     # #        #  #     # #  #  # #####    #####  "<<endl;
+    cout<<"#       #       #        #  #        #     #    ####### #        #  #     # #   # # #             # "<<endl;
+    cout<<"#       #       #        #  #     #  #     #    #     # #     #  #  #     # #    ## #       #     # "<<endl;
+    cout<<"#       ####### ####### ###  #####  ###    #    #     #  #####  ### ####### #     # #######  #####  "<<endl;
+    cout<<endl;
+    cout<<endl;
+    if (i == 0)
+    {
+        cout<<"      # #     #  #####     #    ######  ####### ######       #   "<<endl;
+        cout<<"      # #     # #     #   # #   #     # #     # #     #     ##   "<<endl;
+        cout<<"      # #     # #        #   #  #     # #     # #     #    # #   "<<endl;
+        cout<<"      # #     # #  #### #     # #     # #     # ######       #   "<<endl;
+        cout<<"#     # #     # #     # ####### #     # #     # #   #        #   "<<endl;
+        cout<<"#     # #     # #     # #     # #     # #     # #    #       #   "<<endl;
+        cout<<" #####   #####   #####  #     # ######  ####### #     #    ##### "<<endl;
+    }
+    if (i == 1)
+    {
+        cout<<"      # #     #  #####     #    ######  ####### ######      #####  "<<endl;
+        cout<<"      # #     # #     #   # #   #     # #     # #     #    #     # "<<endl;
+        cout<<"      # #     # #        #   #  #     # #     # #     #          # "<<endl;
+        cout<<"      # #     # #  #### #     # #     # #     # ######      #####  "<<endl;
+        cout<<"#     # #     # #     # ####### #     # #     # #   #      #       "<<endl;
+        cout<<"#     # #     # #     # #     # #     # #     # #    #     #       "<<endl;
+        cout<<" #####   #####   #####  #     # ######  ####### #     #    ####### "<<endl;
+    }
+    if (i == 2)
+    {
+        cout<<"      # #     #  #####     #    ######  ####### ######      #####  "<<endl;
+        cout<<"      # #     # #     #   # #   #     # #     # #     #    #     # "<<endl;
+        cout<<"      # #     # #        #   #  #     # #     # #     #          # "<<endl;
+        cout<<"      # #     # #  #### #     # #     # #     # ######      #####  "<<endl;
+        cout<<"#     # #     # #     # ####### #     # #     # #   #            # "<<endl;
+        cout<<"#     # #     # #     # #     # #     # #     # #    #     #     # "<<endl;
+        cout<<" #####   #####   #####  #     # ######  ####### #     #     #####  "<<endl;
+    }
+    if (i == 3)
+    {
+        cout<<"      # #     #  #####     #    ######  ####### ######     #       "<<endl;
+        cout<<"      # #     # #     #   # #   #     # #     # #     #    #    #  "<<endl;
+        cout<<"      # #     # #        #   #  #     # #     # #     #    #    #  "<<endl;
+        cout<<"      # #     # #  #### #     # #     # #     # ######     #    #  "<<endl;
+        cout<<"#     # #     # #     # ####### #     # #     # #   #      ####### "<<endl;
+        cout<<"#     # #     # #     # #     # #     # #     # #    #          #  "<<endl;
+        cout<<" #####   #####   #####  #     # ######  ####### #     #         #  "<<endl;
+
+    }
+    cout<<endl;
+    cout<<endl;
+    cout<<" #####     #    #     #    #     #####  ####### ####### "<<endl;
+    cout<<"#     #   # #   ##    #   # #   #     #    #    #       "<<endl;
+    cout<<"#        #   #  # #   #  #   #  #          #    #       "<<endl;
+    cout<<"#  #### #     # #  #  # #     #  #####     #    #####   "<<endl;
+    cout<<"#     # ####### #   # # #######       #    #    #       "<<endl;
+    cout<<"#     # #     # #    ## #     # #     #    #    #       "<<endl;
+    cout<<" #####  #     # #     # #     #  #####     #    ####### "<<endl;
+    cout<<endl;
 }
