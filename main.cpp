@@ -1244,50 +1244,51 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                         {
                             movimientojug1f1  (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                         }
-                    }
-                    if (jugadores[i].basefantasma == 2)
-                    {
-                        movimientojug2f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                    }
-                    if (jugadores[i].basefantasma == 3 || jugadores[i].basefantasma == 5)
-                    {
-                        movimientojug3f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy,i);
+
+                        if (jugadores[i].basefantasma == 2)
+                        {
+                            movimientojug2f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                        }
+                        if (jugadores[i].basefantasma == 3 || jugadores[i].basefantasma == 5)
+                        {
+                            movimientojug3f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy,i);
+
+                        }
+                        if (jugadores[i].basefantasma == 4)
+                        {
+                            movimientojug4f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                        }
+                        reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
 
                     }
-                    if (jugadores[i].basefantasma == 4)
+                    if (jugadores[i].fichmov == 2)
                     {
-                        movimientojug4f1 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                    }
-                    reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
+                        tablero[jugadores[i].ficha2x][jugadores[i].ficha2y]=' ';
+                        if (jugadores[i].basefantasma == 1)
+                        {
+                            movimientojug1f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                        }
+                        if (jugadores[i].basefantasma == 2)
+                        {
+                            movimientojug2f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                        }
+                        if (jugadores[i].basefantasma == 3 || jugadores[i].basefantasma == 5)
+                        {
+                            movimientojug3f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy,i);
+                        }
+                        if (jugadores[i].basefantasma == 4)
+                        {
+                            movimientojug4f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                        }
+                        reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
 
-                }
-                if (jugadores[i].fichmov == 2)
-                {
-                    tablero[jugadores[i].ficha2x][jugadores[i].ficha2y]=' ';
-                    if (jugadores[i].basefantasma == 1)
-                    {
-                        movimientojug1f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
                     }
-                    if (jugadores[i].basefantasma == 2)
+                    if (jugadores[i].ficha1final == true && jugadores[i].ficha2final ==true)
                     {
-                        movimientojug2f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
+                        jugadores[i].ganador = true;
+                        system("cls");
+                        ganador(i,jugadores);
                     }
-                    if (jugadores[i].basefantasma == 3 || jugadores[i].basefantasma == 5)
-                    {
-                        movimientojug3f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy,i);
-                    }
-                    if (jugadores[i].basefantasma == 4)
-                    {
-                        movimientojug4f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                    }
-                    reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
-
-                }
-                if (jugadores[i].ficha1final == true && jugadores[i].ficha2final ==true)
-                {
-                    jugadores[i].ganador = true;
-                    system("cls");
-                    ganador(i,jugadores);
                 }
             }
 
@@ -3282,69 +3283,75 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
 }
 void ganador (int i, struct parques jugadores [maxiju])
 {
-    ifstream gana;
+    ifstream achr;
+    char respu;
     string texto;
-    gana.open("ganador/falicidades.txt",ios::in);
-    while(!gana.eof())
+    achr.open("ganador/felicidades.txt",ios::in);
+    while(!achr.eof())
     {
-        getline(gana,texto);
+        getline(achr,texto);
         cout<<texto<<endl;
     }
-    gana.close();
+    achr.close();
     cout<<endl;
     cout<<endl;
     if (i == 0)
     {
-        gana.open("ganador/jugador1.txt",ios::in);
-        while(!gana.eof())
+        achr.open("ganador/jugador1.txt",ios::in);
+        while(!achr.eof())
         {
-            getline(gana,texto);
+            getline(achr,texto);
             cout<<texto<<endl;
         }
-        gana.close();
+        achr.close();
 
     }
     if (i == 1)
     {
-        gana.open("ganador/jugador2.txt",ios::in);
-        while(!gana.eof())
+        achr.open("ganador/jugador2.txt",ios::in);
+        while(!achr.eof())
         {
-            getline(gana,texto);
+            getline(achr,texto);
             cout<<texto<<endl;
         }
-        gana.close();
+        achr.close();
 
     }
     if (i == 2)
     {
-        gana.open("ganador/jugador3.txt",ios::in);
-        while(!gana.eof())
+        achr.open("ganador/jugador3.txt",ios::in);
+        while(!achr.eof())
         {
-            getline(gana,texto);
+            getline(achr,texto);
             cout<<texto<<endl;
         }
-        gana.close();
+        achr.close();
 
     }
     if (i == 3)
     {
-        gana.open("ganador/jugador4.txt",ios::in);
-        while(!gana.eof())
+        achr.open("ganador/jugador4.txt",ios::in);
+        while(!achr.eof())
         {
-            getline(gana,texto);
+            getline(achr,texto);
             cout<<texto<<endl;
         }
-        gana.close();
+        achr.close();
     }
     cout<<endl;
     cout<<endl;
-    gana.open("ganador/ganador.txt",ios::in);
-    while(!gana.eof())
+    achr.open("ganador/winner.txt",ios::in);
+    while(!achr.eof())
     {
-        getline(gana,texto);
+        getline(achr,texto);
         cout<<texto<<endl;
     }
-    gana.close();
-
+    achr.close();
     cout<<endl;
+    cout<<"Quieres salir?? y/n"<<endl;
+    cin>>respu;
+    if (respu == 'y')
+    {
+        system("cls");
+    }
 }
