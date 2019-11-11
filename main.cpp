@@ -137,6 +137,7 @@ int main()
                 getline(archi,texto);
                 cout<<texto<<endl;
             }
+            archi.close();
             Sleep(5000);
             system("cls");
         }
@@ -318,13 +319,86 @@ void datos4jugadores (string tablero [maxix][maxiy],struct parques jugadores [ma
             cout <<" % "<<endl;
         cin>>jugadores[i].base;
         if (jugadores[i].base == '@')
+        {
+            if (f1 == true)
+            {
+                cout<<" Se te asigno otra ficha por estar la que pusiste ya en uso"<<endl;
+                if (f2 == false)
+                {
+                    jugadores[i].base = '#';
+                }
+                if (f3 == false)
+                {
+                    jugadores[i].base = '$';
+                }
+                if (f4 == false)
+                {
+                    jugadores[i].base = '%';
+                }
+            }
             f1=true;
+        }
         if (jugadores[i].base == '#')
+        {
+            if (f2 == true)
+            {
+                cout<<" Se te asigno otra ficha por estar la que pusiste ya en uso"<<endl;
+                if (f1 == false)
+                {
+                    jugadores[i].base = '@';
+                }
+                if (f3 == false)
+                {
+                    jugadores[i].base = '$';
+                }
+                if (f4 == false)
+                {
+                    jugadores[i].base = '%';
+                }
+            }
             f2=true;
-        if (jugadores[i].base == '&')
+        }
+        if (jugadores[i].base == '$')
+        {
+            if (f3 == true)
+            {
+                cout<<" Se te asigno otra ficha por estar la que pusiste ya en uso"<<endl;
+                if (f2 == false)
+                {
+                    jugadores[i].base = '#';
+                }
+                if (f1 == false)
+                {
+                    jugadores[i].base = '@';
+                }
+                if (f4 == false)
+                {
+                    jugadores[i].base = '%';
+                }
+            }
             f3=true;
+        }
+
         if (jugadores[i].base == '%')
+        {
+            if (f4 == true)
+            {
+                cout<<" Se te asigno otra ficha por estar la que pusiste ya en uso"<<endl;
+                if (f2 == false)
+                {
+                    jugadores[i].base = '#';
+                }
+                if (f1 == false)
+                {
+                    jugadores[i].base = '@';
+                }
+                if (f3 == false)
+                {
+                    jugadores[i].base = '$';
+                }
+            }
             f4=true;
+        }
         if (i == 0)
         {
             for (int x=2; x<jugadores[i].llegaday; x++)
@@ -363,8 +437,8 @@ void datos4jugadores (string tablero [maxix][maxiy],struct parques jugadores [ma
             tablero[jugadores[i].basex][jugadores[i].basey]=jugadores[i].base;
             tablero[jugadores[i].llegadax][jugadores[i].llegaday]=jugadores[i].base;
         }
-
     }
+    Sleep(5000);
     system("cls");
 
 
@@ -386,18 +460,91 @@ void datos2jugadores (string tablero [maxix][maxiy],struct parques jugadores [ma
         if(f2 == false)
             cout<<" # "<<endl;
         if(f3 == false)
-            cout<<" & "<<endl;
+            cout<<" $ "<<endl;
         if(f4 == false)
             cout <<" % "<<endl;
         cin>>jugadores[i].base;
         if (jugadores[i].base == '@')
+        {
+            if (f1 == true)
+            {
+                cout<<" Se te asigno otra ficha por estar la que pusiste ya en uso"<<endl;
+                if (f2 == false)
+                {
+                    jugadores[i].base = '#';
+                }
+                if (f3 == false)
+                {
+                    jugadores[i].base = '$';
+                }
+                if (f4 == false)
+                {
+                    jugadores[i].base = '%';
+                }
+            }
             f1=true;
+        }
         if (jugadores[i].base == '#')
+        {
+            if (f2 == true)
+            {
+                cout<<" Se te asigno otra ficha por estar la que pusiste ya en uso"<<endl;
+                if (f1 == false)
+                {
+                    jugadores[i].base = '@';
+                }
+                if (f3 == false)
+                {
+                    jugadores[i].base = '$';
+                }
+                if (f4 == false)
+                {
+                    jugadores[i].base = '%';
+                }
+            }
             f2=true;
-        if (jugadores[i].base == '&')
+        }
+        if (jugadores[i].base == '$')
+        {
+            if (f3 == true)
+            {
+                cout<<" Se te asigno otra ficha por estar la que pusiste ya en uso"<<endl;
+                if (f2 == false)
+                {
+                    jugadores[i].base = '#';
+                }
+                if (f1 == false)
+                {
+                    jugadores[i].base = '@';
+                }
+                if (f4 == false)
+                {
+                    jugadores[i].base = '%';
+                }
+            }
             f3=true;
+        }
+
         if (jugadores[i].base == '%')
+        {
+            if (f4 == true)
+            {
+                cout<<" Se te asigno otra ficha por estar la que pusiste ya en uso"<<endl;
+                if (f2 == false)
+                {
+                    jugadores[i].base = '#';
+                }
+                if (f1 == false)
+                {
+                    jugadores[i].base = '@';
+                }
+                if (f3 == false)
+                {
+                    jugadores[i].base = '$';
+                }
+            }
             f4=true;
+        }
         if (i == 0)
         {
             for (int x=2; x<jugadores[i].llegaday; x++)
@@ -417,6 +564,7 @@ void datos2jugadores (string tablero [maxix][maxiy],struct parques jugadores [ma
             tablero[jugadores[i].llegadax][jugadores[i].llegaday]=jugadores[i].base;
         }
     }
+    Sleep(5000);
     system("cls");
 
 
@@ -846,6 +994,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                             {
                                 if(jugadores[i].fichas1==true)
                                 {
+                                    cout<<"SALE LA FICHA 2"<<endl;
                                     jugadores[i].fichas2=true;
                                     jugadores[i].ficha2x=jugadores[i].salidax;
                                     jugadores[i].ficha2y=jugadores[i].saliday;
@@ -853,7 +1002,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                                 }
                                 if (jugadores[i].fichas1 == false)
                                 {
-                                    cout<<"SALE 1 FICHA"<<endl;
+                                    cout<<"SALE LA FICHA 1 Y 2"<<endl;
                                     jugadores[i].ficha1x=jugadores[i].salidax;
                                     jugadores[i].ficha1y=jugadores[i].saliday;
                                     jugadores[i].fichas2=true;
@@ -881,6 +1030,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                             {
                                 if(jugadores[i].fichas1==true)
                                 {
+                                    cout<<"SALE LA FICHA 2"<<endl;
                                     jugadores[i].fichas2=true;
                                     jugadores[i].ficha2x=jugadores[i].salidax;
                                     jugadores[i].ficha2y=jugadores[i].saliday;
@@ -890,7 +1040,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                                 {
                                     jugadores[i].ficha1x=jugadores[i].salidax;
                                     jugadores[i].ficha1y=jugadores[i].saliday;
-                                    cout<<"SALE 1 FICHA"<<endl;
+                                    cout<<"SALE LA FICHA 1"<<endl;
                                     tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
                                     tablerofantasma[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].basefantasma;
                                     jugadores[i].lanzamientos =1;
@@ -913,6 +1063,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                             {
                                 if(jugadores[i].fichas1==true)
                                 {
+                                    cout<<"SALE LA FICHA 2"<<endl;
                                     jugadores[i].fichas2=true;
                                     jugadores[i].ficha2x=jugadores[i].salidax;
                                     jugadores[i].ficha2y=jugadores[i].saliday;
@@ -922,7 +1073,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                                 {
                                     jugadores[i].ficha1x=jugadores[i].salidax;
                                     jugadores[i].ficha1y=jugadores[i].saliday;
-                                    cout<<"SALE 1 FICHA"<<endl;
+                                    cout<<"SALE LA FICHA 1"<<endl;
                                     tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
                                     jugadores[i].lanzamientos =1;
                                     jugadores[i].fichas1=true;
@@ -944,6 +1095,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                             {
                                 if(jugadores[i].fichas1==true)
                                 {
+                                    cout<<"SALE LA FICHA 2"<<endl;
                                     jugadores[i].fichas2=true;
                                     jugadores[i].ficha2x=jugadores[i].salidax;
                                     jugadores[i].ficha2y=jugadores[i].saliday;
@@ -953,7 +1105,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                                 {
                                     jugadores[i].ficha1x=jugadores[i].salidax;
                                     jugadores[i].ficha1y=jugadores[i].saliday;
-                                    cout<<"SALE 1 FICHA"<<endl;
+                                    cout<<"SALE LA FICHA 1"<<endl;
                                     tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
                                     tablerofantasma[jugadores[i].salidax][jugadores[i].saliday]=jugadores[i].basefantasma;
                                     jugadores[i].lanzamientos =1;
@@ -976,6 +1128,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                             {
                                 if(jugadores[i].fichas1==true)
                                 {
+                                    cout<<"SALE LA FICHA 2"<<endl;
                                     jugadores[i].fichas2=true;
                                     jugadores[i].ficha2x=jugadores[i].salidax;
                                     jugadores[i].ficha2y=jugadores[i].saliday;
@@ -983,7 +1136,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                                 }
                                 if (jugadores[i].fichas1==false)
                                 {
-                                    cout<<"SALE 1 FICHA"<<endl;
+                                    cout<<"SALE LA FICHA 1"<<endl;
                                     jugadores[i].ficha1x=jugadores[i].salidax;
                                     jugadores[i].ficha1y=jugadores[i].saliday;
                                     tablero[jugadores[i].ficha1x][jugadores[i].ficha1y]=jugadores[i].base;
@@ -1008,6 +1161,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                             {
                                 if(jugadores[i].fichas1==true)
                                 {
+                                    cout<<"SALE LA FICHA 2"<<endl;
                                     jugadores[i].fichas2=true;
                                     jugadores[i].ficha2x=jugadores[i].salidax;
                                     jugadores[i].ficha2y=jugadores[i].saliday;
@@ -1015,7 +1169,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                                 }
                                 if (jugadores[i].fichas1 == false)
                                 {
-                                    cout<<"SALEN 1 FICHA"<<endl;
+                                    cout<<"SALE LA FICHA 1 Y 2"<<endl;
                                     jugadores[i].ficha1x=jugadores[i].salidax;
                                     jugadores[i].ficha1y=jugadores[i].saliday;
                                     jugadores[i].ficha2x=jugadores[i].salidax;
@@ -1047,6 +1201,8 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
             {
                 if (turno == 3)
                 {
+                    cout<<"POR LA REGLA DEL 3R TURNO,"<<endl;
+                    cout<<"SALE LA FICHA 1"<<endl;
                     jugadores[i].lanzamientos =1;
                     jugadores[i].ficha1x=jugadores[i].salidax;
                     jugadores[i].ficha1y=jugadores[i].saliday;
@@ -1155,8 +1311,6 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
         system("cls");
     }
     while(jugadores[i].ganador == false);
-
-
 }
 
 void movimientojug1f1 (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby,int dadox,int dadoy)
@@ -1173,7 +1327,6 @@ void movimientojug1f1 (string tablero [maxix][maxiy],int tablerofantasma [maxix]
         dado=dadoy;
     }
     jugadores[0].contador1 = jugadores[0].contador1 + dado;
-    cout<<jugadores[0].contador1<<endl;
     if (jugadores[0].contador1 <=jugadores[0].limite1)
     {
         jugadores[0].ficha1y = jugadores[0].posy1;
@@ -3129,64 +3282,69 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
 }
 void ganador (int i, struct parques jugadores [maxiju])
 {
-    cout<<"####### ####### #       ###  #####  ### #######    #     #####  ### ####### #     # #######  #####  "<<endl;
-    cout<<"#       #       #        #  #     #  #     #      # #   #     #  #  #     # ##    # #       #     # "<<endl;
-    cout<<"#       #       #        #  #        #     #     #   #  #        #  #     # # #   # #       #       "<<endl;
-    cout<<"#####   #####   #        #  #        #     #    #     # #        #  #     # #  #  # #####    #####  "<<endl;
-    cout<<"#       #       #        #  #        #     #    ####### #        #  #     # #   # # #             # "<<endl;
-    cout<<"#       #       #        #  #     #  #     #    #     # #     #  #  #     # #    ## #       #     # "<<endl;
-    cout<<"#       ####### ####### ###  #####  ###    #    #     #  #####  ### ####### #     # #######  #####  "<<endl;
+    ifstream gana;
+    string texto;
+    gana.open("ganador/falicidades.txt",ios::in);
+    while(!gana.eof())
+    {
+        getline(gana,texto);
+        cout<<texto<<endl;
+    }
+    gana.close();
     cout<<endl;
     cout<<endl;
     if (i == 0)
     {
-        cout<<"      # #     #  #####     #    ######  ####### ######       #   "<<endl;
-        cout<<"      # #     # #     #   # #   #     # #     # #     #     ##   "<<endl;
-        cout<<"      # #     # #        #   #  #     # #     # #     #    # #   "<<endl;
-        cout<<"      # #     # #  #### #     # #     # #     # ######       #   "<<endl;
-        cout<<"#     # #     # #     # ####### #     # #     # #   #        #   "<<endl;
-        cout<<"#     # #     # #     # #     # #     # #     # #    #       #   "<<endl;
-        cout<<" #####   #####   #####  #     # ######  ####### #     #    ##### "<<endl;
+        gana.open("ganador/jugador1.txt",ios::in);
+        while(!gana.eof())
+        {
+            getline(gana,texto);
+            cout<<texto<<endl;
+        }
+        gana.close();
+
     }
     if (i == 1)
     {
-        cout<<"      # #     #  #####     #    ######  ####### ######      #####  "<<endl;
-        cout<<"      # #     # #     #   # #   #     # #     # #     #    #     # "<<endl;
-        cout<<"      # #     # #        #   #  #     # #     # #     #          # "<<endl;
-        cout<<"      # #     # #  #### #     # #     # #     # ######      #####  "<<endl;
-        cout<<"#     # #     # #     # ####### #     # #     # #   #      #       "<<endl;
-        cout<<"#     # #     # #     # #     # #     # #     # #    #     #       "<<endl;
-        cout<<" #####   #####   #####  #     # ######  ####### #     #    ####### "<<endl;
+        gana.open("ganador/jugador2.txt",ios::in);
+        while(!gana.eof())
+        {
+            getline(gana,texto);
+            cout<<texto<<endl;
+        }
+        gana.close();
+
     }
     if (i == 2)
     {
-        cout<<"      # #     #  #####     #    ######  ####### ######      #####  "<<endl;
-        cout<<"      # #     # #     #   # #   #     # #     # #     #    #     # "<<endl;
-        cout<<"      # #     # #        #   #  #     # #     # #     #          # "<<endl;
-        cout<<"      # #     # #  #### #     # #     # #     # ######      #####  "<<endl;
-        cout<<"#     # #     # #     # ####### #     # #     # #   #            # "<<endl;
-        cout<<"#     # #     # #     # #     # #     # #     # #    #     #     # "<<endl;
-        cout<<" #####   #####   #####  #     # ######  ####### #     #     #####  "<<endl;
+        gana.open("ganador/jugador3.txt",ios::in);
+        while(!gana.eof())
+        {
+            getline(gana,texto);
+            cout<<texto<<endl;
+        }
+        gana.close();
+
     }
     if (i == 3)
     {
-        cout<<"      # #     #  #####     #    ######  ####### ######     #       "<<endl;
-        cout<<"      # #     # #     #   # #   #     # #     # #     #    #    #  "<<endl;
-        cout<<"      # #     # #        #   #  #     # #     # #     #    #    #  "<<endl;
-        cout<<"      # #     # #  #### #     # #     # #     # ######     #    #  "<<endl;
-        cout<<"#     # #     # #     # ####### #     # #     # #   #      ####### "<<endl;
-        cout<<"#     # #     # #     # #     # #     # #     # #    #          #  "<<endl;
-        cout<<" #####   #####   #####  #     # ######  ####### #     #         #  "<<endl;
-
+        gana.open("ganador/jugador4.txt",ios::in);
+        while(!gana.eof())
+        {
+            getline(gana,texto);
+            cout<<texto<<endl;
+        }
+        gana.close();
     }
     cout<<endl;
     cout<<endl;
-    cout<<" #####     #    #     #    #     #####  ####### ####### "<<endl;
-    cout<<"#     #   # #   ##    #   # #   #     #    #    #       "<<endl;
-    cout<<"#        #   #  # #   #  #   #  #          #    #       "<<endl;
-    cout<<"#  #### #     # #  #  # #     #  #####     #    #####   "<<endl;
-    cout<<"#     # ####### #   # # #######       #    #    #       "<<endl;
-    cout<<"#     # #     # #    ## #     # #     #    #    #       "<<endl;
-    cout<<" #####  #     # #     # #     #  #####     #    ####### "<<endl;
+    gana.open("ganador/ganador.txt",ios::in);
+    while(!gana.eof())
+    {
+        getline(gana,texto);
+        cout<<texto<<endl;
+    }
+    gana.close();
+
     cout<<endl;
 }
