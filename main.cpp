@@ -1,12 +1,14 @@
 #include <iostream>
-#include <iomanip>
 #include <fstream>
 #include <time.h>
+#include "winner.h"
+#include "dadosimp.h"
 #include <stdlib.h>
 #include <iomanip>
 #include <windows.h>
 using namespace std;
-
+using namespace winner;
+using namespace dados;
 #define maxiju 4
 #define maxix 100
 #define maxiy 100
@@ -42,8 +44,6 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
 void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby);
 //vista del mapa
 void vista (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],struct parques jugadores [maxiju],int numjug,int tamtabx,int tamtaby);
-
-void ganador(int i,struct parques jugadores [maxiju]);
 
 struct parques
 {
@@ -106,6 +106,12 @@ int main()
             if(numjug == 1 )
             {
                 cout<<"\t\t\t\t\t\t\t\t\tNo puedes jugar solo, consiguete a alguien"<<endl;
+                mapaparadosjugadores(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+
+                datos2jugadores (tablero,jugadores,numjug);
+                juego(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
+
+
                 system("cls");
             }
             if (numjug == 2)
@@ -564,7 +570,7 @@ void datos2jugadores (string tablero [maxix][maxiy],struct parques jugadores [ma
             tablero[jugadores[i].llegadax][jugadores[i].llegaday]=jugadores[i].base;
         }
     }
-    Sleep(5000);
+    Sleep(3000);
     system("cls");
 
 
@@ -584,7 +590,6 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
 {
     int turno=0,i=0,respu=0,contador=1;
     int dadox=0,dadoy=0;
-    ifstream das;
 
     bool movi = false;
     cout<<"RECUERDEN SUS FICHAS JUGADORES "<<endl;
@@ -607,376 +612,10 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
         {
             do
             {
-                string daso;
                 cout<<"Lanzamiento #"<<contador<<endl;
                 dadox = rand() % 6 + 1;
                 dadoy = rand() % 6 + 1;
-                if (dadox == 1 && dadoy == 1)
-                {
-                    das.open("dados/dado11.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-
-                    }
-                    das.close();
-                }
-                if (dadox == 1 && dadoy == 2)
-                {
-                    das.open("dados/dado12.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 1 && dadoy == 3)
-                {
-                    das.open("dados/dado13.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 1 && dadoy == 4)
-                {
-                    das.open("dados/dado14.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 1 && dadoy == 5)
-                {
-                    das.open("dados/dado15.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 1 && dadoy == 6)
-                {
-                    das.open("dados/dado16.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 2 && dadoy == 1)
-                {
-                    das.open("dados/dado21.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-
-                    }
-                    das.close();
-                }
-                if (dadox == 2 && dadoy == 2)
-                {
-                    das.open("dados/dado22.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 2 && dadoy == 3)
-                {
-                    das.open("dados/dado23.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 2 && dadoy == 4)
-                {
-                    das.open("dados/dado24.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 2 && dadoy == 5)
-                {
-                    das.open("dados/dado25.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 2 && dadoy == 6)
-                {
-                    das.open("dados/dado26.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 3 && dadoy == 1)
-                {
-                    das.open("dados/dado31.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-
-                    }
-                    das.close();
-                }
-                if (dadox == 3 && dadoy == 2)
-                {
-                    das.open("dados/dado32.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 3 && dadoy == 3)
-                {
-                    das.open("dados/dado33.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 3 && dadoy == 4)
-                {
-                    das.open("dados/dado34.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 3 && dadoy == 5)
-                {
-                    das.open("dados/dado35.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 3 && dadoy == 6)
-                {
-                    das.open("dados/dado36.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 4 && dadoy == 1)
-                {
-                    das.open("dados/dado41.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-
-                    }
-                    das.close();
-                }
-                if (dadox == 4 && dadoy == 2)
-                {
-                    das.open("dados/dado42.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 4 && dadoy == 3)
-                {
-                    das.open("dados/dado43.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 4 && dadoy == 4)
-                {
-                    das.open("dados/dado44.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 4 && dadoy == 5)
-                {
-                    das.open("dados/dado45.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 4 && dadoy == 6)
-                {
-                    das.open("dados/dado46.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 5 && dadoy == 1)
-                {
-                    das.open("dados/dado51.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-
-                    }
-                    das.close();
-                }
-                if (dadox == 5 && dadoy == 2)
-                {
-                    das.open("dados/dado52.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 5 && dadoy == 3)
-                {
-                    das.open("dados/dado53.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 5 && dadoy == 4)
-                {
-                    das.open("dados/dado54.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 5 && dadoy == 5)
-                {
-                    das.open("dados/dado55.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 5 && dadoy == 6)
-                {
-                    das.open("dados/dado56.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 6 && dadoy == 1)
-                {
-                    das.open("dados/dado61.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-
-                    }
-                    das.close();
-                }
-                if (dadox == 6 && dadoy == 2)
-                {
-                    das.open("dados/dado62.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 6 && dadoy == 3)
-                {
-                    das.open("dados/dado63.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 6 && dadoy == 4)
-                {
-                    das.open("dados/dado64.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 6 && dadoy == 5)
-                {
-                    das.open("dados/dado65.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
-                if (dadox == 6 && dadoy == 6)
-                {
-                    das.open("dados/dado66.txt",ios::in);
-                    while(!das.eof())
-                    {
-                        getline(das,daso);
-                        cout<<daso<<endl;
-                    }
-                    das.close();
-                }
+                dado(dadox,dadoy);
                 if (jugadores[i].fichas1==true || jugadores[i].fichas2==true )
                 {
                     if (turno > 0)
@@ -1287,7 +926,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                     {
                         jugadores[i].ganador = true;
                         system("cls");
-                        ganador(i,jugadores);
+                        ganador(i);
                     }
                 }
             }
@@ -3279,79 +2918,5 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].lanzamientos =1;
             }
         }
-    }
-}
-void ganador (int i, struct parques jugadores [maxiju])
-{
-    ifstream achr;
-    char respu;
-    string texto;
-    achr.open("ganador/felicidades.txt",ios::in);
-    while(!achr.eof())
-    {
-        getline(achr,texto);
-        cout<<texto<<endl;
-    }
-    achr.close();
-    cout<<endl;
-    cout<<endl;
-    if (i == 0)
-    {
-        achr.open("ganador/jugador1.txt",ios::in);
-        while(!achr.eof())
-        {
-            getline(achr,texto);
-            cout<<texto<<endl;
-        }
-        achr.close();
-
-    }
-    if (i == 1)
-    {
-        achr.open("ganador/jugador2.txt",ios::in);
-        while(!achr.eof())
-        {
-            getline(achr,texto);
-            cout<<texto<<endl;
-        }
-        achr.close();
-
-    }
-    if (i == 2)
-    {
-        achr.open("ganador/jugador3.txt",ios::in);
-        while(!achr.eof())
-        {
-            getline(achr,texto);
-            cout<<texto<<endl;
-        }
-        achr.close();
-
-    }
-    if (i == 3)
-    {
-        achr.open("ganador/jugador4.txt",ios::in);
-        while(!achr.eof())
-        {
-            getline(achr,texto);
-            cout<<texto<<endl;
-        }
-        achr.close();
-    }
-    cout<<endl;
-    cout<<endl;
-    achr.open("ganador/winner.txt",ios::in);
-    while(!achr.eof())
-    {
-        getline(achr,texto);
-        cout<<texto<<endl;
-    }
-    achr.close();
-    cout<<endl;
-    cout<<"Quieres salir?? y/n"<<endl;
-    cin>>respu;
-    if (respu == 'y')
-    {
-        system("cls");
     }
 }
