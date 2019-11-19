@@ -593,6 +593,7 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
     int dadox=0,dadoy=0,suma =0,x=1;
 
     bool movi = false;
+    bool fich = false;
     cout<<"RECUERDEN SUS FICHAS JUGADORES "<<endl;
     for (int u=0; u<numjug; u++)
     {
@@ -603,7 +604,8 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
 
     do
     {
-        x=1;
+
+
         cout<<"Turno #"<<turno<<endl;
         cout<<"Juega "<<jugadores[i].nombre<<endl;
         vista(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby);
@@ -611,6 +613,8 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
         cin>>respu;
         if (respu == 1)
         {
+            x=1;
+            fich = false;
             do
             {
                 cout<<"Lanzamiento #"<<contador<<endl;
@@ -936,7 +940,6 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                             if (jugadores[i].basefantasma == 4)
                             {
                                 movimientojug4f2 (tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,dadox,dadoy);
-                                jugadores[i].fichasamov = 2;
                             }
                             reglas(tablero,tablerofantasma,jugadores,numjug,tamtabx,tamtaby,i);
 
@@ -948,9 +951,17 @@ void juego (string tablero [maxix][maxiy],int tablerofantasma [maxix][maxiy],str
                             ganador(i);
                         }
                     }
+                    if (jugadores[i].movfich == 3)
+                    {
+                        fich = true;
+                    }
+                    if (x >= jugadores[i].fichasamov)
+                    {
+                        fich = true;
+                    }
                     x++;
                 }
-                while(x < jugadores[i].fichasamov);
+                while(fich == false);
             }
 
         }
@@ -2700,7 +2711,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
             {
                 jugadores[3].fichas1 = false;
                 jugadores[3].ficha1x = jugadores[3].basex;
-                jugadores[3].ficha1y= jugadores[3].basey;
+                jugadores[3].ficha1y = jugadores[3].basey;
                 jugadores[3].contador1 =0;
                 jugadores[3].lanzamientos =1;
             }
