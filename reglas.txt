@@ -1,9 +1,16 @@
 las reglas de este juego son las siguientes:
+
 1. Tienes 2 fichas las cuales tienes que llevar a la base final para poder ganar.
+
 2. Tienes 3 lanzamientos para sacar pares en la ronda 1 si no logras sacar ningun par de fichas
 cuando llegues a la ronda 3 se te sacara una ficha automaticamente.
+
 3. Solo puedes mover una ficha por turno.
+
 4. Si un jugador te llega a comer te vas directo a la carcel y tienes que sacar pares para
 poder sacar la ficha de la carcel.
+
 5. No puedes hacer bloqueo por que si lo haces te pueden enviar las dos fichas a la carcel.
+
+6. Por cada turno puedes mover las dos fichas si las sacaste.
 
