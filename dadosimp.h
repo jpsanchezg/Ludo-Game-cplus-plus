@@ -1,6 +1,7 @@
 #ifndef DADOSIMP_H_INCLUDED
 #define DADOSIMP_H_INCLUDED
 #include <iostream>
+#include <windows.h>
 using namespace std;
 namespace dados
 {
