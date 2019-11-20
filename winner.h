@@ -1,6 +1,7 @@
 #ifndef WINNER_H_INCLUDED
 #define WINNER_H_INCLUDED
 #include <iostream>
+#include <windows.h>
 using namespace std;
 namespace winner
 {
