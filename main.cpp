@@ -2567,6 +2567,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[1].ficha1x = jugadores[1].basex;
                 jugadores[1].ficha1y = jugadores[1].basey;
                 jugadores[1].contador1 =0;
+                jugadores[1].fichasamov = 1;
                 jugadores[1].lanzamientos =1;
             }
             if (tablero[jugadores[0].ficha1x][jugadores[0].ficha1y] == tablero[jugadores[1].ficha2x][jugadores[1].ficha2y])
@@ -2574,6 +2575,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[1].fichas2 = false;
                 jugadores[1].ficha2x = jugadores[1].basex;
                 jugadores[1].ficha2y = jugadores[1].basey;
+                jugadores[1].fichasamov = 1;
                 jugadores[1].contador2 =0;
                 jugadores[1].lanzamientos =1;
 
@@ -2584,6 +2586,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].ficha1x = jugadores[2].basex;
                 jugadores[2].ficha1y = jugadores[2].basey;
                 jugadores[2].contador1 =0;
+                jugadores[2].fichasamov = 1;
                 jugadores[2].lanzamientos =1;
 
             }
@@ -2593,6 +2596,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].ficha2x = jugadores[2].basex;
                 jugadores[2].ficha2y = jugadores[2].basey;
                 jugadores[2].contador2 =0;
+                jugadores[2].fichasamov = 1;
                 jugadores[2].lanzamientos =1;
 
             }
@@ -2602,6 +2606,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].ficha1x = jugadores[3].basex;
                 jugadores[3].ficha1y = jugadores[3].basey;
                 jugadores[3].contador1 =0;
+                jugadores[3].fichasamov = 1;
                 jugadores[3].lanzamientos =1;
 
             }
@@ -2611,6 +2616,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].ficha2x = jugadores[3].basex;
                 jugadores[3].ficha2y = jugadores[3].basey;
                 jugadores[3].contador2 =0;
+                jugadores[3].fichasamov = 1;
                 jugadores[3].lanzamientos =1;
 
             }
@@ -2623,6 +2629,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[0].ficha1x = jugadores[0].basex;
                 jugadores[0].ficha1y = jugadores[0].basey;
                 jugadores[0].contador1 =0;
+                jugadores[0].fichasamov = 1;
                 jugadores[0].lanzamientos =1;
             }
             if (tablero[jugadores[1].ficha1x][jugadores[1].ficha1y] == tablero[jugadores[0].ficha2x][jugadores[0].ficha2y])
@@ -2631,6 +2638,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[0].ficha2x = jugadores[0].basex;
                 jugadores[0].ficha2y = jugadores[0].basey;
                 jugadores[0].contador2 =0;
+                jugadores[0].fichasamov = 1;
                 jugadores[0].lanzamientos =1;
 
             }
@@ -2640,6 +2648,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].ficha1x = jugadores[2].basex;
                 jugadores[2].ficha1y = jugadores[2].basey;
                 jugadores[2].contador1 =0;
+                jugadores[2].fichasamov = 1;
                 jugadores[2].lanzamientos =1;
             }
             if (tablero[jugadores[1].ficha1x][jugadores[1].ficha1y] == tablero[jugadores[2].ficha2x][jugadores[2].ficha2y])
@@ -2648,6 +2657,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].ficha2x = jugadores[2].basex;
                 jugadores[2].ficha2y = jugadores[2].basey;
                 jugadores[2].contador2 =0;
+                jugadores[2].fichasamov = 1;
                 jugadores[2].lanzamientos =1;
 
             }
@@ -2658,6 +2668,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].ficha1x = jugadores[3].basex;
                 jugadores[3].ficha1y = jugadores[3].basey;
                 jugadores[3].contador1 =0;
+                jugadores[3].fichasamov = 1;
                 jugadores[3].lanzamientos =1;
 
             }
@@ -2667,6 +2678,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].ficha2x = jugadores[3].basex;
                 jugadores[3].ficha2y = jugadores[3].basey;
                 jugadores[3].contador2 =0;
+                jugadores[3].fichasamov = 1;
                 jugadores[3].lanzamientos =1;
             }
         }
@@ -2678,6 +2690,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[0].ficha1x = jugadores[0].basex;
                 jugadores[0].ficha1y = jugadores[0].basey;
                 jugadores[0].contador1 =0;
+                jugadores[0].fichasamov = 1;
                 jugadores[0].lanzamientos =1;
 
             }
@@ -2687,6 +2700,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[0].ficha2x = jugadores[0].basex;
                 jugadores[0].ficha2y = jugadores[0].basey;
                 jugadores[0].contador2 =0;
+                jugadores[0].fichasamov = 1;
                 jugadores[0].lanzamientos =1;
 
             }
@@ -2696,6 +2710,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[1].ficha1x = jugadores[1].basex;
                 jugadores[1].ficha1y = jugadores[1].basey;
                 jugadores[1].contador1 =0;
+                jugadores[1].fichasamov = 1;
                 jugadores[1].lanzamientos =1;
 
             }
@@ -2705,6 +2720,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[1].ficha2x = jugadores[1].basex;
                 jugadores[1].ficha2y = jugadores[1].basey;
                 jugadores[1].contador2 =0;
+                jugadores[1].fichasamov = 1;
                 jugadores[1].lanzamientos =1;
             }
             if (tablero[jugadores[2].ficha1x][jugadores[2].ficha1y] == tablero[jugadores[3].ficha1x][jugadores[3].ficha1y])
@@ -2713,6 +2729,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].ficha1x = jugadores[3].basex;
                 jugadores[3].ficha1y = jugadores[3].basey;
                 jugadores[3].contador1 =0;
+                jugadores[3].fichasamov = 1;
                 jugadores[3].lanzamientos =1;
             }
             if (tablero[jugadores[2].ficha1x][jugadores[2].ficha1y] == tablero[jugadores[3].ficha2x][jugadores[3].ficha2y])
@@ -2721,6 +2738,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].ficha2x = jugadores[3].basex;
                 jugadores[3].ficha2y = jugadores[3].basey;
                 jugadores[3].contador2 =0;
+                jugadores[3].fichasamov = 1;
                 jugadores[3].lanzamientos =1;
             }
         }
@@ -2732,6 +2750,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[0].ficha1x = jugadores[0].basex;
                 jugadores[0].ficha1y = jugadores[0].basey;
                 jugadores[0].contador1 =0;
+                jugadores[0].fichasamov = 1;
                 jugadores[0].lanzamientos =1;
             }
             if (tablero[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablero[jugadores[0].ficha2x][jugadores[0].ficha2y])
@@ -2740,6 +2759,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[0].ficha2x = jugadores[0].basex;
                 jugadores[0].ficha2y = jugadores[0].basey;
                 jugadores[0].contador2 =0;
+                jugadores[0].fichasamov = 1;
                 jugadores[0].lanzamientos =1;
             }
             if (tablero[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablero[jugadores[1].ficha1x][jugadores[1].ficha1y])
@@ -2748,6 +2768,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[1].ficha1x = jugadores[1].basex;
                 jugadores[1].ficha1y = jugadores[1].basey;
                 jugadores[1].contador1 =0;
+                jugadores[1].fichasamov = 1;
                 jugadores[1].lanzamientos =1;
             }
             if (tablero[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablero[jugadores[1].ficha2x][jugadores[1].ficha2y])
@@ -2756,6 +2777,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[1].ficha2x = jugadores[1].basex;
                 jugadores[1].ficha2y = jugadores[1].basey;
                 jugadores[1].contador2 =0;
+                jugadores[1].fichasamov = 1;
                 jugadores[1].lanzamientos =1;
             }
 
@@ -2765,6 +2787,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].ficha1x = jugadores[2].basex;
                 jugadores[2].ficha1y = jugadores[2].basey;
                 jugadores[2].contador1 =0;
+                jugadores[2].fichasamov = 1;
                 jugadores[2].lanzamientos =1;
             }
             if (tablero[jugadores[3].ficha1x][jugadores[3].ficha1y] == tablero[jugadores[2].ficha2x][jugadores[2].ficha2y])
@@ -2773,6 +2796,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].ficha2x = jugadores[2].basex;
                 jugadores[2].ficha2y = jugadores[2].basey;
                 jugadores[2].contador2 =0;
+                jugadores[2].fichasamov = 1;
                 jugadores[2].lanzamientos =1;
             }
         }
@@ -2787,6 +2811,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[1].ficha1x = jugadores[1].basex;
                 jugadores[1].ficha1y = jugadores[1].basey;
                 jugadores[1].contador1 =0;
+                jugadores[1].fichasamov = 1;
                 jugadores[1].lanzamientos =1;
             }
             if (tablero[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablero[jugadores[1].ficha2x][jugadores[1].ficha2y])
@@ -2795,6 +2820,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[1].ficha2x = jugadores[1].basex;
                 jugadores[1].ficha2y = jugadores[1].basey;
                 jugadores[1].contador2 =0;
+                jugadores[1].fichasamov = 1;
                 jugadores[1].lanzamientos =1;
             }
             if (tablero[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablero[jugadores[2].ficha1x][jugadores[2].ficha1y])
@@ -2803,6 +2829,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].ficha1x = jugadores[2].basex;
                 jugadores[2].ficha1y = jugadores[2].basey;
                 jugadores[2].contador1 =0;
+                jugadores[2].fichasamov = 1;
                 jugadores[2].lanzamientos =1;
             }
             if (tablero[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablero[jugadores[2].ficha2x][jugadores[2].ficha2y])
@@ -2811,6 +2838,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].ficha2x = jugadores[2].basex;
                 jugadores[2].ficha2y = jugadores[2].basey;
                 jugadores[2].contador2 =0;
+                jugadores[2].fichasamov = 1;
                 jugadores[2].lanzamientos =1;
             }
             if (tablero[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablero[jugadores[3].ficha1x][jugadores[3].ficha1y])
@@ -2819,6 +2847,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].ficha1x = jugadores[3].basex;
                 jugadores[3].ficha1y = jugadores[3].basey;
                 jugadores[3].contador1 =0;
+                jugadores[3].fichasamov = 1;
                 jugadores[3].lanzamientos =1;
             }
             if (tablero[jugadores[0].ficha2x][jugadores[0].ficha2y] == tablero[jugadores[3].ficha2x][jugadores[3].ficha2y])
@@ -2827,6 +2856,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].ficha2x = jugadores[3].basex;
                 jugadores[3].ficha2y = jugadores[3].basey;
                 jugadores[3].contador2 =0;
+                jugadores[3].fichasamov = 1;
                 jugadores[3].lanzamientos =1;
             }
         }
@@ -2838,6 +2868,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[0].ficha1x = jugadores[0].basex;
                 jugadores[0].ficha1y = jugadores[0].basey;
                 jugadores[0].contador1 =0;
+                jugadores[0].fichasamov = 1;
                 jugadores[0].lanzamientos =1;
             }
             if (tablero[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablero[jugadores[0].ficha2x][jugadores[0].ficha2y])
@@ -2846,6 +2877,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[0].ficha2x = jugadores[0].basex;
                 jugadores[0].ficha2y = jugadores[0].basey;
                 jugadores[0].contador2 =0;
+                jugadores[0].fichasamov = 1;
                 jugadores[0].lanzamientos =1;
             }
             if (tablero[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablero[jugadores[2].ficha1x][jugadores[2].ficha1y])
@@ -2854,6 +2886,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].ficha1x = jugadores[2].basex;
                 jugadores[2].ficha1y = jugadores[2].basey;
                 jugadores[2].contador1 =0;
+                jugadores[2].fichasamov = 1;
                 jugadores[2].lanzamientos =1;
             }
             if (tablero[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablero[jugadores[2].ficha2x][jugadores[2].ficha2y])
@@ -2862,6 +2895,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].ficha2x = jugadores[2].basex;
                 jugadores[2].ficha2y = jugadores[2].basey;
                 jugadores[2].contador2 =0;
+                jugadores[2].fichasamov = 1;
                 jugadores[2].lanzamientos =1;
             }
             if (tablero[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablero[jugadores[3].ficha1x][jugadores[3].ficha1y])
@@ -2870,6 +2904,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].ficha1x = jugadores[3].basex;
                 jugadores[3].ficha1y = jugadores[3].basey;
                 jugadores[3].contador1 =0;
+                jugadores[3].fichasamov = 1;
                 jugadores[3].lanzamientos =1;
             }
             if (tablero[jugadores[1].ficha2x][jugadores[1].ficha2y] == tablero[jugadores[3].ficha2x][jugadores[3].ficha2y])
@@ -2878,6 +2913,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].ficha2x = jugadores[3].basex;
                 jugadores[3].ficha2y = jugadores[3].basey;
                 jugadores[3].contador2 =0;
+                jugadores[3].fichasamov = 1;
                 jugadores[3].lanzamientos =1;
             }
         }
@@ -2889,6 +2925,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[0].ficha1x = jugadores[0].basex;
                 jugadores[0].ficha1y = jugadores[0].basey;
                 jugadores[0].contador1 =0;
+                jugadores[0].fichasamov = 1;
                 jugadores[0].lanzamientos =1;
             }
             if (tablero[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablero[jugadores[0].ficha2x][jugadores[0].ficha2y])
@@ -2897,6 +2934,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[0].ficha2x = jugadores[0].basex;
                 jugadores[0].ficha2y = jugadores[0].basey;
                 jugadores[0].contador2 =0;
+                jugadores[0].fichasamov = 1;
                 jugadores[0].lanzamientos =1;
             }
             if (tablero[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablero[jugadores[1].ficha1x][jugadores[1].ficha1y])
@@ -2905,6 +2943,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[1].ficha1x = jugadores[1].basex;
                 jugadores[1].ficha1y = jugadores[1].basey;
                 jugadores[1].contador1 =0;
+                jugadores[1].fichasamov = 1;
                 jugadores[1].lanzamientos =1;
             }
             if (tablero[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablero[jugadores[1].ficha2x][jugadores[1].ficha2y])
@@ -2913,6 +2952,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[1].ficha2x = jugadores[1].basex;
                 jugadores[1].ficha2y = jugadores[1].basey;
                 jugadores[1].contador2 =0;
+                jugadores[1].fichasamov = 1;
                 jugadores[1].lanzamientos =1;
             }
             if (tablero[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablero[jugadores[3].ficha1x][jugadores[3].ficha1y])
@@ -2921,6 +2961,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].ficha1x = jugadores[3].basex;
                 jugadores[3].ficha1y = jugadores[3].basey;
                 jugadores[3].contador1 =0;
+                jugadores[3].fichasamov = 1;
                 jugadores[3].lanzamientos =1;
             }
             if (tablero[jugadores[2].ficha2x][jugadores[2].ficha2y] == tablero[jugadores[3].ficha2x][jugadores[3].ficha2y])
@@ -2929,6 +2970,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[3].ficha2x = jugadores[3].basex;
                 jugadores[3].ficha2y = jugadores[3].basey;
                 jugadores[3].contador2 =0;
+                jugadores[3].fichasamov = 1;
                 jugadores[3].lanzamientos =1;
             }
         }
@@ -2940,6 +2982,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[0].ficha1x = jugadores[0].basex;
                 jugadores[0].ficha1y = jugadores[0].basey;
                 jugadores[0].contador1 =0;
+                jugadores[0].fichasamov = 1;
                 jugadores[0].lanzamientos =1;
             }
             if (tablero[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablero[jugadores[0].ficha2x][jugadores[0].ficha2y])
@@ -2948,6 +2991,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[0].ficha2x = jugadores[0].basex;
                 jugadores[0].ficha2y = jugadores[0].basey;
                 jugadores[0].contador2 =0;
+                jugadores[0].fichasamov = 1;
                 jugadores[0].lanzamientos =1;
             }
             if (tablero[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablero[jugadores[1].ficha1x][jugadores[1].ficha1y])
@@ -2956,6 +3000,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[1].ficha1x = jugadores[1].basex;
                 jugadores[1].ficha1y = jugadores[1].basey;
                 jugadores[1].contador1 =0;
+                jugadores[1].fichasamov = 1;
                 jugadores[1].lanzamientos =1;
             }
             if (tablero[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablero[jugadores[1].ficha2x][jugadores[1].ficha2y])
@@ -2964,6 +3009,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[1].ficha2x = jugadores[1].basex;
                 jugadores[1].ficha2y = jugadores[1].basey;
                 jugadores[1].contador2 =0;
+                jugadores[1].fichasamov = 1;
                 jugadores[1].lanzamientos =1;
             }
             if (tablero[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablero[jugadores[2].ficha1x][jugadores[2].ficha1y])
@@ -2972,6 +3018,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].ficha1x = jugadores[2].basex;
                 jugadores[2].ficha1y = jugadores[2].basey;
                 jugadores[2].contador1 =0;
+                jugadores[2].fichasamov = 1;
                 jugadores[2].lanzamientos =1;
             }
             if (tablero[jugadores[3].ficha2x][jugadores[3].ficha2y] == tablero[jugadores[2].ficha2x][jugadores[2].ficha2y])
@@ -2980,6 +3027,7 @@ void reglas (string tablero [maxix][maxiy],int tablerofantasma[maxix][maxiy],str
                 jugadores[2].ficha2x = jugadores[2].basex;
                 jugadores[2].ficha2y = jugadores[2].basey;
                 jugadores[2].contador2 =0;
+                jugadores[2].fichasamov = 1;
                 jugadores[2].lanzamientos =1;
             }
         }
